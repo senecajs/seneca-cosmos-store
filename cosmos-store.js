@@ -53,7 +53,6 @@ function cosmos_store(options) {
   var meta = seneca.store.init(seneca, options, store)
 
   seneca.add({ init: store.name, tag: meta.tag }, function (msg, reply) {
-    console.log("QQ")
     const COSMOS_SDK = options.sdk()
     
     ctx.client = new COSMOS_SDK.CosmosClient({
