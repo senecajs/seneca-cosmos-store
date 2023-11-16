@@ -37,13 +37,18 @@ async function run() {
   let t03o = await s0.entity('db1/container1').save$({id: 'y8bx03', foo: 'a445'})
 
   var list = await t01.list$()
-
-  console.log('t01o list: ', list)
+  console.log('list: ', list.length)
 
   console.log('t01o load: ', await s0.entity('db1/container1').load$('t6wq1o') )
 
   await s0.entity('db1/container1').remove$('t6wq1o')
 
   console.log('t01o load: ', await s0.entity('db1/container1').load$('t6wq1o') )
+
+  t03o = await t03o.remove$()
+
+  t03o = await s0.entity('db1/container1').load$('y8bx03')
+
+  console.log(t03o)
 
 }

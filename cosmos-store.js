@@ -167,17 +167,19 @@ function make_intern() {
       
       const { database } = await ctx.client.databases.createIfNotExists({
         id: base,
-        // should come from options?
+        // should come from entoptions?
         throughput: 400,
       })
           
       const { container } = await database.containers.createIfNotExists({
         id: name,
-        // should come from options?
+        // should come from entoptions?
         partitionKey: {
           paths: [
             '/id'
-          ]
+          ],
+          kind: 'MultiHash',
+          version: 2
         }
       })
       
