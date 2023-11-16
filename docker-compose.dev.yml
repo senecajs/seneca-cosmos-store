@@ -1,0 +1,9 @@
+version: '1'
+
+services:
+  cosmosdb:
+    # image: amazon/cosmosdb-local
+    hostname: cosmosdb-local
+    container_name: cosmosdb-local
+    ports:
+      - 8081:8081
