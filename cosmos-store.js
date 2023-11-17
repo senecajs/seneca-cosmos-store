@@ -55,10 +55,46 @@ function cosmos_store(options) {
   seneca.add({ init: store.name, tag: meta.tag }, function (msg, reply) {
     const COSMOS_SDK = options.sdk()
     
+    
     ctx.client = new COSMOS_SDK.CosmosClient({
       endpoint: options.cosmos.endpoint,
       key: options.cosmos.key,
     })
+    
+    reference_containers()
+    
+    async function reference_containers() {
+      
+      for(let entityname in options.entity) {
+        let [ dbId, containerId] = entityname.split('/')
+        
+        const { database } = await ctx.client.databases.createIfNotExists({
+          id: dbId,
+          // should come from entoptions?
+          throughput: 400,
+        })
+          
+        const { container } = await database.containers.createIfNotExists({
+          id: containerId,
+          // should come from entoptions?
+          partitionKey: {
+            paths: [
+              '/id'
+            ],
+            kind: 'MultiHash',
+            version: 2
+          }
+        })
+        
+        intern.container_ref[entityname] = container
+        // console.log('name: ', intern.container_ref )
+      
+      }
+      
+      reply()
+      
+    
+    }
     
     
     /*
@@ -69,7 +105,7 @@ function cosmos_store(options) {
     )
     */
 
-    reply()
+    
   })
 
   var plugin_meta = {
@@ -90,6 +126,7 @@ function make_intern() {
   return {
     PV: 1, // persistence version, used for data migration
     canon_ref: {},
+    container_ref: {},
 
     // TODO: why is this needed?
     clean_config: function (cfgin) {
@@ -226,7 +263,7 @@ function make_intern() {
           } = ent.canon$({ object: true })
           
           
-          console.log(ent.id, opts.generate_id(ent))
+          // console.log(ent.id, opts.generate_id(ent))
           if (null == ent.id) {
             new_id = opts.generate_id(ent)
             item.id = new_id
@@ -240,21 +277,8 @@ function make_intern() {
           
             const { base, name } = args
             
-            const { database } = await ctx.client.databases.createIfNotExists({
-              id: base,
-              // should come from options?
-              throughput: 400,
-            })
-          
-            const { container } = await database.containers.createIfNotExists({
-              id: name,
-              // should come from options?
-              partitionKey: {
-                paths: [
-                  '/id'
-                ]
-              }
-            })
+            const container = intern.container_ref[base+'/'+name]
+            
             
             container.items.upsert(item)
             
@@ -467,12 +491,20 @@ function make_intern() {
           // const ti = intern.get_table(qent, ctx)
           // console.log('TI', ti)
 
+	  const {
+            base,
+            name
+          } = qent.canon$({ object: true })
+          
           var qid = q.id
           
-          intern.get_container(qent, ctx, do_load)
+          // intern.get_container(qent, ctx, do_load)
           
-          async function do_load(container, base, name) {
-            console.log(base, name)
+          do_load({ base, name })
+          
+          async function do_load(args) {
+            const { base, name } = args
+            const container = intern.container_ref[base+'/'+name]
             try {
               const { resource } = await container.item(qid, qid).read()
               reply(resource)
@@ -514,6 +546,11 @@ function make_intern() {
           var qent = msg.qent
           var q = msg.q
           
+          const {
+            base,
+            name
+          } = qent.canon$({ object: true })
+          
           let listreq = {}
           let listquery = 'SELECT'
           let queryspec = {}
@@ -536,11 +573,11 @@ function make_intern() {
           
           console.log('list_req: ', listreq)
           
-
+          do_list({ base, name })
           
-          intern.get_container(qent, ctx, do_list)
-          
-          async function do_list(container, base, name) {
+          async function do_list(args) {
+            const { base, name } = args
+            const container = intern.container_ref[base+'/'+name]
             const { resources } = await container.items.query(listreq).fetchAll()
             reply(resources)
           }
@@ -556,15 +593,26 @@ function make_intern() {
           var qent = msg.qent
           var q = msg.q
           
-          intern.get_container(qent, ctx, do_remove)
+          const {
+            base,
+            name
+          } = qent.canon$({ object: true })
           
-          async function do_remove(container, base, name) {
+          // intern.get_container(qent, ctx, do_remove)
+          
+          do_remove({ base, name })
+          
+          async function do_remove(args) {
+            const { base, name } = args
+            const container = intern.container_ref[base+'/'+name]
+            
             if (null != q.id) {
-              container.item(q.id, q.id).delete()
+              await container.item(q.id, q.id).delete()
+              reply()
             }
             
             // const { resources } = await container.items
-            reply()
+            
           }
           
           /*

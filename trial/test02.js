@@ -13,6 +13,10 @@ var s0 = Seneca({ legacy: false })
   .use('doc')
   .use('..', {
     sdk: () => AzureCosmos,
+    entity: {
+      'db1/container1': {},
+      'db2/container2': {},
+    },
     cosmos: {
       endpoint: 'https://localhost:8081',
       key: 'C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==',
@@ -37,7 +41,7 @@ async function run() {
 
   let t03o = await s0.entity('db1/container1').save$({id: 'y8bx03', foo: 'a445'})
 
-  var list = await t01.list$({ limit$: 1 })
+  var list = await t01.list$({ limit$: 2 })
   console.log('list: ', list.length)
 
   console.log('t01o load: ', await s0.entity('db1/container1').load$('t6wq1o') )
