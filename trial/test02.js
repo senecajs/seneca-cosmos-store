@@ -37,7 +37,7 @@ async function run() {
 
   let t03o = await s0.entity('db1/container1').save$({id: 'y8bx03', foo: 'a445'})
 
-  var list = await t01.list$()
+  var list = await t01.list$({ limit$: 1 })
   console.log('list: ', list.length)
 
   console.log('t01o load: ', await s0.entity('db1/container1').load$('t6wq1o') )

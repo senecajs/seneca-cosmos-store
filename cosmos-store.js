@@ -513,13 +513,35 @@ function make_intern() {
           var seneca = this
           var qent = msg.qent
           var q = msg.q
+          
+          let listreq = {}
+          let listquery = 'SELECT'
+          let queryspec = {}
+          
+          let params = listreq.parameters = []
+          
+          if (null != q.limit$) {
+            listquery += ' TOP ' + '@limit'
+            params.push({
+              name: '@limit',
+              value: q.limit$,
+            })
+            delete q.limit$
+            
+          }
+          listquery += ' * from all'
+          
+          listreq.query = listquery
+          
+          
+          console.log('list_req: ', listreq)
+          
 
           
           intern.get_container(qent, ctx, do_list)
           
           async function do_list(container, base, name) {
-            console.log(base, name)
-            const { resources } = await container.items.readAll().fetchAll()
+            const { resources } = await container.items.query(listreq).fetchAll()
             reply(resources)
           }
 
@@ -730,8 +752,6 @@ function make_intern() {
 
 
     listent: function (ctx, seneca, qent, co, q, reply) {
-      let [ db, container ] = co.name.split('_')
-      console.log('co: ', db, container)
       
       reply([])
     
