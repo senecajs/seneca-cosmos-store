@@ -244,14 +244,19 @@ function make_intern() {
           
           let new_id
           
+          console.log('save ent: ', ent, co)
           // console.log('data: ', data)
           var q = msg.q || {}
           
           
           // console.log(ent.id, opts.generate_id(ent))
           if (null == ent.id) {
-            new_id = opts.generate_id(ent)
-            ent.id = item.id = new_id
+            if( null == ent.id$) {
+              new_id = opts.generate_id(ent)
+              ent.id = item.id = new_id
+            } else {
+              ent.id = item.id = ent.id$
+            }
           }
 
           
@@ -262,9 +267,10 @@ function make_intern() {
             const container = await intern.load_container(co.name, ctx)
             
             
-            container.items.upsert(item)
+            let rs = await container.items.upsert(item)
+            console.log('after save: ', ent.make$(ent), ent.make$(item), rs.resource)
             
-            return reply(ent)
+            return reply(null, ent.make$(rs.resource))
           
           }
           
@@ -482,21 +488,7 @@ function make_intern() {
           
           const co = intern.get_container(qent, ctx)
           
-          do_load()
-          
-          async function do_load(args) {
-            const container = await intern.load_container(co.name, ctx)
-            
-            try {
-              const { resource } = await container.item(qid, qid).read()
-              reply(resource ? qent.make$(resource) : null)
-            } catch (err) {
-              console.log(err.message)
-              reply()
-            }
-          }
-          
-/*
+
           if (null == qid) {
             if (0 === Object.keys(seneca.util.clean(q)).length) {
               return reply()
@@ -506,7 +498,7 @@ function make_intern() {
               ctx,
               seneca,
               qent,
-              ti,
+              co,
               q,
               function (err, reslist) {
                 if (err) return reply(err)
@@ -518,9 +510,10 @@ function make_intern() {
 
           // Load by id
           else {
-            return intern.id_get(ctx, seneca, qent, ti, q, reply)
+            return intern.id_get(ctx, seneca, qent, co, q, reply)
           }
-*/
+          
+          
         },
 
         list: function (msg, reply) {
@@ -530,41 +523,7 @@ function make_intern() {
           
           const co = intern.get_container(qent, ctx)
           
-          let listreq = {}
-          let listquery = 'SELECT'
-          let queryspec = {}
-          
-          let params = listreq.parameters = []
-          
-          if (null != q.limit$) {
-            listquery += ' TOP ' + '@limit'
-            params.push({
-              name: '@limit',
-              value: q.limit$,
-            })
-            delete q.limit$
-            
-          }
-          listquery += ' * from all'
-          
-          listreq.query = listquery
-          
-          
-          console.log('list_req: ', listreq)
-          
-          do_list()
-          
-          async function do_list(args) {
-            const container = await intern.load_container(co.name, ctx)
-            let out_list = []
-            const { resources } = await container.items.query(listreq).fetchAll()
-            
-            out_list = resources.map(resource => qent.make$(resource) )
-            
-            reply(out_list)
-          }
-
-          // intern.listent(ctx, seneca, qent, co, q, reply)
+          intern.listent(ctx, seneca, qent, co, q, reply)
           
         },
 
@@ -718,7 +677,23 @@ function make_intern() {
      */
     },
 
-    id_get: function (ctx, seneca, ent, table, q, reply) {
+    id_get: function (ctx, seneca, ent, co, q, reply) {
+    
+      do_load()
+          
+      async function do_load(args) {
+        const container = await intern.load_container(co.name, ctx)
+            
+        try {
+          const { resource } = await container.item(q.id, q.id).read()
+          reply(resource ? ent.make$(resource) : null)
+        } catch (err) {
+          console.log(err.message)
+          reply()
+        }
+      }
+          
+          
       /*
 
       let ti = intern.tableinfo(table)
@@ -785,8 +760,62 @@ function make_intern() {
 
 
     listent: function (ctx, seneca, qent, co, q, reply) {
+    
+      let listreq = {}
+      let listquery = 'SELECT'
+      let queryspec = {}
       
-      reply([])
+      let cq = seneca.util.clean(q)
+      let fq = cq
+          
+      let params = listreq.parameters = []
+          
+      if (null != q.limit$) {
+        listquery += ' TOP ' + '@limit'
+        params.push({
+          name: '@limit',
+          value: q.limit$,
+        })
+        // delete q.limit$
+            
+      }
+      listquery += ' * from item'
+      
+      
+      if (0 < Object.keys(fq).length) {
+        listquery += ' WHERE '
+        
+        listquery += 
+          Object.keys(cq).map((k, i) => {
+            params.push({
+              name: '@i'+i,
+              value: cq[k],
+            })
+          
+            return 'item.' + k + ' = ' + '@' + ( 'i' + i )
+          
+          }).join(' AND ')
+         
+      }
+      
+      listreq.query = listquery
+      
+      console.log('list_req: ', listreq, q)
+      
+      do_list()
+      async function do_list(args) {
+        const container = await intern.load_container(co.name, ctx)
+        let out_list = []
+        const { resources } = await container.items.query(listreq).fetchAll()
+        
+    
+        out_list = resources.map(resource => qent.make$(resource) )
+        
+        console.log("DO LIST", co, out_list.length)
+    
+        reply(null, out_list)
+      }
+      
     
       /*
       var isarr = Array.isArray
