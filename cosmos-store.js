@@ -244,7 +244,7 @@ function make_intern() {
           
           let new_id
           
-          console.log('save ent: ', ent, co)
+          // console.log('save ent: ', ent, co)
           // console.log('data: ', data)
           var q = msg.q || {}
           
@@ -268,9 +268,9 @@ function make_intern() {
             
             
             let rs = await container.items.upsert(item)
-            console.log('after save: ', ent.make$(ent), ent.make$(item), rs.resource)
+            // rs.resource
             
-            return reply(null, ent.make$(rs.resource))
+            return reply(null, ent)
           
           }
           
@@ -688,7 +688,7 @@ function make_intern() {
           const { resource } = await container.item(q.id, q.id).read()
           reply(resource ? ent.make$(resource) : null)
         } catch (err) {
-          console.log(err.message)
+          console.error(err.message)
           reply()
         }
       }
@@ -800,7 +800,7 @@ function make_intern() {
       
       listreq.query = listquery
       
-      console.log('list_req: ', listreq, q)
+      // console.log('list_req: ', listreq, q)
       
       do_list()
       async function do_list(args) {
@@ -810,8 +810,6 @@ function make_intern() {
         
     
         out_list = resources.map(resource => qent.make$(resource) )
-        
-        console.log("DO LIST", co, out_list.length)
     
         reply(null, out_list)
       }
