@@ -579,10 +579,6 @@ function make_intern() {
           
           var all = true === q.all$
           
-          if (all) {
-            reply()
-          }
-          
           do_remove()
           
           async function do_remove(args) {
