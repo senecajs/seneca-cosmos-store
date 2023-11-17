@@ -28,6 +28,22 @@ module.exports.defaults = {
 
   // entity meta data, by canon string
   entity: {},
+  
+  dbConfig: Required(Object),
+  
+  // container default
+  conConfig: {
+    
+    partitionKey: {
+      paths: [
+        '/id'
+      ],
+      kind: 'MultiHash',
+      version: 2
+    }
+  
+  } 
+  
 }
 
 function cosmos_store(options) {
@@ -61,35 +77,15 @@ function cosmos_store(options) {
       key: options.cosmos.key,
     })
     
+    const dbConfig = options.dbConfig
+    
     reference_containers()
     
     async function reference_containers() {
       
-      for(let entityname in options.entity) {
-        let [ dbId, containerId] = entityname.split('/')
-        
-        const { database } = await ctx.client.databases.createIfNotExists({
-          id: dbId,
-          // should come from entoptions?
-          throughput: 400,
-        })
-          
-        const { container } = await database.containers.createIfNotExists({
-          id: containerId,
-          // should come from entoptions?
-          partitionKey: {
-            paths: [
-              '/id'
-            ],
-            kind: 'MultiHash',
-            version: 2
-          }
-        })
-        
-        intern.container_ref[entityname] = container
-        // console.log('name: ', intern.container_ref )
-      
-      }
+      intern.database = (await ctx.client.databases.createIfNotExists({
+        ...dbConfig
+      })).database
       
       reply()
       
@@ -126,7 +122,7 @@ function make_intern() {
   return {
     PV: 1, // persistence version, used for data migration
     canon_ref: {},
-    container_ref: {},
+    database: {},
 
     // TODO: why is this needed?
     clean_config: function (cfgin) {
@@ -199,10 +195,22 @@ function make_intern() {
       
       let canon = ent.canon$({ object: true })
       
-      container.name = canon.base + '/' + canon.name
+      container.name = (canon.base ? canon.base + '_' : '') + canon.name
       
       return container
       
+    },
+    
+    
+    load_container: async function (id, ctx) {
+      // console.log(ctx.options)
+    
+      const { container } = await intern.database.containers.createIfNotExists({
+        id,
+        ...ctx.options.conConfig
+      })
+      
+      return container
     },
 
 
@@ -251,8 +259,7 @@ function make_intern() {
           
           
           async function do_upsert(ctx, args) {
-            
-            const container = intern.container_ref[co.name]
+            const container = await intern.load_container(co.name, ctx)
             
             
             container.items.upsert(item)
@@ -475,11 +482,11 @@ function make_intern() {
           
           const co = intern.get_container(qent, ctx)
           
-          do_load({ base, name })
+          do_load()
           
           async function do_load(args) {
-            const { base, name } = args
-            const container = intern.container_ref[co.name]
+            const container = await intern.load_container(co.name, ctx)
+            
             try {
               const { resource } = await container.item(qid, qid).read()
               reply(resource ? qent.make$(resource) : null)
@@ -548,7 +555,7 @@ function make_intern() {
           do_list()
           
           async function do_list(args) {
-            const container = intern.container_ref[co.name]
+            const container = await intern.load_container(co.name, ctx)
             let out_list = []
             const { resources } = await container.items.query(listreq).fetchAll()
             
@@ -570,13 +577,22 @@ function make_intern() {
           
           let co = intern.get_container(qent, ctx)
           
+          var all = true === q.all$
+          
+          if (all) {
+            reply()
+          }
+          
           do_remove()
           
           async function do_remove(args) {
-            const container = intern.container_ref[co.name]
+            const container = await intern.load_container(co.name, ctx)
+            
             
             if (null != q.id) {
               await container.item(q.id, q.id).delete()
+              reply()
+            } else {
               reply()
             }
             
