@@ -243,7 +243,7 @@ function make_intern() {
           // console.log(ent.id, opts.generate_id(ent))
           if (null == ent.id) {
             new_id = opts.generate_id(ent)
-            item.id = new_id
+            ent.id = item.id = new_id
           }
 
           
@@ -465,7 +465,7 @@ function make_intern() {
           var q = msg.q
           // const ti = intern.get_table(qent, ctx)
           // console.log('TI', ti)
-
+          
 	  const {
             base,
             name
@@ -482,7 +482,7 @@ function make_intern() {
             const container = intern.container_ref[co.name]
             try {
               const { resource } = await container.item(qid, qid).read()
-              reply(resource)
+              reply(qent.make$(resource))
             } catch (err) {
               console.log(err.message)
               reply()
@@ -549,8 +549,12 @@ function make_intern() {
           
           async function do_list(args) {
             const container = intern.container_ref[co.name]
+            let out_list = []
             const { resources } = await container.items.query(listreq).fetchAll()
-            reply(resources)
+            
+            out_list = resources.map(resource => qent.make$(resource) )
+            
+            reply(out_list)
           }
 
           // intern.listent(ctx, seneca, qent, co, q, reply)
