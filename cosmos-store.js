@@ -258,7 +258,6 @@ function make_intern() {
               ent.id = item.id = ent.id$
             }
           }
-
           
           do_upsert(ctx)
           
@@ -266,11 +265,22 @@ function make_intern() {
           async function do_upsert(ctx, args) {
             const container = await intern.load_container(co.name, ctx)
             
+            if ( null != ent.id ) {
+              const { resource } = await container.item(ent.id, ent.id).read()
+              if(resource) {
+                item = resource
+                Object.assign(item, data)
+              }
+            }
+            
+            
+            
             
             let rs = await container.items.upsert(item)
+            // console.log('ent: ', rs.resource, item)
             // rs.resource
             
-            return reply(null, ent)
+            return reply(null, ent.make$(rs.resource) )
           
           }
           
