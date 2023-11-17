@@ -15,6 +15,8 @@ const PluginValidator = require('seneca-plugin-validator')
 
 const LegacyStoreTest = require('seneca-store-test')
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
+
 function make_seneca(config) {
   config = Object.assign({ seneca: {}, plugin: {} }, config)
   return (
@@ -53,10 +55,31 @@ async function generate_entries(si, q_name, entries) {
 
 }
 
+var dbConfig = {
+  id: 'db1',
+  throughput: 400
+}
+  
+var conConfig = {
+  partitionKey: {
+    paths: [
+      '/id'
+    ],
+    kind: 'MultiHash',
+    version: 2
+  }
+}
+  
+var plugin = {
+  dbConfig,
+  conConfig
+  
+}
+
 lab.test('validate', PluginValidator(Plugin, module))
 
 lab.test('happy', async () => {
-  var si = make_seneca()
+  var si = make_seneca({ plugin })
   await si.ready()
   expect(si.find_plugin('cosmos-store$1')).exists()
 
@@ -545,19 +568,13 @@ lab.test('export', async () => {
   var get_dc = si.export('cosmos-store$1/get_client')
   expect(get_dc()).exists()
 })
+*/
+
 
 lab.describe('legacy-store-test', () => {
   const plugin = {
-    entity: {
-      'moon/bar': {
-        // for special handling
-        fields: {
-          wen: {
-            type: 'date',
-          },
-        },
-      },
-    },
+    dbConfig,
+    conConfig,
   }
 
   const si = make_seneca({ plugin })
@@ -583,26 +600,8 @@ lab.describe('legacy-store-test', () => {
   // })
 })
 
-var plugin = {
-  entity: {
-    'test/foo': {
-      // for special handling
-      fields: {
-        d1: {
-          type: 'date',
-        },
-      },
-    },
 
-    // Custom table name
-    'test/custom': {
-      table: {
-        name: 'custom01',
-      },
-    },
-  },
-}
-
+/*
 lab.test('store-core', async () => {
   var si = make_seneca({ plugin })
   await testrun.store_core({ seneca: si, expect, xlog: console.log })
@@ -813,6 +812,8 @@ const testrun = {
         b: true,
       })
       .save$()
+    
+    
     var foo0o = await seneca.entity('test/foo').load$(foo0.id)
 
     log && log('S10000', foo0, foo0o)
@@ -882,4 +883,5 @@ const testrun = {
     expect(foo2o.fields$()).equals(['id', 'm', 'd1', 's1'])
   },
 }
-  */
+*/
+

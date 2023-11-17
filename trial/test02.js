@@ -5,6 +5,22 @@ const AzureCosmos = require('@azure/cosmos')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 
+var dbConfig = {
+  id: 'db1',
+  throughput: 400
+}
+
+var conConfig = {
+  partitionKey: {
+    paths: [
+      '/id'
+    ],
+    kind: 'MultiHash',
+    version: 2
+  }
+}
+
+
 var s0 = Seneca({ legacy: false })
   .test()
   .ignore_plugin('mem-store')
@@ -13,10 +29,8 @@ var s0 = Seneca({ legacy: false })
   .use('doc')
   .use('..', {
     sdk: () => AzureCosmos,
-    entity: {
-      'db1/container1': {},
-      'db2/container2': {},
-    },
+    dbConfig,
+    conConfig,
     cosmos: {
       endpoint: 'https://localhost:8081',
       key: 'C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==',
