@@ -191,35 +191,17 @@ function make_intern() {
     },
     */
 
-    get_container: async function (ent, ctx, dofunc) {
+    get_container: function (ent, ctx) {
       let entopts = intern.entity_options(ent, ctx)
       // let table = entopts && entopts.table
-
-      // if (null == table || null == table.name) {
-      let { base, name } = ent.canon$({ object: true })
-      // container = container || {}
-      // container.name = (canon.base ? canon.base + '_' : '') + canon.name
-      // }
       
-      const { database } = await ctx.client.databases.createIfNotExists({
-        id: base,
-        // should come from entoptions?
-        throughput: 400,
-      })
-          
-      const { container } = await database.containers.createIfNotExists({
-        id: name,
-        // should come from entoptions?
-        partitionKey: {
-          paths: [
-            '/id'
-          ],
-          kind: 'MultiHash',
-          version: 2
-        }
-      })
+      let container = {}
       
-      dofunc(container, base, name)
+      let canon = ent.canon$({ object: true })
+      
+      container.name = canon.base + '/' + canon.name
+      
+      return container
       
     },
 
@@ -247,7 +229,7 @@ function make_intern() {
           var ent = msg.ent
 
           var update = null != ent.id
-          // const ti = intern.get_table(ent, ctx)
+          const co = intern.get_container(ent, ctx)
           var data = ent.data$(false)
           
           var item = data
@@ -257,11 +239,6 @@ function make_intern() {
           // console.log('data: ', data)
           var q = msg.q || {}
           
-          const {
-            base,
-            name
-          } = ent.canon$({ object: true })
-          
           
           // console.log(ent.id, opts.generate_id(ent))
           if (null == ent.id) {
@@ -270,14 +247,12 @@ function make_intern() {
           }
 
           
-          do_upsert(ctx, { base, name })
+          do_upsert(ctx)
           
           
           async function do_upsert(ctx, args) {
-          
-            const { base, name } = args
             
-            const container = intern.container_ref[base+'/'+name]
+            const container = intern.container_ref[co.name]
             
             
             container.items.upsert(item)
@@ -498,13 +473,13 @@ function make_intern() {
           
           var qid = q.id
           
-          // intern.get_container(qent, ctx, do_load)
+          const co = intern.get_container(qent, ctx)
           
           do_load({ base, name })
           
           async function do_load(args) {
             const { base, name } = args
-            const container = intern.container_ref[base+'/'+name]
+            const container = intern.container_ref[co.name]
             try {
               const { resource } = await container.item(qid, qid).read()
               reply(resource)
@@ -546,10 +521,7 @@ function make_intern() {
           var qent = msg.qent
           var q = msg.q
           
-          const {
-            base,
-            name
-          } = qent.canon$({ object: true })
+          const co = intern.get_container(qent, ctx)
           
           let listreq = {}
           let listquery = 'SELECT'
@@ -573,11 +545,10 @@ function make_intern() {
           
           console.log('list_req: ', listreq)
           
-          do_list({ base, name })
+          do_list()
           
           async function do_list(args) {
-            const { base, name } = args
-            const container = intern.container_ref[base+'/'+name]
+            const container = intern.container_ref[co.name]
             const { resources } = await container.items.query(listreq).fetchAll()
             reply(resources)
           }
@@ -593,18 +564,12 @@ function make_intern() {
           var qent = msg.qent
           var q = msg.q
           
-          const {
-            base,
-            name
-          } = qent.canon$({ object: true })
+          let co = intern.get_container(qent, ctx)
           
-          // intern.get_container(qent, ctx, do_remove)
-          
-          do_remove({ base, name })
+          do_remove()
           
           async function do_remove(args) {
-            const { base, name } = args
-            const container = intern.container_ref[base+'/'+name]
+            const container = intern.container_ref[co.name]
             
             if (null != q.id) {
               await container.item(q.id, q.id).delete()
