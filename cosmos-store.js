@@ -482,7 +482,7 @@ function make_intern() {
             const container = intern.container_ref[co.name]
             try {
               const { resource } = await container.item(qid, qid).read()
-              reply(qent.make$(resource))
+              reply(resource ? qent.make$(resource) : null)
             } catch (err) {
               console.log(err.message)
               reply()
