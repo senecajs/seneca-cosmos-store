@@ -586,6 +586,16 @@ lab.describe('legacy-store-test', () => {
   })
 
   lab.before(() => si_merge.ready())
+  
+  /*
+  LegacyStoreTest.test.keyvalue (lab, 
+  {
+    seneca: si,
+    senecaMerge: si_merge,
+    script: lab,
+    ent0: 'AAAA',
+  })
+  */
 
   LegacyStoreTest.basictest({
     seneca: si,
@@ -593,6 +603,8 @@ lab.describe('legacy-store-test', () => {
     script: lab,
   })
 
+  
+  
   // TODO: fix implmentation
   // LegacyStoreTest.upserttest({
   //   seneca: si,

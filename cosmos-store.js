@@ -544,26 +544,66 @@ function make_intern() {
           var qent = msg.qent
           var q = msg.q
           
+          let cq = seneca.util.clean(q)
+          
           let co = intern.get_container(qent, ctx)
           
           var all = true === q.all$
+          var load = true === q.load$
           
-          if(all) {
-            return reply([])
-          }
+          let qid = q.id
           
+          // console.log(cq)
           do_remove()
           
           async function do_remove(args) {
             const container = await intern.load_container(co.name, ctx)
             
             
-            if (null != q.id) {
-              await container.item(q.id, q.id).delete()
-              reply()
-            } else {
-              reply()
+            if (0 === Object.keys(cq).length && !all) {
+              reply(seneca.error('empty-remove-query'))
             }
+            
+            if (null != q.id) {
+              await remove_single_by_id(q, qent)
+
+            } else {
+            
+              intern.listent(ctx, seneca, qent, co, cq, async function (listerr, list) {
+                if(all) {
+                
+                  for(let item of list) {
+                    await container.item(item.id, item.id).delete()
+                  }
+                  
+                  return reply()
+                  
+		} else {
+		  qid = 0 < list.length ? list[0].id : null
+                  return remove_single_by_id({ id: qid }, qent)
+		}
+              })
+		
+            
+            }
+            
+            async function remove_single_by_id(q, qent) {
+              if(q.id || qent.id ) {
+                if(load) {
+                  return intern.id_get(ctx, seneca, qent, co, q, async (err, res) => {
+                    await container.item(q.id || qent.id, q.id || qent.id).delete()
+                    reply(res)
+                  })
+                } else { 
+                  await container.item(q.id || qent.id, q.id || qent.id).delete()
+                  return reply()
+                }
+              } else {
+                return reply()
+              }
+              
+            }
+            
             
             // const { resources } = await container.items
             
@@ -696,10 +736,10 @@ function make_intern() {
             
         try {
           const { resource } = await container.item(q.id, q.id).read()
-          reply(resource ? ent.make$(resource) : null)
+          reply(null, resource ? ent.make$(resource) : null)
         } catch (err) {
-          console.error(err.message)
-          reply()
+          // console.error(err.message)
+          reply(err, null)
         }
       }
           
@@ -775,6 +815,13 @@ function make_intern() {
       let listquery = 'SELECT'
       let queryspec = {}
       
+      var isarr = Array.isArray
+      
+      if (isarr(q) || 'object' != typeof q) {
+        q = { id: q }
+      }
+
+      
       let cq = seneca.util.clean(q)
       let fq = cq
           
@@ -794,15 +841,43 @@ function make_intern() {
       
       if (0 < Object.keys(fq).length) {
         listquery += ' WHERE '
+
+/*
+            let cq_k =  isarr(cq[k]) ? cq[k] : [ cq[k] ]
+            return '(' +
+                cq_k
+                  .map((v, i) => {
+                    let cq_v = intern.build_ops(v, k)
+                    // console.log('cq_v: ', cq_v)
+                    return cq_v.cmps.map((c, j) =>
+                      ('#' + c.k + ` ${c.cmpop} :` + c.k + i + j + 'n') ).join(' and ')
+                   })
+                  .join(' or ') +
+                ')'
+                */
+            
         
         listquery += 
           Object.keys(cq).map((k, i) => {
-            params.push({
-              name: '@i'+i,
-              value: cq[k],
-            })
+            let cq_k =  isarr(cq[k]) ? cq[k] : [ cq[k] ]   
+            
+
           
-            return 'item.' + k + ' = ' + '@' + ( 'i' + i )
+            // return 'item.' + k + ' = ' + '@' + ( 'i' + i )
+            
+            return '(' +
+                cq_k
+                  .map((v, j) => {
+                    params.push({
+                      name: '@i'+i+j,
+                      value: v,
+                    })
+            
+                    return 'item.' + k + ' = ' + '@' + ( 'i' + i + j )
+                   })
+                  .join(' OR ') +
+                ')'
+                
           
           }).join(' AND ')
          
@@ -810,7 +885,7 @@ function make_intern() {
       
       listreq.query = listquery
       
-      // console.log('list_req: ', listreq, q)
+      // console.log('list_req: ', listreq ) // , q, co)
       
       do_list()
       async function do_list(args) {
