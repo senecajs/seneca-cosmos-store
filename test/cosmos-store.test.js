@@ -589,13 +589,18 @@ lab.describe('legacy-store-test', () => {
 
   const si = make_seneca({ plugin })
 
-  lab.before(() => si.ready())
+  lab.before(async () =>  {
+    si.ready()
+    await si.entity('ENT0').make$().load$('not__id')
+  })
 
   const si_merge = make_seneca({
     plugin: Object.assign({ merge: false }, plugin),
   })
 
   lab.before(() => si_merge.ready())
+  
+  
   
   LegacyStoreTest.test.keyvalue (lab, 
   {
