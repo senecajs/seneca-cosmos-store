@@ -57,13 +57,23 @@ async function generate_entries(si, q_name, entries) {
 
 var dbConfig = {
   id: 'db1',
-  throughput: 400
+  // throughput: 400
 }
   
 var conConfig = {
+
+indexingPolicy: {
+  includedPaths: [
+    { path: "/*" },  // Index all paths
+    // Add more specific paths if needed
+  ],
+  excludedPaths: [
+    // Exclude paths if needed
+  ]
+},
   partitionKey: {
     paths: [
-      '/id'
+      '/id',
     ],
     kind: 'MultiHash',
     version: 2
@@ -587,15 +597,13 @@ lab.describe('legacy-store-test', () => {
 
   lab.before(() => si_merge.ready())
   
-  /*
   LegacyStoreTest.test.keyvalue (lab, 
   {
     seneca: si,
     senecaMerge: si_merge,
     script: lab,
-    ent0: 'AAAA',
+    ent0: 'ENT0',
   })
-  */
 
   LegacyStoreTest.basictest({
     seneca: si,

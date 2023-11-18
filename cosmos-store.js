@@ -33,7 +33,7 @@ module.exports.defaults = {
   
   // container default
   conConfig: {
-    
+    /*
     partitionKey: {
       paths: [
         '/id'
@@ -41,6 +41,7 @@ module.exports.defaults = {
       kind: 'MultiHash',
       version: 2
     }
+    */
   
   } 
   
@@ -202,15 +203,23 @@ function make_intern() {
     },
     
     
-    load_container: async function (id, ctx) {
+    load_container: async function (id, ctx, reply) {
       // console.log(ctx.options)
-    
-      const { container } = await intern.database.containers.createIfNotExists({
-        id,
-        ...ctx.options.conConfig
-      })
       
-      return container
+      // console.log(id, ctx.options.conConfig)
+      try {
+        const { container } = await intern.database.containers.createIfNotExists({
+          id,
+          ...ctx.options.conConfig
+        })
+        return container
+      } catch(err) {
+        reply(err, null)
+      }
+      
+      
+      
+      // return container
     },
 
 
@@ -263,7 +272,7 @@ function make_intern() {
           
           
           async function do_upsert(ctx, args) {
-            const container = await intern.load_container(co.name, ctx)
+            const container = await intern.load_container(co.name, ctx, reply)
             
             if ( null != ent.id ) {
               const { resource } = await container.item(ent.id, ent.id).read()
@@ -497,7 +506,7 @@ function make_intern() {
           var qid = q.id
           
           const co = intern.get_container(qent, ctx)
-          
+          // console.log(q)
 
           if (null == qid) {
             if (0 === Object.keys(seneca.util.clean(q)).length) {
@@ -553,11 +562,11 @@ function make_intern() {
           
           let qid = q.id
           
-          // console.log(cq)
+          // console.log(q)
           do_remove()
           
           async function do_remove(args) {
-            const container = await intern.load_container(co.name, ctx)
+            const container = await intern.load_container(co.name, ctx, reply)
             
             
             if (0 === Object.keys(cq).length && !all) {
@@ -594,8 +603,15 @@ function make_intern() {
                     await container.item(q.id || qent.id, q.id || qent.id).delete()
                     reply(res)
                   })
-                } else { 
-                  await container.item(q.id || qent.id, q.id || qent.id).delete()
+                } else {
+                  try {
+                    await container.item(q.id || qent.id, q.id || qent.id).delete()
+                  } catch(err) {
+                    if (err.body.code == 'NotFound') {
+                      return reply()
+                    }
+                  }
+                  
                   return reply()
                 }
               } else {
@@ -732,8 +748,8 @@ function make_intern() {
       do_load()
           
       async function do_load(args) {
-        const container = await intern.load_container(co.name, ctx)
-            
+        const container = await intern.load_container(co.name, ctx, reply)
+        
         try {
           const { resource } = await container.item(q.id, q.id).read()
           reply(null, resource ? ent.make$(resource) : null)
@@ -836,26 +852,23 @@ function make_intern() {
         // delete q.limit$
             
       }
-      listquery += ' * from item'
+      
+     
+     /*
+      if( 0 < Object.keys(fq).length ) {
+        listquery += ' ' +
+          Object.keys(fq).map( k => {
+            return co.name + '.' + k
+          }).join(', ') + ' FROM ' + co.name
+      
+      } else {
+      */
+        listquery += ' * FROM ' + co.name
+      // }
       
       
       if (0 < Object.keys(fq).length) {
         listquery += ' WHERE '
-
-/*
-            let cq_k =  isarr(cq[k]) ? cq[k] : [ cq[k] ]
-            return '(' +
-                cq_k
-                  .map((v, i) => {
-                    let cq_v = intern.build_ops(v, k)
-                    // console.log('cq_v: ', cq_v)
-                    return cq_v.cmps.map((c, j) =>
-                      ('#' + c.k + ` ${c.cmpop} :` + c.k + i + j + 'n') ).join(' and ')
-                   })
-                  .join(' or ') +
-                ')'
-                */
-            
         
         listquery += 
           Object.keys(cq).map((k, i) => {
@@ -873,7 +886,7 @@ function make_intern() {
                       value: v,
                     })
             
-                    return 'item.' + k + ' = ' + '@' + ( 'i' + i + j )
+                    return co.name + '.' + k + ' = ' + '@' + ( 'i' + i + j )
                    })
                   .join(' OR ') +
                 ')'
@@ -889,7 +902,7 @@ function make_intern() {
       
       do_list()
       async function do_list(args) {
-        const container = await intern.load_container(co.name, ctx)
+        const container = await intern.load_container(co.name, ctx, reply)
         let out_list = []
         const { resources } = await container.items.query(listreq).fetchAll()
         
