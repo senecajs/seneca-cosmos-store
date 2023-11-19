@@ -627,8 +627,6 @@ lab.test('store-core', async () => {
   await testrun.store_core({ seneca: si, expect, xlog: console.log })
 })
 
-
-/*
 lab.test('store-load', async () => {
   var si = make_seneca({ plugin })
   await testrun.store_load({ seneca: si, expect, xlog: console.log })
@@ -639,6 +637,7 @@ lab.test('store-save', async () => {
   await testrun.store_save({ seneca: si, expect, xlog: console.log })
 })
 
+/*
 lab.test('custom-table', async () => {
   var si = make_seneca({ plugin })
   let c0 = await si
