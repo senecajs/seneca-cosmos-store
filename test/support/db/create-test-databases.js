@@ -3,21 +3,74 @@ const CosmosDb = require('./client')
 const codb = CosmosDb.connect({ verbose: true })
 
 
+
+const partitionKey = {
+  paths: [
+    '/id'
+  ],
+  kind: 'MultiHash',
+  version: 2
+}
+
 const dbs = [
 
   {
     id: 'db1',
     throughput: 400,
-    container: {
-      id: 'container1',
-      partitionKey: {
-        paths: [
-          '/id'
-        ],
-        kind: 'MultiHash',
-        version: 2
+    container: [
+      {
+        id: 'container1',
+        partitionKey,
+      },
+      {
+        id: 'test_foo',
+        partitionKey,
+      },
+      {
+        id: 'moon_bar',
+        partitionKey,
+      },
+      {
+        id: 'racers',
+        partitionKey,
+      },
+
+      {
+        id: 'foo',
+        partitionKey,
+      },
+      {
+        id: 'players',
+        partitionKey,
+      },
+
+      {
+        id: 'users',
+        partitionKey,
+      },
+
+      {
+        id: 'products',
+        partitionKey,
+      },
+
+      {
+        id: 'custom01',
+        partitionKey,
+      },
+
+      {
+        id: 'customers',
+        partitionKey,
+      },
+
+      {
+        id: 'ENT0',
+        partitionKey,
       }
-    }
+
+    ]
+
   }
 
 ]
@@ -33,11 +86,16 @@ async function create_db(db, codb, opts = {}) {
 
   try {
     const { database } = await codb.databases.createIfNotExists(db)
-    try {
-      const { container } = await database.containers.createIfNotExists(co)
-    } catch (err) {
-      console.error('Error creating container "' + co.id + '":', err.message)
-      return
+    for(let container of co) {
+      try {
+        await database.containers.createIfNotExists(container)
+        if (opts.verbose) {
+          console.log(`Database "${db.id}" with container "${container.id}" has been created successfully.`)
+        }
+      } catch (err) {
+        console.error('Error creating container "' + co.id + '":', err.message)
+        return
+      }
     }
   } catch (err) {
       console.error('Error creating database "' + db.id + '":', err.message)
@@ -47,9 +105,6 @@ async function create_db(db, codb, opts = {}) {
 
   db.container = co
 
-  if (opts.verbose) {
-    console.log(`Database "${db.id}" with container "${co.id}" has been created successfully.`)
-  }
 
   return
 

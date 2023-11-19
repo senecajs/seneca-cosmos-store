@@ -580,7 +580,6 @@ lab.test('export', async () => {
 })
 */
 
-
 lab.describe('legacy-store-test', () => {
   const plugin = {
     dbConfig,
@@ -589,10 +588,7 @@ lab.describe('legacy-store-test', () => {
 
   const si = make_seneca({ plugin })
 
-  lab.before(async () =>  {
-    si.ready()
-    await si.entity('ENT0').make$().load$('not__id')
-  })
+  lab.before( () => si.ready() )
 
   const si_merge = make_seneca({
     plugin: Object.assign({ merge: false }, plugin),
@@ -626,12 +622,13 @@ lab.describe('legacy-store-test', () => {
 })
 
 
-/*
 lab.test('store-core', async () => {
   var si = make_seneca({ plugin })
   await testrun.store_core({ seneca: si, expect, xlog: console.log })
 })
 
+
+/*
 lab.test('store-load', async () => {
   var si = make_seneca({ plugin })
   await testrun.store_load({ seneca: si, expect, xlog: console.log })
@@ -674,6 +671,7 @@ lab.test('custom-table', async () => {
   let cl1 = await si.entity('test/custom').list$({ x: [1], y: 'a' })
   expect(cl1.length).above(0)
 })
+*/
 
 const testrun = {
   store_core: async function (opts) {
@@ -681,18 +679,21 @@ const testrun = {
     var expect = opts.expect
     var log = opts.log
 
+
     // S00010: Clear test/foo
     await seneca.entity('test/foo').remove$({ all$: true })
     var foolist = await seneca.entity('test/foo').list$()
 
     log && log('S00010', foolist)
     expect(foolist.length).equal(0)
+    
 
     // S00100: Load non-existent returns null.
     var foo0n = await seneca.entity('test/foo').load$('not-an-id')
 
     log && log('S00100', foo0n)
     expect(foo0n).equal(null)
+   
 
     // S00200: Create unsaved entity
     var m0 = (Math.random() + '').substring(2)
@@ -743,6 +744,7 @@ const testrun = {
       oc: { y: 3, z: { q: 4, u: ['a', 'b'], v: [{ w: 5 }] } },
       ac: [{ x: 6, y: 7 }, { x: 8, z: 9 }, { u: [{ a: 1 }] }],
     })
+    
     expect(Object.keys(foo0.data$(false)).sort()).equals([
       'a',
       'ac',
@@ -754,6 +756,8 @@ const testrun = {
       'oc',
       's',
     ])
+    
+     
 
     // S00400: Load existing by id returns entity.
     var foo0o = await seneca.entity('test/foo').load$(foo0.id)
@@ -787,6 +791,7 @@ const testrun = {
 
     log && log('S00800', m0, foolist0r)
     expect(foolist0r.length).equals(0)
+    
   },
 
   store_load: async function (opts) {
@@ -819,6 +824,7 @@ const testrun = {
 
     log && log('S01200', foo1n)
     expect(foo1n).equal(null)
+    
   },
 
   store_save: async function (opts) {
@@ -908,5 +914,5 @@ const testrun = {
     expect(foo2o.fields$()).equals(['id', 'm', 'd1', 's1'])
   },
 }
-*/
+
 

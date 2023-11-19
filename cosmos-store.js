@@ -284,12 +284,15 @@ function make_intern() {
             
             
             
+            try {
+              let rs = await container.items.upsert(item)
+              // console.log('ent: ', rs.resource, item)
+              // rs.resource
             
-            let rs = await container.items.upsert(item)
-            // console.log('ent: ', rs.resource, item)
-            // rs.resource
-            
-            return reply(null, ent.make$(rs.resource) )
+              return reply(null, ent.make$(rs.resource) )
+            } catch(err) {
+              return reply(err, null)
+            }
           
           }
           
