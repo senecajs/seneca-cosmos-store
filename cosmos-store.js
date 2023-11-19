@@ -29,7 +29,9 @@ module.exports.defaults = {
   // entity meta data, by canon string
   entity: {},
   
-  dbConfig: Required(Object),
+  dbConfig: {
+    id: 'db1'
+  },
   
   // container default
   conConfig: {

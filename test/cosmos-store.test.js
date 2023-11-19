@@ -56,7 +56,7 @@ async function generate_entries(si, q_name, entries) {
 }
 
 var dbConfig = {
-  id: 'db1',
+  id: 'db1'
   // throughput: 400
 }
   
@@ -89,7 +89,7 @@ var plugin = {
 lab.test('validate', PluginValidator(Plugin, module))
 
 lab.test('happy', async () => {
-  var si = make_seneca({ plugin })
+  var si = make_seneca()
   await si.ready()
   expect(si.find_plugin('cosmos-store$1')).exists()
 
@@ -99,7 +99,6 @@ lab.test('happy', async () => {
   expect(si.find_plugin('cosmos-store$2')).exists()
 })
 
-/*
 lab.test('no-dups', async () => {
   var si = make_seneca()
   await si.ready()
@@ -126,6 +125,7 @@ lab.test('no-dups', async () => {
   expect(list.length).equal(1)
 })
 
+/*
 // See support/db/create-database-tables for table def
 lab.test('special-query', async () => {
   var si = make_seneca({
