@@ -64,10 +64,38 @@ async function run() {
 
   console.log('t01o load: ', await s0.entity('db1/container1').load$('t6wq1o') )
 
-  t03o = await t03o.remove$()
+ // t03o = await t03o.remove$()
+  
+  t03o.foo78 = 'adfsd101'
+  t03o.p = 'adfsd102'
+  await t03o.save$()
+
+  await s0.entity('db1/container1').save$({ id: 'y8bx03', aa: 'aa' })
+
 
   t03o = await s0.entity('db1/container1').load$('y8bx03')
 
   console.log(t03o)
+
+
+  console.log (
+    await s0.entity('db1/container1').remove$({ all$: true })
+  )
+  /*
+  console.log(
+    await s0.entity('db1/container1').list$()
+  )
+  */
+
+  let f1 = await s0.entity('db1/container1').make$().data$({
+    foo: 'a1',
+  }).save$()
+  console.log('f1: ', f1._ts)
+  setTimeout(async ()=>{
+    f1 = await f1.data$({foo1: 'a2'}).save$()
+    console.log('updated: ', f1._ts)
+
+    console.log( (await s0.entity('db1/container1').load$(f1.id))._ts )
+  }, 3000)
 
 }
