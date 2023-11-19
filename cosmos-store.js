@@ -498,11 +498,6 @@ function make_intern() {
           // const ti = intern.get_table(qent, ctx)
           // console.log('TI', ti)
           
-	  const {
-            base,
-            name
-          } = qent.canon$({ object: true })
-          
           var qid = q.id
           
           const co = intern.get_container(qent, ctx)
