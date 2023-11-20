@@ -1098,7 +1098,7 @@ function make_intern() {
       
       if (q.fields$) {
         for(let field in item) {
-          // TODO: find a better way (use a hashmap) - this is O(n)
+          // TODO: find a better way- via Query API
           if (!q.fields$.includes(field)) {
             delete item[field]
           }
