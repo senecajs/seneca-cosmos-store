@@ -126,39 +126,9 @@ lab.test('no-dups', async () => {
   expect(list.length).equal(1)
 })
 
-/*
 // See support/db/create-database-tables for table def
 lab.test('special-query', async () => {
-  var si = make_seneca({
-    plugin: {
-      entity: {
-        query01: {
-          table: {
-            name: 'query01',
-            key: {
-              partition: 'id',
-              sort: 'sk0',
-            },
-            index: [
-              {
-                name: 'gsi_0',
-                key: {
-                  partition: 'ip0',
-                },
-              },
-              {
-                name: 'gsi_1',
-                key: {
-                  partition: 'ip1',
-                  sort: 'is1',
-                },
-              },
-            ],
-          },
-        },
-      },
-    },
-  })
+  var si = make_seneca({})
   await si.ready()
   // si.quiet()
 
@@ -261,7 +231,7 @@ lab.test('special-query', async () => {
 
   // console.log('END')
 })
-
+/*
 lab.test('comparison-query', async () => {
   var si = make_seneca({
     plugin: {
