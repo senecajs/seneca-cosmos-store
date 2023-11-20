@@ -552,8 +552,6 @@ function make_intern() {
           var qent = msg.qent
           var q = msg.q
           
-          let cq = seneca.util.clean(q)
-          
           let co = intern.get_container(qent, ctx)
           
           var all = true === q.all$
@@ -567,19 +565,21 @@ function make_intern() {
           async function do_remove(args) {
             const container = await intern.load_container(co.name, ctx, reply)
             
-            
-            if (0 === Object.keys(cq).length && !all) {
-              reply(seneca.error('empty-remove-query'))
-            }
-            
             if (null != q.id) {
-              await remove_single_by_id(q, qent)
+              await remove_single_by_id(q)
 
             } else {
+              let cq = seneca.util.clean(q)
+              
+              if (0 === Object.keys(cq).length && !all) {
+                reply(seneca.error('empty-remove-query'))
+              }
             
               intern.listent(ctx, seneca, qent, co, cq, async function (listerr, list) {
-                if(all) {
+                if (intern.has_error(seneca, listerr, ctx, reply)) return
                 
+                
+                if(all) {
                   for(let item of list) {
                     await container.item(item.id, item.id).delete()
                   }
@@ -588,23 +588,23 @@ function make_intern() {
                   
 		} else {
 		  qid = 0 < list.length ? list[0].id : null
-                  return remove_single_by_id({ id: qid }, qent)
+                  return remove_single_by_id({ id: qid })
 		}
               })
 		
             
             }
             
-            async function remove_single_by_id(q, qent) {
-              if(q.id || qent.id ) {
+            async function remove_single_by_id(q) {
+              if (null != q.id) {
                 if(load) {
                   return intern.id_get(ctx, seneca, qent, co, q, async (err, res) => {
-                    await container.item(q.id || qent.id, q.id || qent.id).delete()
+                    await container.item(q.id, q.id).delete()
                     reply(res)
                   })
                 } else {
                   try {
-                    await container.item(q.id || qent.id, q.id || qent.id).delete()
+                    await container.item(q.id, q.id).delete()
                   } catch(err) {
                     if (err.body.code == 'NotFound') {
                       return reply()
