@@ -34,18 +34,7 @@ module.exports.defaults = {
   },
   
   // container default
-  conConfig: {
-    /*
-    partitionKey: {
-      paths: [
-        '/id'
-      ],
-      kind: 'MultiHash',
-      version: 2
-    }
-    */
-  
-  } 
+  conConfig: {} 
   
 }
 
