@@ -249,13 +249,14 @@ function make_intern() {
           
           
           // console.log(ent.id, opts.generate_id(ent))
-          if (null == ent.id) {
-            if( null == ent.id$) {
+          if (!update) {
+            let new_id = ent.id$
+
+            if (null == new_id) {
               new_id = opts.generate_id(ent)
-              ent.id = item.id = new_id
-            } else {
-              ent.id = item.id = ent.id$
             }
+            
+            data.id = new_id
           }
           
           do_upsert(ctx)
