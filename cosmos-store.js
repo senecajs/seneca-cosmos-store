@@ -20,8 +20,7 @@ module.exports.defaults = {
 
   cosmos: Open({}),
 
-  // See https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#constructor-property
-  dc: Open({
+  client: Open({
     // Latest version of dynamodb supports empty strings
     convertEmptyValues: false,
   }),
@@ -100,8 +99,8 @@ function cosmos_store(options) {
     name: store.name,
     tag: meta.tag,
     exports: {
-      get_dc: () => {
-        return ctx.dc
+      get_client: () => {
+        return ctx.client
       },
     },
   }
@@ -702,7 +701,7 @@ function make_intern() {
 
         native: function (msg, reply) {
           reply({
-            dc: ctx.dc,
+            client: ctx.client,
           })
         },
       }

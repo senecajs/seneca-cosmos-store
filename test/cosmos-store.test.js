@@ -570,15 +570,16 @@ lab.test('injection-fails', async () => {
 
 
 })
+*/
 
 lab.test('export', async () => {
   var si = make_seneca()
   await si.ready()
 
-  var get_dc = si.export('cosmos-store$1/get_client')
-  expect(get_dc()).exists()
+  var get_client = si.export('cosmos-store$1/get_client')
+  expect(get_client()).exists()
 })
-*/
+
 
 lab.describe('legacy-store-test', () => {
   const plugin = {
