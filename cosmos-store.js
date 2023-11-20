@@ -851,7 +851,7 @@ function make_intern() {
       
       } else {
       */
-        listquery += ' * FROM ' + co.name
+      listquery += ' * FROM ' + co.name
       // }
       
       
@@ -860,11 +860,7 @@ function make_intern() {
         
         listquery += 
           Object.keys(cq).map((k, i) => {
-            let cq_k =  isarr(cq[k]) ? cq[k] : [ cq[k] ]   
-            
-
-          
-            // return 'item.' + k + ' = ' + '@' + ( 'i' + i )
+            let cq_k =  isarr(cq[k]) ? cq[k] : [ cq[k] ]
             
             return '(' +
                 cq_k
@@ -873,7 +869,6 @@ function make_intern() {
                       name: '@i'+i+j,
                       value: v,
                     })
-            
                     return co.name + '.' + k + ' = ' + '@' + ( 'i' + i + j )
                    })
                   .join(' OR ') +
@@ -889,10 +884,13 @@ function make_intern() {
       // console.log('list_req: ', listreq ) // , q, co)
       
       do_list()
+      
       async function do_list(args) {
         const container = await intern.load_container(co.name, ctx, reply)
         let out_list = []
-        const { resources } = await container.items.query(listreq).fetchAll()
+        const {
+          resources
+        } = await container.items.query(listreq).fetchAll()
         
     
         out_list = resources.map(resource => qent.make$(resource) )
