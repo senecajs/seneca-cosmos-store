@@ -16,7 +16,7 @@ const dbs = [
 
   {
     id: 'db1',
-    throughput: 400,
+    // throughput: 400,
     container: [
       {
         id: 'container1',
@@ -91,14 +91,16 @@ async function create_db(db, codb, opts = {}) {
 
   try {
     const { database } = await codb.databases.createIfNotExists(db)
-    for(let container of co) {
+    for(let conConfig of co) {
       try {
-        await database.containers.createIfNotExists(container)
+        const {
+          container
+        } = await database.containers.createIfNotExists(conConfig)
         if (opts.verbose) {
           console.log(`Database "${db.id}" with container "${container.id}" has been created successfully.`)
         }
       } catch (err) {
-        console.error('Error creating container "' + co.id + '":', err.message)
+        console.error('Error creating container "' + conConfig.id + '":', err.message)
         return
       }
     }
