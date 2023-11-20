@@ -869,9 +869,9 @@ function make_intern() {
      
       if (q.fields$ ) {
         listquery += ' ' +
-          Object.keys(fq).map( k => {
-            return co.name + '.' + k
-          }).join(', ') + ' FROM ' + co.name
+          q.fields$
+            .map( k => co.name + '.' + k)
+            .join(', ') + ' FROM ' + co.name
       
       } else {
         listquery += ' * FROM ' + co.name
