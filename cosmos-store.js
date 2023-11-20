@@ -284,7 +284,7 @@ function make_intern() {
                 let rs = await container.items.upsert(item)
 		// console.log('ent: ', rs.resource, item)
 		// rs.resource
-		return reply(null, ent.make$(intern.outbound(ctx, ent, q, rs.resource)) )
+		return reply(null, ent.make$(intern.outbound(ctx, ent, rs.resource)) )
               } catch(err) {
                 return reply(err, null)
               }
@@ -765,7 +765,7 @@ function make_intern() {
           const {
             resource
           } = await container.item(q.id || ent.id, q.id || ent.id).read()
-          reply(null, resource ? ent.make$(intern.outbound(ctx, ent, q, resource)) : null)
+          reply(null, resource ? ent.make$(intern.outbound(ctx, ent, resource)) : null)
         } catch (err) {
           // console.error(err.message)
           reply(err, null)
@@ -916,7 +916,7 @@ function make_intern() {
         } = await container.items.query(listreq).fetchAll()
         
     
-        out_list = resources.map(resource => qent.make$( intern.outbound(ctx, qent, q, resource) ) )
+        out_list = resources.map(resource => qent.make$( intern.outbound(ctx, qent, resource) ) )
     
         reply(null, out_list)
       }
@@ -1091,7 +1091,7 @@ function make_intern() {
       return data
     },
 
-    outbound: function (ctx, ent, q, data) {
+    outbound: function (ctx, ent, data) {
       if (null == data) return null
       
       let entity_options = intern.entity_options(ent, ctx)
