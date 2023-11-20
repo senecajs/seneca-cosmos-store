@@ -547,6 +547,8 @@ function make_intern() {
 
         remove: function (msg, reply) {
           var seneca = this
+          
+          const DELETE = 'Delete'
           // console.log('REMOVE MSG', msg)
 
           var qent = msg.qent
@@ -579,9 +581,25 @@ function make_intern() {
                 if (intern.has_error(seneca, listerr, ctx, reply)) return
                 
                 if(all) {
+                
                   for(let item of list) {
                     await container.item(item.id, item.id).delete()
                   }
+                  /*
+                  // NOTE: using batch/bulk appears to be slower
+                  let batchreq = 
+                    list.map(item => ({
+                      operationType: DELETE,
+                      id: item.id,
+                      partitionKey: item.id
+                    }))
+                    
+                  try {
+                    await container.items.bulk(batchreq)
+                  } catch(err) {
+                    reply(err, null)
+                  }
+                  */
                   
                   return reply()
                   
