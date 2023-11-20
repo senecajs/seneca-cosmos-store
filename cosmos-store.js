@@ -290,13 +290,8 @@ function make_intern() {
               }
 		
             }
-            
-            
-            
-
           
           }
-          
 
 /*
 
