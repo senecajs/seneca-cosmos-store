@@ -580,7 +580,6 @@ lab.test('export', async () => {
   expect(get_client()).exists()
 })
 
-
 lab.describe('legacy-store-test', () => {
   const plugin = {
     dbConfig,
@@ -622,7 +621,6 @@ lab.describe('legacy-store-test', () => {
   // })
 })
 
-
 lab.test('store-core', async () => {
   var si = make_seneca({ plugin })
   await testrun.store_core({ seneca: si, expect, xlog: console.log })
@@ -638,7 +636,7 @@ lab.test('store-save', async () => {
   await testrun.store_save({ seneca: si, expect, xlog: console.log })
 })
 
-/*
+
 lab.test('custom-table', async () => {
   var si = make_seneca({ plugin })
   let c0 = await si
@@ -671,7 +669,6 @@ lab.test('custom-table', async () => {
   let cl1 = await si.entity('test/custom').list$({ x: [1], y: 'a' })
   expect(cl1.length).above(0)
 })
-*/
 
 const testrun = {
   store_core: async function (opts) {

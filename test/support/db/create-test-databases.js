@@ -72,6 +72,11 @@ const dbs = [
       {
         id: 'uniq01',
         partitionKey,
+      },
+
+      {
+        id: 'test_custom',
+        partitionKey,
       }
 
     ]

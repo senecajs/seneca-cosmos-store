@@ -284,7 +284,7 @@ function make_intern() {
                 let rs = await container.items.upsert(item)
 		// console.log('ent: ', rs.resource, item)
 		// rs.resource
-		return reply(null, ent.make$(intern.outbound(ctx, rs.resource)) )
+		return reply(null, ent.make$(intern.outbound(ctx, q, rs.resource)) )
               } catch(err) {
                 return reply(err, null)
               }
@@ -752,7 +752,7 @@ function make_intern() {
           const {
             resource
           } = await container.item(q.id || ent.id, q.id || ent.id).read()
-          reply(null, resource ? ent.make$(intern.outbound(ctx, resource)) : null)
+          reply(null, resource ? ent.make$(intern.outbound(ctx, q, resource)) : null)
         } catch (err) {
           // console.error(err.message)
           reply(err, null)
@@ -905,7 +905,7 @@ function make_intern() {
         } = await container.items.query(listreq).fetchAll()
         
     
-        out_list = resources.map(resource => qent.make$( intern.outbound(ctx, resource) ) )
+        out_list = resources.map(resource => qent.make$( intern.outbound(ctx, q, resource) ) )
     
         reply(null, out_list)
       }
@@ -1080,7 +1080,7 @@ function make_intern() {
       return data
     },
 
-    outbound: function (ctx, item) {
+    outbound: function (ctx, q, item) {
       if (null == item) return null
       const defaultFields = [
         '_attachments',
@@ -1094,7 +1094,15 @@ function make_intern() {
         if(null != item[field]) {
           delete item[field]
         }
-        
+      }
+      
+      if (q.fields$) {
+        for(let field in item) {
+          // TODO: find a better way (use a hashmap) - this is O(n)
+          if (!q.fields$.includes(field)) {
+            delete item[field]
+          }
+        }
       }
       
       return item
