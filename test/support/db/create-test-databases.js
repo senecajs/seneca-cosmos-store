@@ -31,6 +31,10 @@ const dbs = [
         partitionKey,
       },
       {
+        id: 'zen_moon_bar',
+        partitionKey,
+      },
+      {
         id: 'racers',
         partitionKey,
       },
