@@ -61,16 +61,17 @@ var dbConfig = {
 }
   
 var conConfig = {
-
-indexingPolicy: {
-  includedPaths: [
-    { path: "/*" },  // Index all paths
-    // Add more specific paths if needed
-  ],
-  excludedPaths: [
-    // Exclude paths if needed
-  ]
-},
+  /*
+  indexingPolicy: {
+    includedPaths: [
+      { path: "/*" },  // Index all paths
+      // Add more specific paths if needed
+    ],
+    excludedPaths: [
+      // Exclude paths if needed
+    ]
+  },
+  */ 
   partitionKey: {
     paths: [
       '/id',
