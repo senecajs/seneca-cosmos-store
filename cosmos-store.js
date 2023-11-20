@@ -264,7 +264,7 @@ function make_intern() {
           async function do_upsert(ctx, args) {
             const container = await intern.load_container(co.name, ctx, reply)
             
-            if ( null != ent.id ) {
+            if (update) {
             
               intern.id_get(ctx, seneca, ent, co, q, async (err, res) => {
                 if(res) {
