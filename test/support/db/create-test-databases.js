@@ -16,7 +16,7 @@ const dbs = [
 
   {
     id: 'db1',
-    // throughput: 400,
+    throughput: 400,
     container: [
       {
         id: 'container1',
