@@ -260,29 +260,40 @@ function make_intern() {
           
           do_upsert(ctx)
           
-          
           async function do_upsert(ctx, args) {
             const container = await intern.load_container(co.name, ctx, reply)
             
             if ( null != ent.id ) {
-              const { resource } = await container.item(ent.id, ent.id).read()
-              if(resource) {
-                item = resource
-                Object.assign(item, data)
+            
+              intern.id_get(ctx, seneca, ent, co, q, async (err, res) => {
+                if(res) {
+                  item = res // { ...res }
+                  Object.assign(item, data)
+                }
+
+                await upsert(item, reply)
+                
+              })
+            } else {
+              await upsert(item, reply)
+            }
+            
+            async function upsert(item, reply) {
+              try {
+                let rs = await container.items.upsert(item)
+		// console.log('ent: ', rs.resource, item)
+		// rs.resource
+		    
+		return reply(null, ent.make$(rs.resource) )
+              } catch(err) {
+                return reply(err, null)
               }
+		
             }
             
             
             
-            try {
-              let rs = await container.items.upsert(item)
-              // console.log('ent: ', rs.resource, item)
-              // rs.resource
-            
-              return reply(null, ent.make$(rs.resource) )
-            } catch(err) {
-              return reply(err, null)
-            }
+
           
           }
           
@@ -739,7 +750,9 @@ function make_intern() {
         const container = await intern.load_container(co.name, ctx, reply)
         
         try {
-          const { resource } = await container.item(q.id, q.id).read()
+          const {
+            resource
+          } = await container.item(q.id || ent.id, q.id || ent.id).read()
           reply(null, resource ? ent.make$(resource) : null)
         } catch (err) {
           // console.error(err.message)
