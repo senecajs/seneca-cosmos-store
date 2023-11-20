@@ -578,7 +578,6 @@ function make_intern() {
               intern.listent(ctx, seneca, qent, co, cq, async function (listerr, list) {
                 if (intern.has_error(seneca, listerr, ctx, reply)) return
                 
-                
                 if(all) {
                   for(let item of list) {
                     await container.item(item.id, item.id).delete()
