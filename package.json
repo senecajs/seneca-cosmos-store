@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "cosmos-store.js",
   "scripts": {
-    "test-docker": "docker run -d -p 18000:8000 amazon/dynamodb-local",
+    "test-docker": "docker run -p 8081:8081 -p 10250-10255:10250-10255 --interactive --tty mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest",
     "test-create-db": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 node ./test/support/db/create-test-databases.js",
     "test-delete-db": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 node ./test/support/db/delete-test-databases.js",
     "test-list-db": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 node ./test/support/db/list-test-databases.js",
