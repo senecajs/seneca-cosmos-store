@@ -872,17 +872,15 @@ function make_intern() {
       }
       
      
-     /*
-      if( 0 < Object.keys(fq).length ) {
+      if (q.fields$ ) {
         listquery += ' ' +
           Object.keys(fq).map( k => {
             return co.name + '.' + k
           }).join(', ') + ' FROM ' + co.name
       
       } else {
-      */
-      listquery += ' * FROM ' + co.name
-      // }
+        listquery += ' * FROM ' + co.name
+      }
       
       
       if (0 < Object.keys(fq).length) {
@@ -1115,17 +1113,6 @@ function make_intern() {
           delete data[field]
         }
       }
-      
-      if (q.fields$) {
-        for(let field in data) {
-          // TODO: find a better way- via Query API
-          if (!q.fields$.includes(field)) {
-            delete data[field]
-          }
-        }
-      }
-      
-      
 
       if (entity_options) {
         var fields = entity_options.fields || {}
