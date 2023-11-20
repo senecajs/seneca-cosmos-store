@@ -632,6 +632,22 @@ lab.test('store-load', async () => {
 })
 
 lab.test('store-save', async () => {
+
+  var plugin = {
+    entity: {
+      'test/foo': {
+        // for special handling
+        fields: {
+          d1: {
+            type: 'date',
+          },
+        },
+      }
+    
+    }
+  }
+  
+  
   var si = make_seneca({ plugin })
   await testrun.store_save({ seneca: si, expect, xlog: console.log })
 })
@@ -893,8 +909,9 @@ const testrun = {
       m: m2,
       s1: '',
     })
+    
     expect(foo2.d1.toISOString()).equals(d1.toISOString())
-    expect(foo2.fields$()).equals(['id', 'm', 'd1', 's1'])
+    expect(foo2.fields$()).equals(['m', 's1', 'd1', 'id'])
 
     // S10205: existing item, edge cases: empty string, Date
     var d1a = new Date()
@@ -908,7 +925,7 @@ const testrun = {
       s1: '',
     })
     expect(foo2o.d1.toISOString()).equals(d1a.toISOString())
-    expect(foo2o.fields$()).equals(['id', 'm', 'd1', 's1'])
+    expect(foo2o.fields$()).equals(['m', 's1', 'd1', 'id'])
   },
 }
 
