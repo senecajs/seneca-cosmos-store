@@ -521,7 +521,7 @@ function make_intern() {
               function (err, reslist) {
                 if (err) return reply(err)
 
-                return reply(reslist ? reslist[0] : null)
+                return reply(0 != reslist.length ? reslist[0] : null)
               }
             )
           }
