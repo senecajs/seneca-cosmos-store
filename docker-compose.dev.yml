@@ -2,7 +2,7 @@ version: '1'
 
 services:
   cosmosdb:
-    # image: amazon/cosmosdb-local
+    # image: azure/cosmosdb-local
     hostname: cosmosdb-local
     container_name: cosmosdb-local
     ports:
