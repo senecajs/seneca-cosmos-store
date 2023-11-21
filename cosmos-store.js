@@ -589,7 +589,7 @@ function make_intern() {
                   return reply()
                   
 		} else {
-		  qid = 0 < list.length ? list[0].id : null
+                  qid = 0 < list.length ? list[0].id : null
                   return remove_single_by_id({ id: qid })
 		}
               })
