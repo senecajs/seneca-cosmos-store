@@ -176,7 +176,7 @@ function make_intern() {
     */
 
     get_container: function (ent, ctx) {
-      let entopts = intern.entity_options(ent, ctx)
+      // let entopts = intern.entity_options(ent, ctx)
       // let table = entopts && entopts.table
       
       let container = {}
@@ -234,8 +234,6 @@ function make_intern() {
           var data = ent.data$(false)
           
           var item = data
-          
-          let new_id
           
           // console.log('save ent: ', ent, co)
           // console.log('data: ', data)
@@ -536,8 +534,6 @@ function make_intern() {
 
         remove: function (msg, reply) {
           var seneca = this
-          
-          const DELETE = 'Delete'
           // console.log('REMOVE MSG', msg)
 
           var qent = msg.qent
@@ -578,7 +574,7 @@ function make_intern() {
                   // NOTE: using batch/bulk appears to be slower
                   let batchreq = 
                     list.map(item => ({
-                      operationType: DELETE,
+                      operationType: 'Delete',
                       id: item.id,
                       partitionKey: item.id
                     }))
@@ -836,7 +832,7 @@ function make_intern() {
     
       let listreq = {}
       let listquery = 'SELECT'
-      let queryspec = {}
+      // let queryspec = {}
       
       var isarr = Array.isArray
       
