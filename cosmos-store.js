@@ -33,6 +33,7 @@ module.exports.defaults = {
   },
   
   // container default
+  // NOTE: not needed if the containers are already created
   conConfig: {} 
   
 }
@@ -73,16 +74,12 @@ function cosmos_store(options) {
     reference_containers()
     
     async function reference_containers() {
-      
       intern.database = (await ctx.client.databases.createIfNotExists({
         ...dbConfig
       })).database
       
       reply()
-      
-    
     }
-    
     
     /*
     AWS_SDK.config.update(intern.clean_config(options.aws))
@@ -195,8 +192,8 @@ function make_intern() {
     
     load_container: async function (id, ctx, reply) {
       // console.log(ctx.options)
-      
       // console.log(id, ctx.options.conConfig)
+      
       try {
         const { container } = await intern.database.containers.createIfNotExists({
           id,
@@ -206,9 +203,6 @@ function make_intern() {
       } catch(err) {
         reply(err, null)
       }
-      
-      
-      
       // return container
     },
 
