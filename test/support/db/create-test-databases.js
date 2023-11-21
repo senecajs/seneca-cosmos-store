@@ -2,8 +2,6 @@ const CosmosDb = require('./client')
 
 const codb = CosmosDb.connect({ verbose: true })
 
-
-
 const partitionKey = {
   paths: [
     '/id'
