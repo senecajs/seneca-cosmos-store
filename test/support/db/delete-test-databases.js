@@ -11,12 +11,12 @@ delete_table_if_not_exists('racers', ddb, { verbose: true })
 delete_table_if_not_exists('users', ddb, { verbose: true })
 delete_table_if_not_exists('customers', ddb, { verbose: true })
 */
-delete_database_all({ verbose: true })
+delete_container_all('db1', { verbose: true })
 
 
-async function delete_database_all(opts = {}) {
+async function delete_container_all(dbId, opts = {}) {
 
-  const db = codb.database('db1') 
+  const db = codb.database(dbId) 
   const { resources: containers } = await db.containers.readAll().fetchAll()
   for(const container of containers) {
     db.container(container.id).delete(container.id)
