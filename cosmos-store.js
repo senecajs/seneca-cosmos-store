@@ -71,9 +71,9 @@ function cosmos_store(options) {
     
     const dbConfig = options.dbConfig
     
-    reference_containers()
+    reference_database()
     
-    async function reference_containers() {
+    async function reference_database() {
       intern.database = (await ctx.client.databases.createIfNotExists({
         ...dbConfig
       })).database
