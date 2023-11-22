@@ -195,6 +195,9 @@ function make_intern() {
       // console.log(id, ctx.options.conConfig)
       
       try {
+        // it is more efficient to use 'intern.database.container(id)'
+        // but all the containers have to be pre-created
+        // return intern.database.container(id)
         const { container } = await intern.database.containers.createIfNotExists({
           id,
           ...ctx.options.conConfig
