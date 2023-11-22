@@ -2,15 +2,6 @@ const CosmosDb = require('./client')
 
 const codb = CosmosDb.connect({ verbose: true })
 
-/*
-delete_table_if_not_exists('test_foo', ddb, { verbose: true })
-delete_table_if_not_exists('foo', ddb, { verbose: true })
-delete_table_if_not_exists('moon_bar', ddb, { verbose: true })
-delete_table_if_not_exists('players', ddb, { verbose: true })
-delete_table_if_not_exists('racers', ddb, { verbose: true })
-delete_table_if_not_exists('users', ddb, { verbose: true })
-delete_table_if_not_exists('customers', ddb, { verbose: true })
-*/
 delete_container_all('db1', { verbose: true })
 
 
