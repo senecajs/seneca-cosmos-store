@@ -15,6 +15,24 @@ delete_database_all({ verbose: true })
 
 
 async function delete_database_all(opts = {}) {
+
+  const db = codb.database('db1') 
+  const { resources: containers } = await db.containers.readAll().fetchAll()
+  for(const container of containers) {
+    db.container(container.id).delete(container.id)
+      .then(res => {
+        if (opts.verbose) {
+          console.log('Container "' + container.id + '" has been deleted successfully.')
+        }
+      })
+      .catch(err => {
+        console.error('Error:', err.message)
+        return
+      })
+  }
+
+
+  /*
   const { resources: dbs } = await codb.databases.readAll().fetchAll()
   for( const db of dbs ) {
     codb.database(db.id).delete()
@@ -28,19 +46,6 @@ async function delete_database_all(opts = {}) {
         return
       })
   }
-  /*
-  codb.database(db).delete(db)
-    .then(res => {
-      if (opts.verbose) {
-        console.log('Database "' + db + '" has been deleted successfully.')
-      }
-
-    })
-    .catch(err => {
-      console.error('Error:', err.message)
-      return
-    })
-   */
-
+  */
 }
 
