@@ -183,7 +183,7 @@ function make_intern() {
       
       let canon = ent.canon$({ object: true })
       
-      container.name = (canon.base ? canon.base + '_' : '') + canon.name
+      container.name = (null != canon.base ? canon.base + '_' : '') + canon.name
       
       return container
       
