@@ -895,6 +895,24 @@ function make_intern() {
          
       }
       
+      if (null != q.sort$) {
+        let sort_order = {
+          '1': 'ASC',
+          '-1': 'DESC',
+        }
+        
+        if (typeof q.sort$ == 'object') {
+          Object.keys(q.sort$).forEach( k => {
+            let order = sort_order[q.sort$[k]]
+            if (null != order) {
+              listquery += ' ORDER BY '
+                + co.name + '.' + k + ' ' + order
+            }
+            
+          })
+        }
+      }
+      
       listreq.query = listquery
       
       // console.log('list_req: ', listreq ) // , q, co)

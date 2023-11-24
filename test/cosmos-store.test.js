@@ -231,6 +231,43 @@ lab.test('special-query', async () => {
 
   // console.log('END')
 })
+
+lab.test('simple sort', async () => {
+
+  const plugin = {
+    dbConfig,
+    conConfig,
+  }
+
+  const si = make_seneca({ plugin })
+
+  lab.before( () => si.ready() )
+
+  await generate_entries(si, 'query02',
+    [ 
+      { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
+      { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10 },
+      { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10 },
+      { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 8, d: 10 },
+      { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 7, d: 10 },
+      { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 6, d: 10 },
+      { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
+      { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
+      { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13 },
+    ])
+  
+  let list = await si.entity('query02').list$({ sort$: { is2: 1 } })
+  
+  expect(list.map(e => e.is2)).equal(Array(9).fill().map((v, i) => i+1))
+  
+  list = await si.entity('query02').list$({ sort$: { is2: -1 } })
+  
+  expect(list.map(e => e.is2)).equal(Array(9).fill().map((v, i) => Math.abs(i-9)))
+  
+  si.entity('query02').remove$({ all$: true })
+  
+})
+
 /*
 lab.test('comparison-query', async () => {
   var si = make_seneca({

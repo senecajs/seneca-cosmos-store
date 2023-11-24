@@ -84,7 +84,13 @@ const dbs = [
       {
         id: 'query01',
         partitionKey,
-      }
+      },
+
+      {
+        id: 'query02',
+        partitionKey,
+      },
+
 
     ]
 
