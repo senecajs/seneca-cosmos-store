@@ -1,4 +1,4 @@
-/* Copyright (c) 2020-2022 Richard Rodger and other contributors, MIT License. */
+/* Copyright (c) 2023 Richard Rodger and other contributors, MIT License. */
 'use strict'
 
 const { Required, Open } = require('gubu')
@@ -28,13 +28,19 @@ module.exports.defaults = {
   // entity meta data, by canon string
   entity: {},
   
-  dbConfig: {
+  dbConfig: Open({
     id: 'db1'
-  },
+  }),
   
-  // container default
+  // container default config
   // NOTE: not needed if the containers are already created
-  conConfig: {} 
+  conConfig: Open({  partitionKey: {
+    paths: [
+      '/id'
+    ],
+    kind: 'MultiHash',
+    version: 2
+  }}) 
   
 }
 
