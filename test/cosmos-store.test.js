@@ -264,6 +264,11 @@ lab.test('simple sort', async () => {
   
   expect(list.map(e => e.is2)).equal(Array(9).fill().map((v, i) => Math.abs(i-9)))
   
+  // combine
+  list = await si.entity('query02').list$({ sort$: { is2: 1 }, limit$: 2, ip3: 'AA' })
+  expect(list.map(e => e.is2)).equal([1, 4])
+  
+  // clear
   si.entity('query02').remove$({ all$: true })
   
 })
