@@ -1,7 +1,7 @@
 /* Copyright (c) 2023 Richard Rodger and other contributors, MIT License. */
 'use strict'
 
-const { Required, Open } = require('gubu')
+const { Required, Open, Default } = require('gubu')
 
 module.exports = cosmos_store
 
@@ -29,18 +29,20 @@ module.exports.defaults = {
   entity: {},
   
   dbConfig: Open({
-    id: 'db1'
+    id: Default('db1', String)
   }),
   
   // container default config
   // NOTE: not needed if the containers are already created
-  conConfig: Open({  partitionKey: {
-    paths: [
-      '/id'
-    ],
-    kind: 'MultiHash',
-    version: 2
-  }}) 
+  conConfig: Open({
+    partitionKey: {
+      paths: Open(Default([
+        '/id'
+      ], Array)),
+      kind: 'MultiHash',
+      version: 2
+    }
+  })
   
 }
 
@@ -198,7 +200,6 @@ function make_intern() {
     
     load_container: async function (id, ctx, reply) {
       // console.log(ctx.options)
-      // console.log(id, ctx.options.conConfig)
       
       try {
         // it is more efficient to use 'intern.database.container(id)'
