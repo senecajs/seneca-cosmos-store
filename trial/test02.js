@@ -6,11 +6,12 @@ const AzureCosmos = require('@azure/cosmos')
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 
 var dbConfig = {
-  id: 'db1',
-  throughput: 400
+  id: 'db2',
+  // throughput: 400
 }
 
 var conConfig = {
+  /*
   partitionKey: {
     paths: [
       '/id'
@@ -18,6 +19,7 @@ var conConfig = {
     kind: 'MultiHash',
     version: 2
   }
+  */
 }
 
 
@@ -78,14 +80,14 @@ async function run() {
   console.log(t03o)
 
 
+
   console.log (
     await s0.entity('db1/container1').remove$({ all$: true })
   )
   /*
-  console.log(
-    await s0.entity('db1/container1').list$()
-  )
-  */
+  // console.log(
+    //await s0.entity('db1/container1').list$()
+ // )
 
   let f1 = await s0.entity('db1/container1').make$().data$({
     foo: 'a1',
@@ -97,5 +99,7 @@ async function run() {
 
     console.log( (await s0.entity('db1/container1').load$(f1.id))._ts )
   }, 3000)
+  console.log(await s0.entity('db1/container1').list$() )
+  */
 
 }
