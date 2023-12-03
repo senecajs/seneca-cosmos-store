@@ -15,7 +15,10 @@ const PluginValidator = require('seneca-plugin-validator')
 
 const LegacyStoreTest = require('seneca-store-test')
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
+// for local dev
+if (process.env.COSMOS_LOCAL_DEV) {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
+}
 
 function make_seneca(config) {
   config = Object.assign({ seneca: {}, plugin: {} }, config)
@@ -37,7 +40,10 @@ function make_seneca(config) {
             cosmos: {
               endpoint:
                 process.env.SENECA_COSMOS_ENDPOINT || 'https://localhost:8081',
-              key: 'C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==',
+              // see: https://learn.microsoft.com/en-us/azure/cosmos-db/emulator#authentication
+              // for default auth key
+              key: process.env.SENECA_COSMOS_KEY,
+              // container: { create: false },
             },
           },
           config.plugin

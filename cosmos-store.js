@@ -18,12 +18,15 @@ module.exports.defaults = {
   // preserve undefined fields when saving
   merge: true,
 
-  cosmos: Open({}),
-
-  client: Open({
-    // Latest version of dynamodb supports empty strings
-    convertEmptyValues: false,
+  cosmos: Open({
+    endpoint: Required(String),
+    key: Required(String),
+    container: Open({
+      create: Default(true, Boolean)
+    })
   }),
+
+  client: Open({}),
 
   // entity meta data, by canon string
   entity: {},
@@ -200,20 +203,25 @@ function make_intern() {
     
     load_container: async function (id, ctx, reply) {
       // console.log(ctx.options)
+      const create = true === ctx.options.cosmos.container.create
+      const containers = intern.database.containers
       
       try {
-        // it is more efficient to use 'intern.database.container(id)'
-        // but all the containers have to be pre-created
-        // return intern.database.container(id)
-        const { container } = await intern.database.containers.createIfNotExists({
-          id,
-          ...ctx.options.conConfig
-        })
+        let container
+        if(create) {
+          container = (await containers.createIfNotExists({
+            id,
+            ...ctx.options.conConfig
+          })).container
+        } else {
+          container = intern.database.container(id)
+        }
+        
         return container
       } catch(err) {
         reply(err, null)
       }
-      // return container
+      
     },
 
 

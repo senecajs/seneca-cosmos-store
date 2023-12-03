@@ -2,7 +2,9 @@ const { CosmosClient } = require('@azure/cosmos')
 const config = require('./config')
 
 // for local dev
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
+if (process.env.COSMOS_LOCAL_DEV) {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
+}
 
 module.exports = {
   connect(opts = {}) {
