@@ -5,13 +5,13 @@ const AzureCosmos = require('@azure/cosmos')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 
+/*
 var dbConfig = {
   id: 'db2',
   // throughput: 400
 }
 
 var conConfig = {
-  /*
   partitionKey: {
     paths: [
       '/id'
@@ -19,8 +19,8 @@ var conConfig = {
     kind: 'MultiHash',
     version: 2
   }
-  */
 }
+*/
 
 
 var s0 = Seneca({ legacy: false })
@@ -31,11 +31,17 @@ var s0 = Seneca({ legacy: false })
   .use('doc')
   .use('..', {
     sdk: () => AzureCosmos,
-    dbConfig,
-    conConfig,
     cosmos: {
       endpoint: 'https://localhost:8081',
       key: process.env.SENECA_COSMOS_KEY,
+      // container: { create: false },
+      database: {
+        config: {
+          // create: false,
+          id: 'db2'
+        }
+      }
+
     }
 
   })
@@ -43,7 +49,7 @@ var s0 = Seneca({ legacy: false })
 run()
 
 async function run() {
-  var t01 = s0.entity('db1/container1').make$().data$({
+  var t01 = s0.entity('container1').make$().data$({
     id: 't6wq1o',
     //bar: 'b1',
     foo: 'a2',
@@ -52,19 +58,19 @@ async function run() {
   
   var t01o = await t01.save$()
   console.log('B', t01o)
-  let t02o = await s0.entity('db1/container1').save$({id: 'a7wq2o', foo: 'a3'})
+  let t02o = await s0.entity('container1').save$({id: 'a7wq2o', foo: 'a3'})
   console.log('C', t02o)
 
-  let t03o = await s0.entity('db1/container1').save$({id: 'y8bx03', foo: 'a445'})
+  let t03o = await s0.entity('container1').save$({id: 'y8bx03', foo: 'a445'})
 
   var list = await t01.list$({ limit$: 2 })
   console.log('list: ', list.length)
 
-  console.log('t01o load: ', await s0.entity('db1/container1').load$('t6wq1o') )
+  console.log('t01o load: ', await s0.entity('container1').load$('t6wq1o') )
 
   await s0.entity('db1/container1').remove$('t6wq1o')
 
-  console.log('t01o load: ', await s0.entity('db1/container1').load$('t6wq1o') )
+  console.log('t01o load: ', await s0.entity('container1').load$('t6wq1o') )
 
  // t03o = await t03o.remove$()
   
@@ -72,17 +78,17 @@ async function run() {
   t03o.p = 'adfsd102'
   await t03o.save$()
 
-  await s0.entity('db1/container1').save$({ id: 'y8bx03', aa: 'aa' })
+  await s0.entity('container1').save$({ id: 'y8bx03', aa: 'aa' })
 
 
-  t03o = await s0.entity('db1/container1').load$('y8bx03')
+  t03o = await s0.entity('container1').load$('y8bx03')
 
   console.log(t03o)
 
 
 
   console.log (
-    await s0.entity('db1/container1').remove$({ all$: true })
+    await s0.entity('container1').remove$({ all$: true })
   )
   /*
   // console.log(
