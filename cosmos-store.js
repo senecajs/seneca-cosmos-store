@@ -922,14 +922,14 @@ function make_intern() {
         }
         
         if (typeof q.sort$ == 'object') {
-          Object.keys(q.sort$).forEach( k => {
+          for(let k in q.sort$) {
             let order = sort_order[q.sort$[k]]
             if (null != order) {
               listquery += ' ORDER BY '
                 + co.name + '.' + k + ' ' + order
             }
             
-          })
+          }
         }
       }
       
@@ -1107,6 +1107,7 @@ function make_intern() {
 
     inbound: function (ctx, ent, data) {
       if (null == data) return null
+      
       let entity_options = intern.entity_options(ent, ctx)
 
       if (entity_options) {
@@ -1126,6 +1127,7 @@ function make_intern() {
       if (null == data) return null
       
       let entity_options = intern.entity_options(ent, ctx)
+      
       const defaultFields = [
         '_attachments',
         '_etag',
