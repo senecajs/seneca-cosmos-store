@@ -81,8 +81,10 @@ function cosmos_store(options) {
       key: options.cosmos.key,
     })
     
-    const config = options.cosmos.database.config
-    const create = options.cosmos.database.create
+    const {
+      config,
+      create
+    } = options.cosmos.database
     
     create_and_ref_database()
     
@@ -206,9 +208,11 @@ function make_intern() {
     
     load_container: async function (id, ctx, reply) {
       // console.log(ctx.options)
-      const create = ctx.options.cosmos.container.create
+      const {
+        config,
+        create
+      } = ctx.options.cosmos.container
       const containers = intern.database.containers
-      const config = ctx.options.cosmos.container.config
       
       try {
         const container = create ? 
@@ -249,7 +253,7 @@ function make_intern() {
           var ent = msg.ent
 
           var update = null != ent.id
-          const co = intern.get_container(ent, ctx)
+          var co = intern.get_container(ent, ctx)
           var data = ent.data$(false)
           
           var item = data
@@ -510,7 +514,7 @@ function make_intern() {
           
           var qid = q.id
           
-          const co = intern.get_container(qent, ctx)
+          var co = intern.get_container(qent, ctx)
           // console.log(q)
 
           if (null == qid) {
@@ -545,7 +549,7 @@ function make_intern() {
           var qent = msg.qent
           var q = msg.q
           
-          const co = intern.get_container(qent, ctx)
+          var co = intern.get_container(qent, ctx)
           
           intern.listent(ctx, seneca, qent, co, q, reply)
           
