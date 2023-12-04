@@ -21,32 +21,33 @@ module.exports.defaults = {
   cosmos: Open({
     endpoint: Required(String),
     key: Required(String),
+    
+    database: Open({
+      create: Default(true, Boolean),
+      config: Open({
+        id: Required(String)
+      })
+    }),
+    
     container: Open({
-      create: Default(true, Boolean)
+      create: Default(true, Boolean),
+      config: Open({
+        partitionKey: {
+          paths: Open(Default([
+            '/id'
+          ], Array)),
+          kind: 'MultiHash',
+          version: 2
+        }
+      })
     })
+    
   }),
 
   client: Open({}),
 
   // entity meta data, by canon string
   entity: {},
-  
-  dbConfig: Open({
-    id: Default('db1', String)
-  }),
-  
-  // container default config
-  // NOTE: not needed if the containers are already created
-  conConfig: Open({
-    partitionKey: {
-      paths: Open(Default([
-        '/id'
-      ], Array)),
-      kind: 'MultiHash',
-      version: 2
-    }
-  })
-  
 }
 
 function cosmos_store(options) {
@@ -80,14 +81,16 @@ function cosmos_store(options) {
       key: options.cosmos.key,
     })
     
-    const dbConfig = options.dbConfig
+    const config = options.cosmos.database.config
+    const create = options.cosmos.database.create
     
-    reference_database()
+    create_and_ref_database()
     
-    async function reference_database() {
-      intern.database = (await ctx.client.databases.createIfNotExists({
-        ...dbConfig
-      })).database
+    async function create_and_ref_database() {
+      intern.database = create ? 
+        (await ctx.client.databases.createIfNotExists({
+          ...config
+        })).database : ctx.client.database(config.id) 
       
       reply()
     }
@@ -203,19 +206,17 @@ function make_intern() {
     
     load_container: async function (id, ctx, reply) {
       // console.log(ctx.options)
-      const create = true === ctx.options.cosmos.container.create
+      const create = ctx.options.cosmos.container.create
       const containers = intern.database.containers
+      const config = ctx.options.cosmos.container.config
       
       try {
-        let container
-        if(create) {
-          container = (await containers.createIfNotExists({
+        const container = create ? 
+          (await containers.createIfNotExists({
             id,
-            ...ctx.options.conConfig
+            ...config
           })).container
-        } else {
-          container = intern.database.container(id)
-        }
+          : intern.database.container(id)
         
         return container
       } catch(err) {

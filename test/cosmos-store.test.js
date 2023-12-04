@@ -44,6 +44,13 @@ function make_seneca(config) {
               // for default auth key
               key: process.env.SENECA_COSMOS_KEY,
               // container: { create: false },
+              database: {
+                // create: false,
+                config: {
+                  id: 'db1'
+                }
+              }
+              
             },
           },
           config.plugin
@@ -61,13 +68,9 @@ async function generate_entries(si, q_name, entries) {
 
 }
 
-var dbConfig = {
-  id: 'db1'
-  // throughput: 400
-}
-  
-var conConfig = {
-  /*
+/*
+let containerConfig = {
+
   indexingPolicy: {
     includedPaths: [
       { path: "/*" },  // Index all paths
@@ -77,7 +80,7 @@ var conConfig = {
       // Exclude paths if needed
     ]
   },
-  */ 
+  
   partitionKey: {
     paths: [
       '/id',
@@ -86,12 +89,7 @@ var conConfig = {
     version: 2
   }
 }
-  
-var plugin = {
-  dbConfig,
-  conConfig
-  
-}
+*/
 
 lab.test('validate', PluginValidator(Plugin, module))
 
@@ -240,10 +238,7 @@ lab.test('special-query', async () => {
 
 lab.test('simple sort', async () => {
 
-  const plugin = {
-    dbConfig,
-    conConfig,
-  }
+  const plugin = {}
 
   const si = make_seneca({ plugin })
 
@@ -600,10 +595,7 @@ lab.test('export', async () => {
 })
 
 lab.describe('legacy-store-test', () => {
-  const plugin = {
-    dbConfig,
-    conConfig,
-  }
+  const plugin = {}
 
   const si = make_seneca({ plugin })
 
@@ -639,11 +631,13 @@ lab.describe('legacy-store-test', () => {
 })
 
 lab.test('store-core', async () => {
+  const plugin = {}
   var si = make_seneca({ plugin })
   await testrun.store_core({ seneca: si, expect, xlog: console.log })
 })
 
 lab.test('store-load', async () => {
+  const plugin = {}
   var si = make_seneca({ plugin })
   await testrun.store_load({ seneca: si, expect, xlog: console.log })
 })
@@ -671,6 +665,7 @@ lab.test('store-save', async () => {
 
 
 lab.test('custom-table', async () => {
+  const plugin = {}
   var si = make_seneca({ plugin })
   let c0 = await si
     .entity('test/custom')
