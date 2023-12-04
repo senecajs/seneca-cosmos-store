@@ -1,7 +1,7 @@
 /* Copyright (c) 2023 Richard Rodger and other contributors, MIT License. */
 'use strict'
 
-const { Required, Open, Default } = require('gubu')
+const { Gubu, Open, Required, Default } = require('gubu')
 
 module.exports = cosmos_store
 
@@ -18,7 +18,7 @@ module.exports.defaults = {
   // preserve undefined fields when saving
   merge: true,
 
-  cosmos: Open({
+  cosmos: Gubu({
     endpoint: Required(String),
     key: Required(String),
     
@@ -36,8 +36,8 @@ module.exports.defaults = {
           paths: Open(Default([
             '/id'
           ], Array)),
-          kind: 'MultiHash',
-          version: 2
+          kind: Default('MultiHash', String),
+          version: Default(2, Number)
         }
       })
     })
