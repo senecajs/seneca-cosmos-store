@@ -296,6 +296,7 @@ function make_intern() {
             
             async function upsert(item, reply) {
               try {
+                item.entity$ = ent.entity$
                 let rs = await container.items.upsert(item)
 		// console.log('ent: ', rs.resource, item)
 		// rs.resource
