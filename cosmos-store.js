@@ -18,7 +18,7 @@ module.exports.defaults = {
   // preserve undefined fields when saving
   merge: true,
 
-  cosmos: Gubu({
+  cosmos: Open({
     endpoint: Required(String),
     key: Required(String),
     
