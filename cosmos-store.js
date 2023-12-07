@@ -1,7 +1,7 @@
 /* Copyright (c) 2023 Richard Rodger and other contributors, MIT License. */
 'use strict'
 
-const { Gubu, Open, Required, Default } = require('gubu')
+const { Gubu, Open, Required, Default, Skip } = require('gubu')
 
 module.exports = cosmos_store
 
@@ -19,8 +19,9 @@ module.exports.defaults = {
   merge: true,
 
   cosmos: Open({
-    endpoint: Required(String),
-    key: Required(String),
+    endpoint: Skip(String),
+    key: Skip(String),
+    connectionString: Skip(String),
     
     database: Open({
       create: Default(true, Boolean),
@@ -75,11 +76,15 @@ function cosmos_store(options) {
   seneca.add({ init: store.name, tag: meta.tag }, function (msg, reply) {
     const COSMOS_SDK = options.sdk()
     
-    
-    ctx.client = new COSMOS_SDK.CosmosClient({
-      endpoint: options.cosmos.endpoint,
-      key: options.cosmos.key,
-    })
+    if (options.cosmos.connectionString) {
+      ctx.client = new COSMOS_SDK.CosmosClient(options.cosmos.connectionString)
+    }
+    else {
+      ctx.client = new COSMOS_SDK.CosmosClient({
+        endpoint: options.cosmos.endpoint,
+        key: options.cosmos.key,
+      })
+    }
     
     const {
       config,
