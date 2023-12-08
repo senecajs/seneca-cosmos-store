@@ -47,10 +47,9 @@ function make_seneca(config) {
               database: {
                 // create: false,
                 config: {
-                  id: 'db1'
-                }
-              }
-              
+                  id: 'db1',
+                },
+              },
             },
           },
           config.plugin
@@ -60,12 +59,9 @@ function make_seneca(config) {
 }
 
 async function generate_entries(si, q_name, entries) {
-  for(let entry of entries) {
-    await si
-      .entity(q_name)
-      .save$(entry)
+  for (let entry of entries) {
+    await si.entity(q_name).save$(entry)
   }
-
 }
 
 /*
@@ -237,41 +233,48 @@ lab.test('special-query', async () => {
 })
 
 lab.test('simple sort', async () => {
-
   const plugin = {}
 
   const si = make_seneca({ plugin })
 
-  lab.before( () => si.ready() )
+  lab.before(() => si.ready())
 
-  await generate_entries(si, 'query02',
-    [ 
-      { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
-      { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10 },
-      { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10 },
-      { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 8, d: 10 },
-      { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 7, d: 10 },
-      { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 6, d: 10 },
-      { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
-      { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
-      { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13 },
-    ])
-  
+  await generate_entries(si, 'query02', [
+    { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
+    { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10 },
+    { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10 },
+    { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 8, d: 10 },
+    { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 7, d: 10 },
+    { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 6, d: 10 },
+    { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
+    { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
+    { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13 },
+  ])
+
   let list = await si.entity('query02').list$({ sort$: { is2: 1 } })
-  
-  expect(list.map(e => e.is2)).equal(Array(9).fill().map((v, i) => i+1))
-  
+
+  expect(list.map((e) => e.is2)).equal(
+    Array(9)
+      .fill()
+      .map((v, i) => i + 1)
+  )
+
   list = await si.entity('query02').list$({ sort$: { is2: -1 } })
-  
-  expect(list.map(e => e.is2)).equal(Array(9).fill().map((v, i) => Math.abs(i-9)))
-  
+
+  expect(list.map((e) => e.is2)).equal(
+    Array(9)
+      .fill()
+      .map((v, i) => Math.abs(i - 9))
+  )
+
   // combine
-  list = await si.entity('query02').list$({ sort$: { is2: 1 }, limit$: 2, ip3: 'AA' })
-  expect(list.map(e => e.is2)).equal([1, 4])
-  
+  list = await si
+    .entity('query02')
+    .list$({ sort$: { is2: 1 }, limit$: 2, ip3: 'AA' })
+  expect(list.map((e) => e.is2)).equal([1, 4])
+
   // clear
   si.entity('query02').remove$({ all$: true })
-  
 })
 
 /*
@@ -599,16 +602,15 @@ lab.describe('legacy-store-test', () => {
 
   const si = make_seneca({ plugin })
 
-  lab.before( () => si.ready() )
+  lab.before(() => si.ready())
 
   const si_merge = make_seneca({
     plugin: Object.assign({ merge: false }, plugin),
   })
 
   lab.before(() => si_merge.ready())
-  
-  LegacyStoreTest.test.keyvalue (lab, 
-  {
+
+  LegacyStoreTest.test.keyvalue(lab, {
     seneca: si,
     senecaMerge: si_merge,
     script: lab,
@@ -621,8 +623,6 @@ lab.describe('legacy-store-test', () => {
     script: lab,
   })
 
-  
-  
   // TODO: fix implmentation
   // LegacyStoreTest.upserttest({
   //   seneca: si,
@@ -643,7 +643,6 @@ lab.test('store-load', async () => {
 })
 
 lab.test('store-save', async () => {
-
   var plugin = {
     entity: {
       'test/foo': {
@@ -653,16 +652,13 @@ lab.test('store-save', async () => {
             type: 'date',
           },
         },
-      }
-    
-    }
+      },
+    },
   }
-  
-  
+
   var si = make_seneca({ plugin })
   await testrun.store_save({ seneca: si, expect, xlog: console.log })
 })
-
 
 lab.test('custom-table', async () => {
   const plugin = {}
@@ -704,21 +700,18 @@ const testrun = {
     var expect = opts.expect
     var log = opts.log
 
-
     // S00010: Clear test/foo
     await seneca.entity('test/foo').remove$({ all$: true })
     var foolist = await seneca.entity('test/foo').list$()
 
     log && log('S00010', foolist)
     expect(foolist.length).equal(0)
-    
 
     // S00100: Load non-existent returns null.
     var foo0n = await seneca.entity('test/foo').load$('not-an-id')
 
     log && log('S00100', foo0n)
     expect(foo0n).equal(null)
-   
 
     // S00200: Create unsaved entity
     var m0 = (Math.random() + '').substring(2)
@@ -769,7 +762,7 @@ const testrun = {
       oc: { y: 3, z: { q: 4, u: ['a', 'b'], v: [{ w: 5 }] } },
       ac: [{ x: 6, y: 7 }, { x: 8, z: 9 }, { u: [{ a: 1 }] }],
     })
-    
+
     expect(Object.keys(foo0.data$(false)).sort()).equals([
       'a',
       'ac',
@@ -781,8 +774,6 @@ const testrun = {
       'oc',
       's',
     ])
-    
-     
 
     // S00400: Load existing by id returns entity.
     var foo0o = await seneca.entity('test/foo').load$(foo0.id)
@@ -816,7 +807,6 @@ const testrun = {
 
     log && log('S00800', m0, foolist0r)
     expect(foolist0r.length).equals(0)
-    
   },
 
   store_load: async function (opts) {
@@ -849,7 +839,6 @@ const testrun = {
 
     log && log('S01200', foo1n)
     expect(foo1n).equal(null)
-    
   },
 
   store_save: async function (opts) {
@@ -868,8 +857,7 @@ const testrun = {
         b: true,
       })
       .save$()
-    
-    
+
     var foo0o = await seneca.entity('test/foo').load$(foo0.id)
 
     log && log('S10000', foo0, foo0o)
@@ -921,7 +909,7 @@ const testrun = {
       m: m2,
       s1: '',
     })
-    
+
     expect(foo2.d1.toISOString()).equals(d1.toISOString())
     expect(foo2.fields$()).equals(['m', 's1', 'd1', 'id'])
 
@@ -940,5 +928,3 @@ const testrun = {
     expect(foo2o.fields$()).equals(['m', 's1', 'd1', 'id'])
   },
 }
-
-
