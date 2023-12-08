@@ -1,0 +1,71 @@
+{
+  "name": "@seneca/cosmos-store",
+  "description": "CosmosDB store for Seneca",
+  "version": "1.0.0",
+  "keywords": [
+    "seneca",
+    "cosmos",
+    "azuredb",
+    "store",
+    "plugin"
+  ],
+  "author": {
+    "name": "Richard Rodger",
+    "email": "richard@voxgig.com",
+    "url": "http://richardrodger.com/"
+  },
+  "license": "MIT",
+  "main": "cosmos-store.js",
+  "scripts": {
+    "test-docker": "docker run -p 8081:8081 -p 10250-10255:10250-10255 --interactive --tty mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest",
+    "test-create-db": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 COSMOS_LOCAL_DEV=1 node ./test/support/db/create-test-databases.js",
+    "test-delete-db": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 COSMOS_LOCAL_DEV=1 node ./test/support/db/delete-test-databases.js",
+    "test-list-db": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 COSMOS_LOCAL_DEV=1 node ./test/support/db/list-test-databases.js",
+    "test": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 COSMOS_LOCAL_DEV=1 lab -v -L -l -t 50 -P '\\.test' test -r console -o stdout -r html -o test/coverage.html -I AggregateError,atob,btoa,AbortController,AbortSignal,EventTarget,Event,MessageChannel,MessagePort,MessageEvent,performance",
+    "test-some": "SENECA_COSMOS_ENDPOINT=https://localhost:8081 lab -v -L -P '\\.test' test -r console -g ",
+    "test-msgs": "lab -t 50 -P messages.test -r console -o stdout -r html -o test/coverage.html",
+    "doc": "seneca-doc",
+    "coveralls": "lab -s -P test -r lcov | coveralls",
+    "prettier": "prettier --write --no-semi --single-quote *.js test/*.js",
+    "reset": "npm run clean && npm i && npm test",
+    "clean": "rm -rf node_modules package-lock.json yarn.lock",
+    "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;",
+    "repo-publish-quick": "npm run prettier && npm test && npm run repo-tag && npm publish --access public --registry=https://registry.npmjs.org",
+    "repo-publish": "npm run clean && npm i --registry=http://registry.npmjs.org && npm run repo-publish-quick"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "cosmos-store.js",
+    "cosmos-store-docs.js",
+    "lib"
+  ],
+  "contributors": [
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "devDependencies": {
+    "@azure/cosmos": "^4.0.0",
+    "coveralls": "3.1.1",
+    "prettier": "2.8.7",
+    "seneca": "3.30.0",
+    "seneca-doc": "2.1.3",
+    "seneca-entity": "22.1.0",
+    "seneca-joi": "7.0.2",
+    "seneca-msg-test": "3.4.0",
+    "seneca-plugin-validator": "0.6.1",
+    "seneca-promisify": "3.6.0",
+    "seneca-store-test": "5.2.0"
+  },
+  "peerDependencies": {
+    "@azure/cosmos": ">=4",
+    "seneca": ">=3",
+    "seneca-entity": ">=22",
+    "seneca-promisify": ">=3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/senecajs/seneca-cosmos-store.git"
+  }
+}
