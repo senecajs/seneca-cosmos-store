@@ -3,6 +3,8 @@
 
 const { Open, Required, Default, Skip } = require('gubu')
 
+Object.defineProperty(cosmos_store, 'name', { value: 'cosmos-store' })
+
 module.exports = cosmos_store
 
 module.exports.errors = {}
@@ -48,7 +50,7 @@ module.exports.defaults = {
   entity: {},
 }
 
-async function cosmos_store(options) {
+function cosmos_store(options) {
   const seneca = this
   const init = seneca.export('entity/init')
 
@@ -69,10 +71,8 @@ async function cosmos_store(options) {
   )
   
   let store = intern.make_store(ctx)
-  let meta = init(seneca, options, store)
   
-  
-  seneca.add({ init: store.name, tag: meta.tag }, function (msg, reply) {
+  seneca.init(function (reply) {
     const COSMOS_SDK = options.sdk()
     
     if (options.cosmos.connectionString) {
@@ -100,6 +100,8 @@ async function cosmos_store(options) {
       reply()
     }
   })
+  
+  let meta = init(seneca, options, store)
   
   return {
     name: store.name,
@@ -162,25 +164,6 @@ function make_intern() {
 
       return entopts
     },
-    /*
-    table: function (ent, ctx) {
-   
-      let table_name = null
-      let entopts = intern.entity_options(ent, ctx)
-      if (
-        null != entopts &&
-        null != entopts.table &&
-        null != entopts.table.name
-      ) {
-        table_name = entopts.table.name
-      } else {
-        let canon = ent.canon$({ object: true })
-        table_name = (canon.base ? canon.base + '_' : '') + canon.name
-      }
-      return table_name
-      
-    },
-    */
 
     get_container: function (ent, ctx) {
       // let entopts = intern.entity_options(ent, ctx)
