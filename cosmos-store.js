@@ -60,21 +60,21 @@ function cosmos_store(options) {
       // TODO: use seneca.export once it allows for null values
       generate_id: options.generate_id || seneca.export('entity/generate_id'),
     },
-    options,
+    options
   )
-  
+
   const ctx = intern.make_ctx(
     {
       name: 'cosmos-store',
     },
     options
   )
-  
+
   let store = intern.make_store(ctx)
-  
+
   seneca.init(function (reply) {
     const COSMOS_SDK = options.sdk()
-    
+
     if (options.cosmos.connectionString) {
       ctx.client = new COSMOS_SDK.CosmosClient(options.cosmos.connectionString)
     } else {
@@ -100,9 +100,9 @@ function cosmos_store(options) {
       reply()
     }
   })
-  
+
   let meta = init(seneca, options, store)
-  
+
   return {
     name: store.name,
     tag: meta.tag,
@@ -112,7 +112,6 @@ function cosmos_store(options) {
       },
     },
   }
-  
 }
 
 function make_intern() {

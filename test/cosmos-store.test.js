@@ -22,36 +22,34 @@ if (process.env.COSMOS_LOCAL_DEV) {
 
 function make_seneca(config) {
   config = Object.assign({ seneca: {}, plugin: {} }, config)
-  return (
-    Seneca(Object.assign({ legacy: false }, config.seneca))
-      .test()
-      .use('promisify')
-      .use('entity', { mem_store: false } )
-      .use('doc')
-      .use(
-        '..',
-        Object.assign(
-          {
-            sdk: () => COSMOS_SDK,
-            cosmos: {
-              endpoint:
-                process.env.SENECA_COSMOS_ENDPOINT || 'https://localhost:8081',
-              // see: https://learn.microsoft.com/en-us/azure/cosmos-db/emulator#authentication
-              // for default auth key
-              key: process.env.SENECA_COSMOS_KEY,
-              // container: { create: false },
-              database: {
-                // create: false,
-                config: {
-                  id: 'db1',
-                },
+  return Seneca(Object.assign({ legacy: false }, config.seneca))
+    .test()
+    .use('promisify')
+    .use('entity', { mem_store: false })
+    .use('doc')
+    .use(
+      '..',
+      Object.assign(
+        {
+          sdk: () => COSMOS_SDK,
+          cosmos: {
+            endpoint:
+              process.env.SENECA_COSMOS_ENDPOINT || 'https://localhost:8081',
+            // see: https://learn.microsoft.com/en-us/azure/cosmos-db/emulator#authentication
+            // for default auth key
+            key: process.env.SENECA_COSMOS_KEY,
+            // container: { create: false },
+            database: {
+              // create: false,
+              config: {
+                id: 'db1',
               },
             },
           },
-          config.plugin
-        )
+        },
+        config.plugin
       )
-  )
+    )
 }
 
 async function generate_entries(si, q_name, entries) {
