@@ -61,7 +61,7 @@
   "peerDependencies": {
     "@azure/cosmos": ">=4",
     "seneca": ">=3",
-    "seneca-entity": ">=22",
+    "seneca-entity": ">=25",
     "seneca-promisify": ">=3"
   },
   "repository": {
