@@ -25,12 +25,8 @@ function make_seneca(config) {
   return (
     Seneca(Object.assign({ legacy: false }, config.seneca))
       .test()
-
-      // make sure mem-store isn't being tested!
-      .ignore_plugin('mem-store')
-
       .use('promisify')
-      .use('entity')
+      .use('entity', { mem_store: false } )
       .use('doc')
       .use(
         '..',

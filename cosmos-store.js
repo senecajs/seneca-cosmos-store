@@ -48,31 +48,33 @@ module.exports.defaults = {
   entity: {},
 }
 
-function cosmos_store(options) {
-  var seneca = this
+async function cosmos_store(options) {
+  const seneca = this
+  const init = seneca.export('entity/init')
 
   // TODO: need a better way to do this
   options = seneca.util.deep(
     {
       // TODO: use seneca.export once it allows for null values
-      generate_id: seneca.export('entity/generate_id'),
+      generate_id: options.generate_id || seneca.export('entity/generate_id'),
     },
-    options
+    options,
   )
-
+  
   const ctx = intern.make_ctx(
     {
       name: 'cosmos-store',
     },
     options
   )
-
-  var store = intern.make_store(ctx)
-  var meta = seneca.store.init(seneca, options, store)
-
+  
+  let store = intern.make_store(ctx)
+  let meta = init(seneca, options, store)
+  
+  
   seneca.add({ init: store.name, tag: meta.tag }, function (msg, reply) {
     const COSMOS_SDK = options.sdk()
-
+    
     if (options.cosmos.connectionString) {
       ctx.client = new COSMOS_SDK.CosmosClient(options.cosmos.connectionString)
     } else {
@@ -98,8 +100,8 @@ function cosmos_store(options) {
       reply()
     }
   })
-
-  var plugin_meta = {
+  
+  return {
     name: store.name,
     tag: meta.tag,
     exports: {
@@ -108,8 +110,7 @@ function cosmos_store(options) {
       },
     },
   }
-
-  return plugin_meta
+  
 }
 
 function make_intern() {
@@ -449,15 +450,6 @@ function make_intern() {
       }
 
       return store
-    },
-
-    // Tmp converter for table parameter
-    tableinfo: (table) => {
-      let tableInfo = table
-      if ('string' === typeof tableInfo) {
-        tableInfo = { name: table }
-      }
-      return tableInfo
     },
 
     id_get: function (ctx, seneca, ent, co, q, reply) {
