@@ -457,21 +457,22 @@ function make_intern() {
 
     build_cmps(qv, kname) {
       // console.log('QV: ', typeof qv, qv)
-      
+
       if ('object' != typeof qv) {
         //  && !Array.isArray(qv)) {
         return { cmps: [{ c: 'eq$', cmpop: '=', k: kname, v: qv }] }
       }
 
       let cmpops = {
-        gt$: { cmpop: '>' },
-        gte$: { cmpop: '>=' },
-        lt$: { cmpop: '<' },
-        lte$: { cmpop: '<=' },
-        ne$: { cmpop: '!=' },
-        eq$: { cmpop: '=' }
-      }, cmps = []
-      
+          gt$: { cmpop: '>' },
+          gte$: { cmpop: '>=' },
+          lt$: { cmpop: '<' },
+          lte$: { cmpop: '<=' },
+          ne$: { cmpop: '!=' },
+          eq$: { cmpop: '=' },
+        },
+        cmps = []
+
       for (let k in qv) {
         let cmp = cmpops[k]
         if (cmp) {
@@ -480,7 +481,7 @@ function make_intern() {
           cmp.v = qv[k]
           cmp.c = k
           cmps.push(cmp)
-        } else if(k.endsWith('$')) {
+        } else if (k.endsWith('$')) {
           throw new Error('Invalid Comparison ' + k)
         }
       }
@@ -528,21 +529,22 @@ function make_intern() {
 
         listquery += Object.keys(cq)
           .map((k) => {
-            let cq_k = isarr(cq[k]) ? cq[k] : [ cq[k] ]
+            let cq_k = isarr(cq[k]) ? cq[k] : [cq[k]]
 
             return (
               '(' +
               cq_k
                 .map((v, i) => {
                   let cq_cmp = intern.build_cmps(v, k)
-                  return cq_cmp
-                    .cmps
+                  return cq_cmp.cmps
                     .map((c, j) => {
                       params.push({
                         name: '@' + k + i + j,
                         value: c.v,
                       })
-                      return co.name + '.' + k + ` ${c.cmpop} ` + '@' + (k + i + j)
+                      return (
+                        co.name + '.' + k + ` ${c.cmpop} ` + '@' + (k + i + j)
+                      )
                     })
                     .join(' AND ')
                 })
@@ -558,24 +560,22 @@ function make_intern() {
           1: 'ASC',
           '-1': 'DESC',
         }
-        
+
         if ('object' !== typeof q.sort$) {
-          throw new Error("Invalid sort$")
+          throw new Error('Invalid sort$')
         }
-        
+
         listquery += ' ORDER BY '
-        listquery +=
-          Object.keys(q.sort$).map(k => {
+        listquery += Object.keys(q.sort$)
+          .map((k) => {
             let order = sort_order[q.sort$[k]]
             if (null != order) {
               return co.name + '.' + k + ' ' + order
+            } else {
+              throw new Error('Invalid sort$ order')
             }
-            else {
-              throw new Error("Invalid sort$ order")
-            }
-        
-          }).join(', ')
-          
+          })
+          .join(', ')
       }
 
       listreq.query = listquery
@@ -589,7 +589,7 @@ function make_intern() {
         if (1 < Object.keys(q.sort$ || {}).length) {
           // TODO: update compositeIndexes
         }
-        
+
         try {
           const { resources } = await container.items.query(listreq).fetchAll()
 
@@ -598,11 +598,10 @@ function make_intern() {
           )
 
           reply(null, out_list)
-        } catch(err) {
+        } catch (err) {
           reply(err, null)
         }
       }
-      
     },
 
     inbound: function (ctx, ent, data) {

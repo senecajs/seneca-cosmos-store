@@ -540,7 +540,7 @@
             <a href="#cosmos-store-doc.js"><span class="basename">cosmos-store-doc.js</span></a>
         </li>
         <li class="">
-            <span class="cov high">86.54</span>
+            <span class="cov high">90.06</span>
             <a href="#cosmos-store.js"><span class="basename">cosmos-store.js</span></a>
         </li>
         <li><a href="#linting">Linting Report</a></li>
@@ -550,8 +550,8 @@
       <div class="stats high">
           <div class="failures">0</div>
           <div class="skipped">0</div>
-          <div class="test-count">57</div>
-          <div class="duration">22020</div>
+          <div class="test-count">72</div>
+          <div class="duration">24432</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -559,6 +559,10 @@
           <input type="checkbox" checked="" onchange="filter(this)" value="failure" id="show-failure">
           <label for="show-failure">Show Failure</label>
           <br>
+          <input type="checkbox" checked="" onchange="filter(this)" value="simple-sort-query-test" id="show-simple-sort-query-test">
+          <label for="show-simple-sort-query-test">simple-sort-query-test</label>
+          <input type="checkbox" checked="" onchange="filter(this)" value="comparison-query-test" id="show-comparison-query-test">
+          <label for="show-comparison-query-test">comparison-query-test</label>
           <input type="checkbox" checked="" onchange="filter(this)" value="legacy-store-test" id="show-legacy-store-test">
           <label for="show-legacy-store-test">legacy-store-test</label>
           <input type="checkbox" checked="" onchange="filter(this)" value="store-keyvalue" id="show-store-keyvalue">
@@ -598,395 +602,500 @@
               <td class="test-title">validate
                   
               </td>
-              <td class="test-duration">14</td>
+              <td class="test-duration">18</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">2</td>
               <td class="test-title">happy
                   
               </td>
-              <td class="test-duration">376</td>
+              <td class="test-duration">459</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">3</td>
               <td class="test-title">no-dups
                   
               </td>
-              <td class="test-duration">438</td>
+              <td class="test-duration">403</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">4</td>
               <td class="test-title">special-query
                   
               </td>
-              <td class="test-duration">1134</td>
+              <td class="test-duration">1067</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">5</td>
-              <td class="test-title">simple sort
+              <td class="test-title">double sort
                   
               </td>
-              <td class="test-duration">839</td>
+              <td class="test-duration">658</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">6</td>
-              <td class="test-title">export
+              <td class="test-title">invalid-operators
                   
               </td>
-              <td class="test-duration">150</td>
+              <td class="test-duration">78</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">7</td>
-              <td class="test-title">store-core
+              <td class="test-title">injection-fails
                   
               </td>
-              <td class="test-duration">542</td>
+              <td class="test-duration">251</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">8</td>
-              <td class="test-title">store-load
+              <td class="test-title">export
                   
               </td>
-              <td class="test-duration">191</td>
+              <td class="test-duration">149</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">9</td>
-              <td class="test-title">store-save
+              <td class="test-title">store-core
                   
               </td>
-              <td class="test-duration">377</td>
+              <td class="test-duration">562</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">10</td>
+              <td class="test-title">store-load
+                  
+              </td>
+              <td class="test-duration">201</td>
+          </tr>
+          <tr class="show  success">
+              <td class="test-id">11</td>
+              <td class="test-title">store-save
+                  
+              </td>
+              <td class="test-duration">392</td>
+          </tr>
+          <tr class="show  success">
+              <td class="test-id">12</td>
               <td class="test-title">custom-table
                   
               </td>
-              <td class="test-duration">287</td>
+              <td class="test-duration">310</td>
           </tr>
-          <tr class="show legacy-store-test store-keyvalue success">
-              <td class="test-id">11</td>
-              <td class="test-title">legacy-store-test store-keyvalue save-load-auto-id
-                  
-              </td>
-              <td class="test-duration">503</td>
-          </tr>
-          <tr class="show legacy-store-test store-keyvalue success">
-              <td class="test-id">12</td>
-              <td class="test-title">legacy-store-test store-keyvalue save-load-given-id
-                  
-              </td>
-              <td class="test-duration">491</td>
-          </tr>
-          <tr class="show legacy-store-test store-keyvalue success">
+          <tr class="show simple-sort-query-test success">
               <td class="test-id">13</td>
-              <td class="test-title">legacy-store-test store-keyvalue remove
+              <td class="test-title">simple-sort-query-test generate_entries
                   
               </td>
-              <td class="test-duration">242</td>
+              <td class="test-duration">394</td>
           </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
+          <tr class="show simple-sort-query-test success">
               <td class="test-id">14</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should load an entity qqq
+              <td class="test-title">simple-sort-query-test ASC sort$: 1
+                  
+              </td>
+              <td class="test-duration">95</td>
+          </tr>
+          <tr class="show simple-sort-query-test success">
+              <td class="test-id">15</td>
+              <td class="test-title">simple-sort-query-test DESC sort$: -1
+                  
+              </td>
+              <td class="test-duration">92</td>
+          </tr>
+          <tr class="show simple-sort-query-test success">
+              <td class="test-id">16</td>
+              <td class="test-title">simple-sort-query-test combine sort$, limit$
+                  
+              </td>
+              <td class="test-duration">102</td>
+          </tr>
+          <tr class="show simple-sort-query-test success">
+              <td class="test-id">17</td>
+              <td class="test-title">simple-sort-query-test clear
+                  
+              </td>
+              <td class="test-duration">335</td>
+          </tr>
+          <tr class="show comparison-query-test success">
+              <td class="test-id">18</td>
+              <td class="test-title">comparison-query-test generate_entries
+                  
+              </td>
+              <td class="test-duration">547</td>
+          </tr>
+          <tr class="show comparison-query-test success">
+              <td class="test-id">19</td>
+              <td class="test-title">comparison-query-test lt$
+                  
+              </td>
+              <td class="test-duration">31</td>
+          </tr>
+          <tr class="show comparison-query-test success">
+              <td class="test-id">20</td>
+              <td class="test-title">comparison-query-test eq$
                   
               </td>
               <td class="test-duration">26</td>
           </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">15</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should return null for non existing entity
+          <tr class="show comparison-query-test success">
+              <td class="test-id">21</td>
+              <td class="test-title">comparison-query-test combine gt$, eq$, gte$
                   
               </td>
-              <td class="test-duration">33</td>
+              <td class="test-duration">28</td>
           </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">16</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should support filtering
+          <tr class="show comparison-query-test success">
+              <td class="test-id">22</td>
+              <td class="test-title">comparison-query-test DESC combine with sort$: -1
                   
               </td>
-              <td class="test-duration">33</td>
+              <td class="test-duration">91</td>
+          </tr>
+          <tr class="show comparison-query-test success">
+              <td class="test-id">23</td>
+              <td class="test-title">comparison-query-test ASC combine with sort$: 1
+                  
+              </td>
+              <td class="test-duration">88</td>
+          </tr>
+          <tr class="show comparison-query-test success">
+              <td class="test-id">24</td>
+              <td class="test-title">comparison-query-test more complicated tests
+                  
+              </td>
+              <td class="test-duration">346</td>
+          </tr>
+          <tr class="show comparison-query-test success">
+              <td class="test-id">25</td>
+              <td class="test-title">comparison-query-test clear
+                  
+              </td>
+              <td class="test-duration">307</td>
+          </tr>
+          <tr class="show legacy-store-test store-keyvalue success">
+              <td class="test-id">26</td>
+              <td class="test-title">legacy-store-test store-keyvalue save-load-auto-id
+                  
+              </td>
+              <td class="test-duration">451</td>
+          </tr>
+          <tr class="show legacy-store-test store-keyvalue success">
+              <td class="test-id">27</td>
+              <td class="test-title">legacy-store-test store-keyvalue save-load-given-id
+                  
+              </td>
+              <td class="test-duration">410</td>
+          </tr>
+          <tr class="show legacy-store-test store-keyvalue success">
+              <td class="test-id">28</td>
+              <td class="test-title">legacy-store-test store-keyvalue remove
+                  
+              </td>
+              <td class="test-duration">244</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">17</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should filter with AND
+              <td class="test-id">29</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should load an entity qqq
                   
               </td>
               <td class="test-duration">28</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">18</td>
+              <td class="test-id">30</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should return null for non existing entity
+                  
+              </td>
+              <td class="test-duration">34</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">31</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should support filtering
+                  
+              </td>
+              <td class="test-duration">27</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">32</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should filter with AND
+                  
+              </td>
+              <td class="test-duration">33</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">33</td>
               <td class="test-title">legacy-store-test Basic Tests Load should filter with AND 2
+                  
+              </td>
+              <td class="test-duration">33</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">34</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should support different attribute types
+                  
+              </td>
+              <td class="test-duration">28</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">35</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should not mix attributes from entity to query for filtering
                   
               </td>
               <td class="test-duration">26</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">19</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should support different attribute types
-                  
-              </td>
-              <td class="test-duration">32</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">20</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should not mix attributes from entity to query for filtering
-                  
-              </td>
-              <td class="test-duration">38</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">21</td>
+              <td class="test-id">36</td>
               <td class="test-title">legacy-store-test Basic Tests Load should reload current entity if no query provided and id present
                   
               </td>
               <td class="test-duration">24</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">22</td>
+              <td class="test-id">37</td>
               <td class="test-title">legacy-store-test Basic Tests Load should do nothing if no query provided and id not present
                   
               </td>
-              <td class="test-duration">0</td>
+              <td class="test-duration">1</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">23</td>
+              <td class="test-id">38</td>
               <td class="test-title">legacy-store-test Basic Tests Save should save an entity to store (and generate an id)
-                  
-              </td>
-              <td class="test-duration">67</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">24</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should save an entity to store (with provided id)
-                  
-              </td>
-              <td class="test-duration">56</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">25</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
-                  
-              </td>
-              <td class="test-duration">99</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">26</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
-                  
-              </td>
-              <td class="test-duration">83</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">27</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should save an entity if id provided but original doesn&#x27;t exist
-                  
-              </td>
-              <td class="test-duration">82</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">28</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should support different attribute types
-                  
-              </td>
-              <td class="test-duration">64</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">29</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should allow dublicate attributes
                   
               </td>
               <td class="test-duration">66</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">30</td>
+              <td class="test-id">39</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should save an entity to store (with provided id)
+                  
+              </td>
+              <td class="test-duration">101</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">40</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
+                  
+              </td>
+              <td class="test-duration">84</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">41</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
+                  
+              </td>
+              <td class="test-duration">87</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">42</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should save an entity if id provided but original doesn&#x27;t exist
+                  
+              </td>
+              <td class="test-duration">92</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">43</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should support different attribute types
+                  
+              </td>
+              <td class="test-duration">69</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">44</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should allow dublicate attributes
+                  
+              </td>
+              <td class="test-duration">67</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">45</td>
               <td class="test-title">legacy-store-test Basic Tests Save should not save modifications to entity after save completes
                   
               </td>
-              <td class="test-duration">44</td>
+              <td class="test-duration">86</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">31</td>
+              <td class="test-id">46</td>
               <td class="test-title">legacy-store-test Basic Tests Save should not backport modification to saved entity to the original one
                   
               </td>
               <td class="test-duration">43</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">32</td>
+              <td class="test-id">47</td>
               <td class="test-title">legacy-store-test Basic Tests Save should clear an attribute if &#x3D; null
                   
               </td>
-              <td class="test-duration">119</td>
+              <td class="test-duration">136</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save when_the_id$_arg_passed_to_#save$_is_undefined success">
-              <td class="test-id">33</td>
+              <td class="test-id">48</td>
               <td class="test-title">legacy-store-test Basic Tests Save when the id$ arg passed to #save$ is undefined should generate a new id and save the entity
                   
               </td>
               <td class="test-duration">58</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save when_the_id$_arg_passed_to_#save$_is_null success">
-              <td class="test-id">34</td>
+              <td class="test-id">49</td>
               <td class="test-title">legacy-store-test Basic Tests Save when the id$ arg passed to #save$ is null should generate a new id and save the entity
                   
               </td>
-              <td class="test-duration">57</td>
+              <td class="test-duration">58</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save when_the_provided_id_is_null success">
-              <td class="test-id">35</td>
+              <td class="test-id">50</td>
               <td class="test-title">legacy-store-test Basic Tests Save when the provided id is null should generate a new id and save the entity
                   
               </td>
-              <td class="test-duration">57</td>
+              <td class="test-duration">66</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save when_the_provided_id_is_undefined success">
-              <td class="test-id">36</td>
+              <td class="test-id">51</td>
               <td class="test-title">legacy-store-test Basic Tests Save when the provided id is undefined should generate a new id and save the entity
                   
               </td>
-              <td class="test-duration">69</td>
+              <td class="test-duration">66</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">37</td>
+              <td class="test-id">52</td>
               <td class="test-title">legacy-store-test Basic Tests List should load all elements if no params
                   
               </td>
-              <td class="test-duration">27</td>
+              <td class="test-duration">31</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">38</td>
+              <td class="test-id">53</td>
               <td class="test-title">legacy-store-test Basic Tests List should load all elements if no params 2
                   
               </td>
-              <td class="test-duration">25</td>
+              <td class="test-duration">26</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">39</td>
+              <td class="test-id">54</td>
               <td class="test-title">legacy-store-test Basic Tests List should load all elements if no query provided
+                  
+              </td>
+              <td class="test-duration">26</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests List success">
+              <td class="test-id">55</td>
+              <td class="test-title">legacy-store-test Basic Tests List should list entities by id
                   
               </td>
               <td class="test-duration">28</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">40</td>
-              <td class="test-title">legacy-store-test Basic Tests List should list entities by id
-                  
-              </td>
-              <td class="test-duration">29</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">41</td>
+              <td class="test-id">56</td>
               <td class="test-title">legacy-store-test Basic Tests List should list entities by integer property
                   
               </td>
-              <td class="test-duration">30</td>
+              <td class="test-duration">32</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">42</td>
+              <td class="test-id">57</td>
               <td class="test-title">legacy-store-test Basic Tests List should list entities by string property
                   
               </td>
-              <td class="test-duration">27</td>
+              <td class="test-duration">32</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">43</td>
+              <td class="test-id">58</td>
               <td class="test-title">legacy-store-test Basic Tests List should list entities by two properties
                   
               </td>
               <td class="test-duration">27</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">44</td>
+              <td class="test-id">59</td>
               <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (array)
-                  
-              </td>
-              <td class="test-duration">27</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">45</td>
-              <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (single id)
-                  
-              </td>
-              <td class="test-duration">36</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">46</td>
-              <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (string)
-                  
-              </td>
-              <td class="test-duration">29</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">47</td>
-              <td class="test-title">legacy-store-test Basic Tests List should filter with AND
                   
               </td>
               <td class="test-duration">26</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">48</td>
+              <td class="test-id">60</td>
+              <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (single id)
+                  
+              </td>
+              <td class="test-duration">30</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests List success">
+              <td class="test-id">61</td>
+              <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (string)
+                  
+              </td>
+              <td class="test-duration">28</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests List success">
+              <td class="test-id">62</td>
+              <td class="test-title">legacy-store-test Basic Tests List should filter with AND
+                  
+              </td>
+              <td class="test-duration">27</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests List success">
+              <td class="test-id">63</td>
               <td class="test-title">legacy-store-test Basic Tests List should not mix attributes from entity to query for filtering
                   
               </td>
-              <td class="test-duration">29</td>
+              <td class="test-duration">25</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">49</td>
+              <td class="test-id">64</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete only an entity
                   
               </td>
-              <td class="test-duration">70</td>
+              <td class="test-duration">68</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">50</td>
+              <td class="test-id">65</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete all entities if all$ &#x3D; true
                   
               </td>
-              <td class="test-duration">103</td>
+              <td class="test-duration">146</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">51</td>
+              <td class="test-id">66</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete an entity by property
+                  
+              </td>
+              <td class="test-duration">88</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">67</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should delete entities filtered by AND
+                  
+              </td>
+              <td class="test-duration">66</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">68</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should return deleted entity if load$: true
+                  
+              </td>
+              <td class="test-duration">82</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">69</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should never return deleted entities if all$: true
+                  
+              </td>
+              <td class="test-duration">116</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">70</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should not delete current ent (only uses query)
                   
               </td>
               <td class="test-duration">84</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">52</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should delete entities filtered by AND
-                  
-              </td>
-              <td class="test-duration">65</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">53</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should return deleted entity if load$: true
-                  
-              </td>
-              <td class="test-duration">134</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">54</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should never return deleted entities if all$: true
-                  
-              </td>
-              <td class="test-duration">83</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">55</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should not delete current ent (only uses query)
-                  
-              </td>
-              <td class="test-duration">97</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">56</td>
+              <td class="test-id">71</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete current entity if no query present
                   
               </td>
-              <td class="test-duration">91</td>
+              <td class="test-duration">84</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Native success">
-              <td class="test-id">57</td>
+              <td class="test-id">72</td>
               <td class="test-title">legacy-store-test Basic Tests Native should prived direct access to the driver
                   
               </td>
@@ -998,10 +1107,10 @@
     </div>    <div id="coverage">
         <h1>Code Coverage Report</h1>
         <div class="stats high">
-            <div class="percentage">86.60%</div>
-            <div class="sloc">470</div>
-            <div class="hits">407</div>
-            <div class="misses">63</div>
+            <div class="percentage">90.10%</div>
+            <div class="sloc">485</div>
+            <div class="hits">437</div>
+            <div class="misses">48</div>
         </div>
         <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="generated" id="show-generated">
@@ -1057,10 +1166,10 @@
             <div class="file ">
                 <h2 id="cosmos-store.js">cosmos-store.js </h2>
                 <div class="stats high">
-                    <div class="percentage">86.54%</div>
-                    <div class="sloc">468</div>
-                    <div class="hits">405</div>
-                    <div class="misses">63</div>
+                    <div class="percentage">90.06%</div>
+                    <div class="sloc">483</div>
+                    <div class="hits">435</div>
+                    <div class="misses">48</div>
                 </div>
                 <table>
                     <thead>
@@ -1394,13 +1503,13 @@
                         </tr>            <tr id="cosmos-store.js__54" class="hit">
                           <td class="line" data-tooltip>54</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  const seneca &#x3D; this</td>
                           
                         </tr>            <tr id="cosmos-store.js__55" class="hit">
                           <td class="line" data-tooltip>55</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  const init &#x3D; seneca.export(&#x27;entity/init&#x27;)</td>
                           
                         </tr>            <tr id="cosmos-store.js__56" class="hit">
@@ -1418,7 +1527,7 @@
                         </tr>            <tr id="cosmos-store.js__58" class="hit">
                           <td class="line" data-tooltip>58</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  options &#x3D; seneca.util.deep(</td>
                           
                         </tr>            <tr id="cosmos-store.js__59" class="hit">
@@ -1466,7 +1575,7 @@
                         </tr>            <tr id="cosmos-store.js__66" class="hit">
                           <td class="line" data-tooltip>66</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  const ctx &#x3D; intern.make_ctx(</td>
                           
                         </tr>            <tr id="cosmos-store.js__67" class="hit">
@@ -1508,7 +1617,7 @@
                         </tr>            <tr id="cosmos-store.js__73" class="hit">
                           <td class="line" data-tooltip>73</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  let store &#x3D; intern.make_store(ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__74" class="hit">
@@ -1520,7 +1629,7 @@
                         </tr>            <tr id="cosmos-store.js__75" class="hit">
                           <td class="line" data-tooltip>75</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  seneca.init(function (reply) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__76" class="hit">
@@ -1556,7 +1665,7 @@
                         </tr>            <tr id="cosmos-store.js__81" class="hit">
                           <td class="line" data-tooltip>81</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">      ctx.client &#x3D; new COSMOS_SDK.CosmosClient({</td>
                           
                         </tr>            <tr id="cosmos-store.js__82" class="hit">
@@ -1592,7 +1701,7 @@
                         </tr>            <tr id="cosmos-store.js__87" class="hit">
                           <td class="line" data-tooltip>87</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">    const { config, create } &#x3D; options.cosmos.database</td>
                           
                         </tr>            <tr id="cosmos-store.js__88" class="hit">
@@ -1604,7 +1713,7 @@
                         </tr>            <tr id="cosmos-store.js__89" class="hit">
                           <td class="line" data-tooltip>89</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">    create_and_ref_database()</td>
                           
                         </tr>            <tr id="cosmos-store.js__90" class="hit">
@@ -1670,7 +1779,7 @@
                         </tr>            <tr id="cosmos-store.js__100" class="hit">
                           <td class="line" data-tooltip>100</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">      reply()</td>
                           
                         </tr>            <tr id="cosmos-store.js__101" class="hit">
@@ -1694,7 +1803,7 @@
                         </tr>            <tr id="cosmos-store.js__104" class="hit">
                           <td class="line" data-tooltip>104</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  let meta &#x3D; init(seneca, options, store)</td>
                           
                         </tr>            <tr id="cosmos-store.js__105" class="hit">
@@ -1706,7 +1815,7 @@
                         </tr>            <tr id="cosmos-store.js__106" class="hit">
                           <td class="line" data-tooltip>106</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">  return {</td>
                           
                         </tr>            <tr id="cosmos-store.js__107" class="hit">
@@ -2000,7 +2109,7 @@
                         </tr>            <tr id="cosmos-store.js__155" class="hit">
                           <td class="line" data-tooltip>155</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>412</td>
+                          <td class="hits" data-tooltip>868</td>
                           <td class="source">      let entopts &#x3D;</td>
                           
                         </tr>            <tr id="cosmos-store.js__156" class="hit">
@@ -2042,7 +2151,7 @@
                         </tr>            <tr id="cosmos-store.js__162" class="hit">
                           <td class="line" data-tooltip>162</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>412</td>
+                          <td class="hits" data-tooltip>868</td>
                           <td class="source">      intern.canon_ref[canonkey] &#x3D; entopts</td>
                           
                         </tr>            <tr id="cosmos-store.js__163" class="hit">
@@ -2054,7 +2163,7 @@
                         </tr>            <tr id="cosmos-store.js__164" class="hit">
                           <td class="line" data-tooltip>164</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>412</td>
+                          <td class="hits" data-tooltip>868</td>
                           <td class="source">      return entopts</td>
                           
                         </tr>            <tr id="cosmos-store.js__165" class="hit">
@@ -2108,7 +2217,7 @@
                         </tr>            <tr id="cosmos-store.js__173" class="hit">
                           <td class="line" data-tooltip>173</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>388</td>
+                          <td class="hits" data-tooltip>423</td>
                           <td class="source">      let canon &#x3D; ent.canon$({ object: true })</td>
                           
                         </tr>            <tr id="cosmos-store.js__174" class="hit">
@@ -2120,7 +2229,7 @@
                         </tr>            <tr id="cosmos-store.js__175" class="hit">
                           <td class="line" data-tooltip>175</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>388</td>
+                          <td class="hits" data-tooltip>423</td>
                           <td class="source">      container.name &#x3D; (null !&#x3D; canon.base ? canon.base + &#x27;_&#x27; : &#x27;&#x27;) + canon.name</td>
                           
                         </tr>            <tr id="cosmos-store.js__176" class="hit">
@@ -2132,7 +2241,7 @@
                         </tr>            <tr id="cosmos-store.js__177" class="hit">
                           <td class="line" data-tooltip>177</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>388</td>
+                          <td class="hits" data-tooltip>423</td>
                           <td class="source">      return container</td>
                           
                         </tr>            <tr id="cosmos-store.js__178" class="hit">
@@ -2168,7 +2277,7 @@
                         </tr>            <tr id="cosmos-store.js__183" class="hit">
                           <td class="line" data-tooltip>183</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>575</td>
+                          <td class="hits" data-tooltip>611</td>
                           <td class="source">      const containers &#x3D; intern.database.containers</td>
                           
                         </tr>            <tr id="cosmos-store.js__184" class="hit">
@@ -2180,7 +2289,7 @@
                         </tr>            <tr id="cosmos-store.js__185" class="hit">
                           <td class="line" data-tooltip>185</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>575</td>
+                          <td class="hits" data-tooltip>611</td>
                           <td class="source">      try {</td>
                           
                         </tr>            <tr id="cosmos-store.js__186" class="chunks">
@@ -2240,7 +2349,7 @@
                         </tr>            <tr id="cosmos-store.js__195" class="hit">
                           <td class="line" data-tooltip>195</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>575</td>
+                          <td class="hits" data-tooltip>611</td>
                           <td class="source">        return container</td>
                           
                         </tr>            <tr id="cosmos-store.js__196" class="hit">
@@ -2306,7 +2415,7 @@
                         </tr>            <tr id="cosmos-store.js__206" class="hit">
                           <td class="line" data-tooltip>206</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>176</td>
+                          <td class="hits" data-tooltip>178</td>
                           <td class="source">      return null !&#x3D; err</td>
                           
                         </tr>            <tr id="cosmos-store.js__207" class="hit">
@@ -2342,7 +2451,7 @@
                         </tr>            <tr id="cosmos-store.js__212" class="hit">
                           <td class="line" data-tooltip>212</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">      const store &#x3D; {</td>
                           
                         </tr>            <tr id="cosmos-store.js__213" class="hit">
@@ -2396,7 +2505,7 @@
                         </tr>            <tr id="cosmos-store.js__221" class="hit">
                           <td class="line" data-tooltip>221</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">          var ent &#x3D; msg.ent</td>
                           
                         </tr>            <tr id="cosmos-store.js__222" class="hit">
@@ -2408,19 +2517,19 @@
                         </tr>            <tr id="cosmos-store.js__223" class="hit">
                           <td class="line" data-tooltip>223</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">          var update &#x3D; null !&#x3D; ent.id</td>
                           
                         </tr>            <tr id="cosmos-store.js__224" class="hit">
                           <td class="line" data-tooltip>224</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">          var co &#x3D; intern.get_container(ent, ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__225" class="hit">
                           <td class="line" data-tooltip>225</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">          var data &#x3D; ent.data$(false)</td>
                           
                         </tr>            <tr id="cosmos-store.js__226" class="hit">
@@ -2432,7 +2541,7 @@
                         </tr>            <tr id="cosmos-store.js__227" class="hit">
                           <td class="line" data-tooltip>227</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">          var item &#x3D; data</td>
                           
                         </tr>            <tr id="cosmos-store.js__228" class="hit">
@@ -2474,13 +2583,13 @@
                         </tr>            <tr id="cosmos-store.js__234" class="hit">
                           <td class="line" data-tooltip>234</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">          if (!update) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__235" class="hit">
                           <td class="line" data-tooltip>235</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>98</td>
+                          <td class="hits" data-tooltip>113</td>
                           <td class="source">            let new_id &#x3D; ent.id$</td>
                           
                         </tr>            <tr id="cosmos-store.js__236" class="hit">
@@ -2492,7 +2601,7 @@
                         </tr>            <tr id="cosmos-store.js__237" class="hit">
                           <td class="line" data-tooltip>237</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>98</td>
+                          <td class="hits" data-tooltip>113</td>
                           <td class="source">            if (null &#x3D;&#x3D; new_id) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__238" class="hit">
@@ -2516,7 +2625,7 @@
                         </tr>            <tr id="cosmos-store.js__241" class="hit">
                           <td class="line" data-tooltip>241</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>98</td>
+                          <td class="hits" data-tooltip>113</td>
                           <td class="source">            data.id &#x3D; new_id</td>
                           
                         </tr>            <tr id="cosmos-store.js__242" class="hit">
@@ -2534,7 +2643,7 @@
                         </tr>            <tr id="cosmos-store.js__244" class="hit">
                           <td class="line" data-tooltip>244</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">          do_upsert(ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__245" class="hit">
@@ -2552,7 +2661,7 @@
                         </tr>            <tr id="cosmos-store.js__247" class="hit">
                           <td class="line" data-tooltip>247</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">            const container &#x3D; await intern.load_container(co.name, ctx, reply)</td>
                           
                         </tr>            <tr id="cosmos-store.js__248" class="hit">
@@ -2564,7 +2673,7 @@
                         </tr>            <tr id="cosmos-store.js__249" class="hit">
                           <td class="line" data-tooltip>249</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">            if (update) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__250" class="hit">
@@ -2624,7 +2733,7 @@
                         </tr>            <tr id="cosmos-store.js__259" class="hit">
                           <td class="line" data-tooltip>259</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>98</td>
+                          <td class="hits" data-tooltip>113</td>
                           <td class="source">              await upsert(item, reply)</td>
                           
                         </tr>            <tr id="cosmos-store.js__260" class="hit">
@@ -2648,19 +2757,19 @@
                         </tr>            <tr id="cosmos-store.js__263" class="hit">
                           <td class="line" data-tooltip>263</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">              try {</td>
                           
                         </tr>            <tr id="cosmos-store.js__264" class="hit">
                           <td class="line" data-tooltip>264</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">                item.entity$ &#x3D; ent.entity$</td>
                           
                         </tr>            <tr id="cosmos-store.js__265" class="hit">
                           <td class="line" data-tooltip>265</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">                let rs &#x3D; await container.items.upsert(item)</td>
                           
                         </tr>            <tr id="cosmos-store.js__266" class="hit">
@@ -2678,7 +2787,7 @@
                         </tr>            <tr id="cosmos-store.js__268" class="hit">
                           <td class="line" data-tooltip>268</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>108</td>
+                          <td class="hits" data-tooltip>123</td>
                           <td class="source">                return reply(</td>
                           
                         </tr>            <tr id="cosmos-store.js__269" class="hit">
@@ -2978,13 +3087,13 @@
                         </tr>            <tr id="cosmos-store.js__318" class="hit">
                           <td class="line" data-tooltip>318</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>42</td>
+                          <td class="hits" data-tooltip>60</td>
                           <td class="source">          var qent &#x3D; msg.qent</td>
                           
                         </tr>            <tr id="cosmos-store.js__319" class="hit">
                           <td class="line" data-tooltip>319</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>42</td>
+                          <td class="hits" data-tooltip>60</td>
                           <td class="source">          var q &#x3D; msg.q</td>
                           
                         </tr>            <tr id="cosmos-store.js__320" class="hit">
@@ -2996,7 +3105,7 @@
                         </tr>            <tr id="cosmos-store.js__321" class="hit">
                           <td class="line" data-tooltip>321</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>42</td>
+                          <td class="hits" data-tooltip>60</td>
                           <td class="source">          var co &#x3D; intern.get_container(qent, ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__322" class="hit">
@@ -3008,7 +3117,7 @@
                         </tr>            <tr id="cosmos-store.js__323" class="hit">
                           <td class="line" data-tooltip>323</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>42</td>
+                          <td class="hits" data-tooltip>60</td>
                           <td class="source">          intern.listent(ctx, seneca, qent, co, q, reply)</td>
                           
                         </tr>            <tr id="cosmos-store.js__324" class="hit">
@@ -3050,13 +3159,13 @@
                         </tr>            <tr id="cosmos-store.js__330" class="hit">
                           <td class="line" data-tooltip>330</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">          var qent &#x3D; msg.qent</td>
                           
                         </tr>            <tr id="cosmos-store.js__331" class="hit">
                           <td class="line" data-tooltip>331</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">          var q &#x3D; msg.q</td>
                           
                         </tr>            <tr id="cosmos-store.js__332" class="hit">
@@ -3068,7 +3177,7 @@
                         </tr>            <tr id="cosmos-store.js__333" class="hit">
                           <td class="line" data-tooltip>333</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">          let co &#x3D; intern.get_container(qent, ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__334" class="hit">
@@ -3080,13 +3189,13 @@
                         </tr>            <tr id="cosmos-store.js__335" class="hit">
                           <td class="line" data-tooltip>335</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">          var all &#x3D; true &#x3D;&#x3D;&#x3D; q.all$</td>
                           
                         </tr>            <tr id="cosmos-store.js__336" class="hit">
                           <td class="line" data-tooltip>336</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">          var load &#x3D; true &#x3D;&#x3D;&#x3D; q.load$</td>
                           
                         </tr>            <tr id="cosmos-store.js__337" class="hit">
@@ -3098,7 +3207,7 @@
                         </tr>            <tr id="cosmos-store.js__338" class="hit">
                           <td class="line" data-tooltip>338</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">          let qid &#x3D; q.id</td>
                           
                         </tr>            <tr id="cosmos-store.js__339" class="hit">
@@ -3116,7 +3225,7 @@
                         </tr>            <tr id="cosmos-store.js__341" class="hit">
                           <td class="line" data-tooltip>341</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">          do_remove()</td>
                           
                         </tr>            <tr id="cosmos-store.js__342" class="hit">
@@ -3134,7 +3243,7 @@
                         </tr>            <tr id="cosmos-store.js__344" class="hit">
                           <td class="line" data-tooltip>344</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">            const container &#x3D; await intern.load_container(co.name, ctx, reply)</td>
                           
                         </tr>            <tr id="cosmos-store.js__345" class="hit">
@@ -3146,7 +3255,7 @@
                         </tr>            <tr id="cosmos-store.js__346" class="hit">
                           <td class="line" data-tooltip>346</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>188</td>
+                          <td class="hits" data-tooltip>190</td>
                           <td class="source">            if (null !&#x3D; q.id) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__347" class="hit">
@@ -3164,7 +3273,7 @@
                         </tr>            <tr id="cosmos-store.js__349" class="hit">
                           <td class="line" data-tooltip>349</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>176</td>
+                          <td class="hits" data-tooltip>178</td>
                           <td class="source">              let cq &#x3D; seneca.util.clean(q)</td>
                           
                         </tr>            <tr id="cosmos-store.js__350" class="hit">
@@ -3200,7 +3309,7 @@
                         </tr>            <tr id="cosmos-store.js__355" class="hit">
                           <td class="line" data-tooltip>355</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>176</td>
+                          <td class="hits" data-tooltip>178</td>
                           <td class="source">              intern.listent(</td>
                           
                         </tr>            <tr id="cosmos-store.js__356" class="hit">
@@ -3254,7 +3363,7 @@
                         </tr>            <tr id="cosmos-store.js__364" class="hit">
                           <td class="line" data-tooltip>364</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>176</td>
+                          <td class="hits" data-tooltip>178</td>
                           <td class="source">                  if (all) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__365" class="hit">
@@ -3266,7 +3375,7 @@
                         </tr>            <tr id="cosmos-store.js__366" class="hit">
                           <td class="line" data-tooltip>366</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>75</td>
+                          <td class="hits" data-tooltip>93</td>
                           <td class="source">                      await container.item(item.id, item.id).delete()</td>
                           
                         </tr>            <tr id="cosmos-store.js__367" class="hit">
@@ -3374,7 +3483,7 @@
                         </tr>            <tr id="cosmos-store.js__384" class="hit">
                           <td class="line" data-tooltip>384</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>172</td>
+                          <td class="hits" data-tooltip>174</td>
                           <td class="source">                    return reply()</td>
                           
                         </tr>            <tr id="cosmos-store.js__385" class="hit">
@@ -3674,7 +3783,7 @@
                         </tr>            <tr id="cosmos-store.js__434" class="hit">
                           <td class="line" data-tooltip>434</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
+                          <td class="hits" data-tooltip>16</td>
                           <td class="source">      return store</td>
                           
                         </tr>            <tr id="cosmos-store.js__435" class="hit">
@@ -3819,13 +3928,13 @@
                           <td class="line" data-tooltip>458</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    build_ops(qv, kname, type) {</td>
+                          <td class="source">    build_cmps(qv, kname) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__459" class="hit">
                           <td class="line" data-tooltip>459</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // TODO: enable these for cosmosDB</td>
+                          <td class="source">      // console.log(&#x27;QV: &#x27;, typeof qv, qv)</td>
                           
                         </tr>            <tr id="cosmos-store.js__460" class="hit">
                           <td class="line" data-tooltip>460</td>
@@ -3833,11 +3942,11 @@
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__461" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__461" class="hit">
                           <td class="line" data-tooltip>461</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>      </div><div class="miss never" data-tooltip>if (&#x27;object&#x27; !&#x3D; typeof qv) {</div></td>
+                          <td class="source">      if (&#x27;object&#x27; !&#x3D; typeof qv) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__462" class="hit">
                           <td class="line" data-tooltip>462</td>
@@ -3845,17 +3954,17 @@
                           <td class="hits" data-tooltip></td>
                           <td class="source">        //  &amp;&amp; !Array.isArray(qv)) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__463" class="miss">
+                        </tr>            <tr id="cosmos-store.js__463" class="hit">
                           <td class="line" data-tooltip>463</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        return { cmps: [{ c: &#x27;$ne&#x27;, cmpop: &#x27;&#x3D;&#x27;, k: kname, v: qv }] }</td>
+                          <td class="hits" data-tooltip>66</td>
+                          <td class="source">        return { cmps: [{ c: &#x27;eq$&#x27;, cmpop: &#x27;&#x3D;&#x27;, k: kname, v: qv }] }</td>
                           
-                        </tr>            <tr id="cosmos-store.js__464" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__464" class="hit">
                           <td class="line" data-tooltip>464</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div class="miss never" data-tooltip>      }</div></td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__465" class="hit">
                           <td class="line" data-tooltip>465</td>
@@ -3863,59 +3972,59 @@
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__466" class="miss">
+                        </tr>            <tr id="cosmos-store.js__466" class="hit">
                           <td class="line" data-tooltip>466</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      let ops &#x3D; {</td>
+                          <td class="hits" data-tooltip>20</td>
+                          <td class="source">      let cmpops &#x3D; {</td>
                           
                         </tr>            <tr id="cosmos-store.js__467" class="hit">
                           <td class="line" data-tooltip>467</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        $gte: { cmpop: &#x27;&gt;&#x27; },</td>
+                          <td class="source">          gt$: { cmpop: &#x27;&gt;&#x27; },</td>
                           
                         </tr>            <tr id="cosmos-store.js__468" class="hit">
                           <td class="line" data-tooltip>468</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        $gt: { cmpop: &#x27;&gt;&#x3D;&#x27; },</td>
+                          <td class="source">          gte$: { cmpop: &#x27;&gt;&#x3D;&#x27; },</td>
                           
                         </tr>            <tr id="cosmos-store.js__469" class="hit">
                           <td class="line" data-tooltip>469</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        $lt: { cmpop: &#x27;&lt;&#x3D;&#x27; },</td>
+                          <td class="source">          lt$: { cmpop: &#x27;&lt;&#x27; },</td>
                           
                         </tr>            <tr id="cosmos-store.js__470" class="hit">
                           <td class="line" data-tooltip>470</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        $lte: { cmpop: &#x27;&lt;&#x27; },</td>
+                          <td class="source">          lte$: { cmpop: &#x27;&lt;&#x3D;&#x27; },</td>
                           
                         </tr>            <tr id="cosmos-store.js__471" class="hit">
                           <td class="line" data-tooltip>471</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        $ne: { cmpop: &#x27;&#x3D;&#x27; },</td>
+                          <td class="source">          ne$: { cmpop: &#x27;!&#x3D;&#x27; },</td>
                           
                         </tr>            <tr id="cosmos-store.js__472" class="hit">
                           <td class="line" data-tooltip>472</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">          eq$: { cmpop: &#x27;&#x3D;&#x27; },</td>
                           
                         </tr>            <tr id="cosmos-store.js__473" class="hit">
                           <td class="line" data-tooltip>473</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        },</td>
                           
                         </tr>            <tr id="cosmos-store.js__474" class="hit">
                           <td class="line" data-tooltip>474</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // console.log(&#x27;QV: &#x27;, typeof qv, qv)</td>
+                          <td class="source">        cmps &#x3D; []</td>
                           
                         </tr>            <tr id="cosmos-store.js__475" class="hit">
                           <td class="line" data-tooltip>475</td>
@@ -3923,65 +4032,65 @@
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__476" class="miss">
+                        </tr>            <tr id="cosmos-store.js__476" class="hit">
                           <td class="line" data-tooltip>476</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      let cmps &#x3D; []</td>
+                          <td class="hits" data-tooltip>20</td>
+                          <td class="source">      for (let k in qv) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__477" class="miss">
+                        </tr>            <tr id="cosmos-store.js__477" class="hit">
                           <td class="line" data-tooltip>477</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      for (let k in qv) {</td>
+                          <td class="hits" data-tooltip>23</td>
+                          <td class="source">        let cmp &#x3D; cmpops[k]</td>
                           
-                        </tr>            <tr id="cosmos-store.js__478" class="miss">
+                        </tr>            <tr id="cosmos-store.js__478" class="hit">
                           <td class="line" data-tooltip>478</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        let op &#x3D; ops[k]</td>
+                          <td class="hits" data-tooltip>23</td>
+                          <td class="source">        if (cmp) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__479" class="miss">
+                        </tr>            <tr id="cosmos-store.js__479" class="hit">
                           <td class="line" data-tooltip>479</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        if (op) {</td>
+                          <td class="hits" data-tooltip>20</td>
+                          <td class="source">          cmp &#x3D; { ...cmpops[k] }</td>
                           
-                        </tr>            <tr id="cosmos-store.js__480" class="miss">
+                        </tr>            <tr id="cosmos-store.js__480" class="hit">
                           <td class="line" data-tooltip>480</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>          op.k &#x3D; kname</td>
+                          <td class="hits" data-tooltip>20</td>
+                          <td class="source">          cmp.k &#x3D; kname</td>
                           
-                        </tr>            <tr id="cosmos-store.js__481" class="miss">
+                        </tr>            <tr id="cosmos-store.js__481" class="hit">
                           <td class="line" data-tooltip>481</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>          op.v &#x3D; qv[k]</td>
+                          <td class="hits" data-tooltip>20</td>
+                          <td class="source">          cmp.v &#x3D; qv[k]</td>
                           
-                        </tr>            <tr id="cosmos-store.js__482" class="miss">
+                        </tr>            <tr id="cosmos-store.js__482" class="hit">
                           <td class="line" data-tooltip>482</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>          op.c &#x3D; k</td>
+                          <td class="hits" data-tooltip>20</td>
+                          <td class="source">          cmp.c &#x3D; k</td>
                           
-                        </tr>            <tr id="cosmos-store.js__483" class="miss">
+                        </tr>            <tr id="cosmos-store.js__483" class="hit">
                           <td class="line" data-tooltip>483</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>          cmps.push(op)</td>
+                          <td class="hits" data-tooltip>20</td>
+                          <td class="source">          cmps.push(cmp)</td>
                           
-                        </tr>            <tr id="cosmos-store.js__484" class="miss">
+                        </tr>            <tr id="cosmos-store.js__484" class="hit">
                           <td class="line" data-tooltip>484</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        } else if (k.startsWith(&#x27;$&#x27;)) {</td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">        } else if (k.endsWith(&#x27;$&#x27;)) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__485" class="miss">
+                        </tr>            <tr id="cosmos-store.js__485" class="hit">
                           <td class="line" data-tooltip>485</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>          throw new Error(&#x27;Invalid Comparison Operator: &#x27; + k)</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">          throw new Error(&#x27;Invalid Comparison &#x27; + k)</td>
                           
                         </tr>            <tr id="cosmos-store.js__486" class="hit">
                           <td class="line" data-tooltip>486</td>
@@ -3999,85 +4108,85 @@
                           <td class="line" data-tooltip>488</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // special case</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__489" class="miss">
+                        </tr>            <tr id="cosmos-store.js__489" class="hit">
                           <td class="line" data-tooltip>489</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      if (&#x27;sort&#x27; &#x3D;&#x3D; type &amp;&amp; 1 &lt; cmps.length) {</td>
+                          <td class="hits" data-tooltip>19</td>
+                          <td class="source">      return { cmps }</td>
                           
-                        </tr>            <tr id="cosmos-store.js__490" class="miss">
+                        </tr>            <tr id="cosmos-store.js__490" class="hit">
                           <td class="line" data-tooltip>490</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        throw new Error(</td>
+                          <td class="source">    },</td>
                           
                         </tr>            <tr id="cosmos-store.js__491" class="hit">
                           <td class="line" data-tooltip>491</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          &#x27;Only one condition per sortkey: &#x27; + cmps.length + &#x27; is given.&#x27;</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__492" class="hit">
                           <td class="line" data-tooltip>492</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        )</td>
+                          <td class="source">    listent: function (ctx, seneca, qent, co, q, reply) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__493" class="hit">
                           <td class="line" data-tooltip>493</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">      let listreq &#x3D; {}</td>
                           
                         </tr>            <tr id="cosmos-store.js__494" class="hit">
                           <td class="line" data-tooltip>494</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      let listquery &#x3D; &#x27;SELECT&#x27;</td>
                           
-                        </tr>            <tr id="cosmos-store.js__495" class="miss">
+                        </tr>            <tr id="cosmos-store.js__495" class="hit">
                           <td class="line" data-tooltip>495</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      return { cmps }</td>
+                          <td class="source">      // let queryspec &#x3D; {}</td>
                           
                         </tr>            <tr id="cosmos-store.js__496" class="hit">
                           <td class="line" data-tooltip>496</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    },</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__497" class="hit">
                           <td class="line" data-tooltip>497</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      var isarr &#x3D; Array.isArray</td>
                           
                         </tr>            <tr id="cosmos-store.js__498" class="hit">
                           <td class="line" data-tooltip>498</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    listent: function (ctx, seneca, qent, co, q, reply) {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__499" class="hit">
                           <td class="line" data-tooltip>499</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      let listreq &#x3D; {}</td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      if (isarr(q) || &#x27;object&#x27; !&#x3D; typeof q) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__500" class="hit">
                           <td class="line" data-tooltip>500</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      let listquery &#x3D; &#x27;SELECT&#x27;</td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">        q &#x3D; { id: q }</td>
                           
                         </tr>            <tr id="cosmos-store.js__501" class="hit">
                           <td class="line" data-tooltip>501</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // let queryspec &#x3D; {}</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__502" class="hit">
                           <td class="line" data-tooltip>502</td>
@@ -4088,638 +4197,638 @@
                         </tr>            <tr id="cosmos-store.js__503" class="hit">
                           <td class="line" data-tooltip>503</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      var isarr &#x3D; Array.isArray</td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      let cq &#x3D; seneca.util.clean(q)</td>
                           
                         </tr>            <tr id="cosmos-store.js__504" class="hit">
                           <td class="line" data-tooltip>504</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      let fq &#x3D; cq</td>
                           
                         </tr>            <tr id="cosmos-store.js__505" class="hit">
                           <td class="line" data-tooltip>505</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      if (isarr(q) || &#x27;object&#x27; !&#x3D; typeof q) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__506" class="hit">
                           <td class="line" data-tooltip>506</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">        q &#x3D; { id: q }</td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      let params &#x3D; (listreq.parameters &#x3D; [])</td>
                           
                         </tr>            <tr id="cosmos-store.js__507" class="hit">
                           <td class="line" data-tooltip>507</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__508" class="hit">
                           <td class="line" data-tooltip>508</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      if (null !&#x3D; q.limit$) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__509" class="hit">
                           <td class="line" data-tooltip>509</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      let cq &#x3D; seneca.util.clean(q)</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">        listquery +&#x3D; &#x27; TOP &#x27; + &#x27;@limit&#x27;</td>
                           
                         </tr>            <tr id="cosmos-store.js__510" class="hit">
                           <td class="line" data-tooltip>510</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      let fq &#x3D; cq</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">        params.push({</td>
                           
                         </tr>            <tr id="cosmos-store.js__511" class="hit">
                           <td class="line" data-tooltip>511</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">          name: &#x27;@limit&#x27;,</td>
                           
                         </tr>            <tr id="cosmos-store.js__512" class="hit">
                           <td class="line" data-tooltip>512</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      let params &#x3D; (listreq.parameters &#x3D; [])</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          value: q.limit$,</td>
                           
                         </tr>            <tr id="cosmos-store.js__513" class="hit">
                           <td class="line" data-tooltip>513</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        })</td>
                           
                         </tr>            <tr id="cosmos-store.js__514" class="hit">
                           <td class="line" data-tooltip>514</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      if (null !&#x3D; q.limit$) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        // delete q.limit$</td>
                           
                         </tr>            <tr id="cosmos-store.js__515" class="hit">
                           <td class="line" data-tooltip>515</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">        listquery +&#x3D; &#x27; TOP &#x27; + &#x27;@limit&#x27;</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__516" class="hit">
                           <td class="line" data-tooltip>516</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">        params.push({</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__517" class="hit">
                           <td class="line" data-tooltip>517</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          name: &#x27;@limit&#x27;,</td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      if (q.fields$) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__518" class="hit">
                           <td class="line" data-tooltip>518</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          value: q.limit$,</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">        listquery +&#x3D;</td>
                           
                         </tr>            <tr id="cosmos-store.js__519" class="hit">
                           <td class="line" data-tooltip>519</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        })</td>
+                          <td class="source">          &#x27; &#x27; +</td>
                           
                         </tr>            <tr id="cosmos-store.js__520" class="hit">
                           <td class="line" data-tooltip>520</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        // delete q.limit$</td>
+                          <td class="source">          q.fields$.map((k) &#x3D;&gt; co.name + &#x27;.&#x27; + k).join(&#x27;, &#x27;) +</td>
                           
                         </tr>            <tr id="cosmos-store.js__521" class="hit">
                           <td class="line" data-tooltip>521</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">          &#x27; FROM &#x27; +</td>
                           
                         </tr>            <tr id="cosmos-store.js__522" class="hit">
                           <td class="line" data-tooltip>522</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">          co.name</td>
                           
                         </tr>            <tr id="cosmos-store.js__523" class="hit">
                           <td class="line" data-tooltip>523</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      if (q.fields$) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      } else {</td>
                           
                         </tr>            <tr id="cosmos-store.js__524" class="hit">
                           <td class="line" data-tooltip>524</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">        listquery +&#x3D;</td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">        listquery +&#x3D; &#x27; * FROM &#x27; + co.name</td>
                           
                         </tr>            <tr id="cosmos-store.js__525" class="hit">
                           <td class="line" data-tooltip>525</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          &#x27; &#x27; +</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__526" class="hit">
                           <td class="line" data-tooltip>526</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          q.fields$.map((k) &#x3D;&gt; co.name + &#x27;.&#x27; + k).join(&#x27;, &#x27;) +</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__527" class="hit">
                           <td class="line" data-tooltip>527</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          &#x27; FROM &#x27; +</td>
+                          <td class="hits" data-tooltip>246</td>
+                          <td class="source">      if (0 &lt; Object.keys(fq).length) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__528" class="hit">
                           <td class="line" data-tooltip>528</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          co.name</td>
+                          <td class="hits" data-tooltip>52</td>
+                          <td class="source">        listquery +&#x3D; &#x27; WHERE &#x27;</td>
                           
                         </tr>            <tr id="cosmos-store.js__529" class="hit">
                           <td class="line" data-tooltip>529</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      } else {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__530" class="hit">
                           <td class="line" data-tooltip>530</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>225</td>
-                          <td class="source">        listquery +&#x3D; &#x27; * FROM &#x27; + co.name</td>
+                          <td class="hits" data-tooltip>52</td>
+                          <td class="source">        listquery +&#x3D; Object.keys(cq)</td>
                           
                         </tr>            <tr id="cosmos-store.js__531" class="hit">
                           <td class="line" data-tooltip>531</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">          .map((k) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="cosmos-store.js__532" class="hit">
                           <td class="line" data-tooltip>532</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">            let cq_k &#x3D; isarr(cq[k]) ? cq[k] : [cq[k]]</td>
                           
                         </tr>            <tr id="cosmos-store.js__533" class="hit">
                           <td class="line" data-tooltip>533</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      if (0 &lt; Object.keys(fq).length) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__534" class="hit">
                           <td class="line" data-tooltip>534</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>37</td>
-                          <td class="source">        listquery +&#x3D; &#x27; WHERE &#x27;</td>
+                          <td class="hits" data-tooltip>84</td>
+                          <td class="source">            return (</td>
                           
                         </tr>            <tr id="cosmos-store.js__535" class="hit">
                           <td class="line" data-tooltip>535</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">              &#x27;(&#x27; +</td>
                           
                         </tr>            <tr id="cosmos-store.js__536" class="hit">
                           <td class="line" data-tooltip>536</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>37</td>
-                          <td class="source">        listquery +&#x3D; Object.keys(cq)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">              cq_k</td>
                           
                         </tr>            <tr id="cosmos-store.js__537" class="hit">
                           <td class="line" data-tooltip>537</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          .map((k, i) &#x3D;&gt; {</td>
+                          <td class="source">                .map((v, i) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="cosmos-store.js__538" class="hit">
                           <td class="line" data-tooltip>538</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            let cq_k &#x3D; isarr(cq[k]) ? cq[k] : [cq[k]]</td>
+                          <td class="source">                  let cq_cmp &#x3D; intern.build_cmps(v, k)</td>
                           
                         </tr>            <tr id="cosmos-store.js__539" class="hit">
                           <td class="line" data-tooltip>539</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>85</td>
+                          <td class="source">                  return cq_cmp.cmps</td>
                           
                         </tr>            <tr id="cosmos-store.js__540" class="hit">
                           <td class="line" data-tooltip>540</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>55</td>
-                          <td class="source">            return (</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">                    .map((c, j) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="cosmos-store.js__541" class="hit">
                           <td class="line" data-tooltip>541</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              &#x27;(&#x27; +</td>
+                          <td class="source">                      params.push({</td>
                           
                         </tr>            <tr id="cosmos-store.js__542" class="hit">
                           <td class="line" data-tooltip>542</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              cq_k</td>
+                          <td class="source">                        name: &#x27;@&#x27; + k + i + j,</td>
                           
                         </tr>            <tr id="cosmos-store.js__543" class="hit">
                           <td class="line" data-tooltip>543</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                .map((v, j) &#x3D;&gt; {</td>
+                          <td class="source">                        value: c.v,</td>
                           
                         </tr>            <tr id="cosmos-store.js__544" class="hit">
                           <td class="line" data-tooltip>544</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                  params.push({</td>
+                          <td class="source">                      })</td>
                           
                         </tr>            <tr id="cosmos-store.js__545" class="hit">
                           <td class="line" data-tooltip>545</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">                    name: &#x27;@i&#x27; + i + j,</td>
+                          <td class="hits" data-tooltip>86</td>
+                          <td class="source">                      return (</td>
                           
                         </tr>            <tr id="cosmos-store.js__546" class="hit">
                           <td class="line" data-tooltip>546</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                    value: v,</td>
+                          <td class="source">                        co.name + &#x27;.&#x27; + k + &#x60; ${c.cmpop} &#x60; + &#x27;@&#x27; + (k + i + j)</td>
                           
                         </tr>            <tr id="cosmos-store.js__547" class="hit">
                           <td class="line" data-tooltip>547</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                  })</td>
+                          <td class="source">                      )</td>
                           
                         </tr>            <tr id="cosmos-store.js__548" class="hit">
                           <td class="line" data-tooltip>548</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>56</td>
-                          <td class="source">                  return co.name + &#x27;.&#x27; + k + &#x27; &#x3D; &#x27; + &#x27;@&#x27; + (&#x27;i&#x27; + i + j)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">                    })</td>
                           
                         </tr>            <tr id="cosmos-store.js__549" class="hit">
                           <td class="line" data-tooltip>549</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                })</td>
+                          <td class="source">                    .join(&#x27; AND &#x27;)</td>
                           
                         </tr>            <tr id="cosmos-store.js__550" class="hit">
                           <td class="line" data-tooltip>550</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">                .join(&#x27; OR &#x27;) +</td>
+                          <td class="source">                })</td>
                           
                         </tr>            <tr id="cosmos-store.js__551" class="hit">
                           <td class="line" data-tooltip>551</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">              &#x27;)&#x27;</td>
+                          <td class="source">                .join(&#x27; OR &#x27;) +</td>
                           
                         </tr>            <tr id="cosmos-store.js__552" class="hit">
                           <td class="line" data-tooltip>552</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">            )</td>
+                          <td class="source">              &#x27;)&#x27;</td>
                           
                         </tr>            <tr id="cosmos-store.js__553" class="hit">
                           <td class="line" data-tooltip>553</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          })</td>
+                          <td class="source">            )</td>
                           
                         </tr>            <tr id="cosmos-store.js__554" class="hit">
                           <td class="line" data-tooltip>554</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          .join(&#x27; AND &#x27;)</td>
+                          <td class="source">          })</td>
                           
                         </tr>            <tr id="cosmos-store.js__555" class="hit">
                           <td class="line" data-tooltip>555</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">          .join(&#x27; AND &#x27;)</td>
                           
                         </tr>            <tr id="cosmos-store.js__556" class="hit">
                           <td class="line" data-tooltip>556</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__557" class="hit">
                           <td class="line" data-tooltip>557</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      if (null !&#x3D; q.sort$) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__558" class="hit">
                           <td class="line" data-tooltip>558</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">        let sort_order &#x3D; {</td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">      if (null !&#x3D; q.sort$) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__559" class="hit">
                           <td class="line" data-tooltip>559</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          1: &#x27;ASC&#x27;,</td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">        let sort_order &#x3D; {</td>
                           
                         </tr>            <tr id="cosmos-store.js__560" class="hit">
                           <td class="line" data-tooltip>560</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          &#x27;-1&#x27;: &#x27;DESC&#x27;,</td>
+                          <td class="source">          1: &#x27;ASC&#x27;,</td>
                           
                         </tr>            <tr id="cosmos-store.js__561" class="hit">
                           <td class="line" data-tooltip>561</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source">          &#x27;-1&#x27;: &#x27;DESC&#x27;,</td>
                           
                         </tr>            <tr id="cosmos-store.js__562" class="hit">
                           <td class="line" data-tooltip>562</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        }</td>
                           
-                        </tr>            <tr id="cosmos-store.js__563" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__563" class="hit">
                           <td class="line" data-tooltip>563</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>        if (</div><div class="miss true" data-tooltip>typeof q.sort$ &#x3D;&#x3D; &#x27;object&#x27;</div><div>) {</div></td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__564" class="hit">
+                        </tr>            <tr id="cosmos-store.js__564" class="chunks">
                           <td class="line" data-tooltip>564</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">          for (let k in q.sort$) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>        if (</div><div class="miss false" data-tooltip>&#x27;object&#x27; !&#x3D;&#x3D; typeof q.sort$</div><div>) {</div></td>
                           
-                        </tr>            <tr id="cosmos-store.js__565" class="hit">
+                        </tr>            <tr id="cosmos-store.js__565" class="miss">
                           <td class="line" data-tooltip>565</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">            let order &#x3D; sort_order[q.sort$[k]]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>          throw new Error(&#x27;Invalid sort$&#x27;)</td>
                           
-                        </tr>            <tr id="cosmos-store.js__566" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__566" class="hit">
                           <td class="line" data-tooltip>566</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>            if (</div><div class="miss true" data-tooltip>null !&#x3D; order</div><div>) {</div></td>
+                          <td class="source">        }</td>
                           
                         </tr>            <tr id="cosmos-store.js__567" class="hit">
                           <td class="line" data-tooltip>567</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">              listquery +&#x3D; &#x27; ORDER BY &#x27; + co.name + &#x27;.&#x27; + k + &#x27; &#x27; + order</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__568" class="hit">
                           <td class="line" data-tooltip>568</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">            }</td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">        listquery +&#x3D; &#x27; ORDER BY &#x27;</td>
                           
                         </tr>            <tr id="cosmos-store.js__569" class="hit">
                           <td class="line" data-tooltip>569</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          }</td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">        listquery +&#x3D; Object.keys(q.sort$)</td>
                           
                         </tr>            <tr id="cosmos-store.js__570" class="hit">
                           <td class="line" data-tooltip>570</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source">          .map((k) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="cosmos-store.js__571" class="hit">
                           <td class="line" data-tooltip>571</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">            let order &#x3D; sort_order[q.sort$[k]]</td>
                           
-                        </tr>            <tr id="cosmos-store.js__572" class="hit">
+                        </tr>            <tr id="cosmos-store.js__572" class="chunks">
                           <td class="line" data-tooltip>572</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>            if (</div><div class="miss true" data-tooltip>null !&#x3D; order</div><div>) {</div></td>
                           
                         </tr>            <tr id="cosmos-store.js__573" class="hit">
                           <td class="line" data-tooltip>573</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      listreq.query &#x3D; listquery</td>
+                          <td class="hits" data-tooltip>10</td>
+                          <td class="source">              return co.name + &#x27;.&#x27; + k + &#x27; &#x27; + order</td>
                           
                         </tr>            <tr id="cosmos-store.js__574" class="hit">
                           <td class="line" data-tooltip>574</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">            } else {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__575" class="hit">
+                        </tr>            <tr id="cosmos-store.js__575" class="miss">
                           <td class="line" data-tooltip>575</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // console.log(&#x27;list_req: &#x27;, listreq ) // , q, co)</td>
+                          <td class="source" data-tooltip>              throw new Error(&#x27;Invalid sort$ order&#x27;)</td>
                           
                         </tr>            <tr id="cosmos-store.js__576" class="hit">
                           <td class="line" data-tooltip>576</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">            }</td>
                           
                         </tr>            <tr id="cosmos-store.js__577" class="hit">
                           <td class="line" data-tooltip>577</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">      do_list()</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          })</td>
                           
                         </tr>            <tr id="cosmos-store.js__578" class="hit">
                           <td class="line" data-tooltip>578</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">          .join(&#x27;, &#x27;)</td>
                           
                         </tr>            <tr id="cosmos-store.js__579" class="hit">
                           <td class="line" data-tooltip>579</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      async function do_list(args) {</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__580" class="hit">
                           <td class="line" data-tooltip>580</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">        const container &#x3D; await intern.load_container(co.name, ctx, reply)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__581" class="hit">
                           <td class="line" data-tooltip>581</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">        let out_list &#x3D; []</td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">      listreq.query &#x3D; listquery</td>
                           
                         </tr>            <tr id="cosmos-store.js__582" class="hit">
                           <td class="line" data-tooltip>582</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">        const { resources } &#x3D; await container.items.query(listreq).fetchAll()</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__583" class="hit">
                           <td class="line" data-tooltip>583</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      // console.log(&#x27;list_req: &#x27;, listreq ) // , q, co)</td>
                           
                         </tr>            <tr id="cosmos-store.js__584" class="hit">
                           <td class="line" data-tooltip>584</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">        out_list &#x3D; resources.map((resource) &#x3D;&gt;</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__585" class="hit">
                           <td class="line" data-tooltip>585</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          qent.make$(intern.outbound(ctx, qent, resource))</td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">      do_list()</td>
                           
                         </tr>            <tr id="cosmos-store.js__586" class="hit">
                           <td class="line" data-tooltip>586</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        )</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__587" class="hit">
                           <td class="line" data-tooltip>587</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      async function do_list(args) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__588" class="hit">
                           <td class="line" data-tooltip>588</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>226</td>
-                          <td class="source">        reply(null, out_list)</td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">        const container &#x3D; await intern.load_container(co.name, ctx, reply)</td>
                           
                         </tr>            <tr id="cosmos-store.js__589" class="hit">
                           <td class="line" data-tooltip>589</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">        if (1 &lt; Object.keys(q.sort$ || {}).length) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__590" class="hit">
                           <td class="line" data-tooltip>590</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    },</td>
+                          <td class="source">          // TODO: update compositeIndexes</td>
                           
                         </tr>            <tr id="cosmos-store.js__591" class="hit">
                           <td class="line" data-tooltip>591</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        }</td>
                           
                         </tr>            <tr id="cosmos-store.js__592" class="hit">
                           <td class="line" data-tooltip>592</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    inbound: function (ctx, ent, data) {</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__593" class="miss">
+                        </tr>            <tr id="cosmos-store.js__593" class="hit">
                           <td class="line" data-tooltip>593</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      if (null &#x3D;&#x3D; data) return null</td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">        try {</td>
                           
                         </tr>            <tr id="cosmos-store.js__594" class="hit">
                           <td class="line" data-tooltip>594</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>245</td>
+                          <td class="source">          const { resources } &#x3D; await container.items.query(listreq).fetchAll()</td>
                           
-                        </tr>            <tr id="cosmos-store.js__595" class="miss">
+                        </tr>            <tr id="cosmos-store.js__595" class="hit">
                           <td class="line" data-tooltip>595</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      let entity_options &#x3D; intern.entity_options(ent, ctx)</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__596" class="hit">
                           <td class="line" data-tooltip>596</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>242</td>
+                          <td class="source">          let out_list &#x3D; resources.map((resource) &#x3D;&gt;</td>
                           
-                        </tr>            <tr id="cosmos-store.js__597" class="miss">
+                        </tr>            <tr id="cosmos-store.js__597" class="hit">
                           <td class="line" data-tooltip>597</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      if (entity_options) {</td>
+                          <td class="source">            qent.make$(intern.outbound(ctx, qent, resource))</td>
                           
-                        </tr>            <tr id="cosmos-store.js__598" class="miss">
+                        </tr>            <tr id="cosmos-store.js__598" class="hit">
                           <td class="line" data-tooltip>598</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        var fields &#x3D; entity_options.fields || {}</td>
+                          <td class="source">          )</td>
                           
-                        </tr>            <tr id="cosmos-store.js__599" class="miss">
+                        </tr>            <tr id="cosmos-store.js__599" class="hit">
                           <td class="line" data-tooltip>599</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        Object.keys(fields).forEach((fn) &#x3D;&gt; {</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__600" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__600" class="hit">
                           <td class="line" data-tooltip>600</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>          </div><div class="miss never" data-tooltip>var fs &#x3D; fields[fn] || {}</div></td>
+                          <td class="hits" data-tooltip>242</td>
+                          <td class="source">          reply(null, out_list)</td>
                           
-                        </tr>            <tr id="cosmos-store.js__601" class="miss">
+                        </tr>            <tr id="cosmos-store.js__601" class="hit">
                           <td class="line" data-tooltip>601</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>          var type &#x3D; fs.type</td>
+                          <td class="source">        } catch (err) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__602" class="miss">
+                        </tr>            <tr id="cosmos-store.js__602" class="hit">
                           <td class="line" data-tooltip>602</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>          if (&#x27;date&#x27; &#x3D;&#x3D;&#x3D; type &amp;&amp; data[fn] instanceof Date) {</td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">          reply(err, null)</td>
                           
-                        </tr>            <tr id="cosmos-store.js__603" class="miss">
+                        </tr>            <tr id="cosmos-store.js__603" class="hit">
                           <td class="line" data-tooltip>603</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>            data[fn] &#x3D; data[fn].toISOString()</td>
+                          <td class="source">        }</td>
                           
                         </tr>            <tr id="cosmos-store.js__604" class="hit">
                           <td class="line" data-tooltip>604</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          }</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__605" class="hit">
                           <td class="line" data-tooltip>605</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        })</td>
+                          <td class="source">    },</td>
                           
                         </tr>            <tr id="cosmos-store.js__606" class="hit">
                           <td class="line" data-tooltip>606</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__607" class="miss">
+                        </tr>            <tr id="cosmos-store.js__607" class="hit">
                           <td class="line" data-tooltip>607</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      return data</td>
+                          <td class="source">    inbound: function (ctx, ent, data) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__608" class="hit">
+                        </tr>            <tr id="cosmos-store.js__608" class="miss">
                           <td class="line" data-tooltip>608</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    },</td>
+                          <td class="source" data-tooltip>      if (null &#x3D;&#x3D; data) return null</td>
                           
                         </tr>            <tr id="cosmos-store.js__609" class="hit">
                           <td class="line" data-tooltip>609</td>
@@ -4727,71 +4836,71 @@
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__610" class="hit">
+                        </tr>            <tr id="cosmos-store.js__610" class="miss">
                           <td class="line" data-tooltip>610</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    outbound: function (ctx, ent, data) {</td>
+                          <td class="source" data-tooltip>      let entity_options &#x3D; intern.entity_options(ent, ctx)</td>
                           
-                        </tr>            <tr id="cosmos-store.js__611" class="miss">
+                        </tr>            <tr id="cosmos-store.js__611" class="hit">
                           <td class="line" data-tooltip>611</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      if (null &#x3D;&#x3D; data) return null</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__612" class="hit">
+                        </tr>            <tr id="cosmos-store.js__612" class="miss">
                           <td class="line" data-tooltip>612</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source" data-tooltip>      if (entity_options) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__613" class="hit">
+                        </tr>            <tr id="cosmos-store.js__613" class="miss">
                           <td class="line" data-tooltip>613</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>412</td>
-                          <td class="source">      let entity_options &#x3D; intern.entity_options(ent, ctx)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>        var fields &#x3D; entity_options.fields || {}</td>
                           
-                        </tr>            <tr id="cosmos-store.js__614" class="hit">
+                        </tr>            <tr id="cosmos-store.js__614" class="miss">
                           <td class="line" data-tooltip>614</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source" data-tooltip>        Object.keys(fields).forEach((fn) &#x3D;&gt; {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__615" class="hit">
+                        </tr>            <tr id="cosmos-store.js__615" class="chunks">
                           <td class="line" data-tooltip>615</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>412</td>
-                          <td class="source">      const defaultFields &#x3D; [&#x27;_attachments&#x27;, &#x27;_etag&#x27;, &#x27;_rid&#x27;, &#x27;_self&#x27;, &#x27;_ts&#x27;]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>          </div><div class="miss never" data-tooltip>var fs &#x3D; fields[fn] || {}</div></td>
                           
-                        </tr>            <tr id="cosmos-store.js__616" class="hit">
+                        </tr>            <tr id="cosmos-store.js__616" class="miss">
                           <td class="line" data-tooltip>616</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source" data-tooltip>          var type &#x3D; fs.type</td>
                           
-                        </tr>            <tr id="cosmos-store.js__617" class="hit">
+                        </tr>            <tr id="cosmos-store.js__617" class="miss">
                           <td class="line" data-tooltip>617</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      for (let field of defaultFields) {</td>
+                          <td class="source" data-tooltip>          if (&#x27;date&#x27; &#x3D;&#x3D;&#x3D; type &amp;&amp; data[fn] instanceof Date) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__618" class="hit">
+                        </tr>            <tr id="cosmos-store.js__618" class="miss">
                           <td class="line" data-tooltip>618</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2060</td>
-                          <td class="source">        if (null !&#x3D; data[field]) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>            data[fn] &#x3D; data[fn].toISOString()</td>
                           
                         </tr>            <tr id="cosmos-store.js__619" class="hit">
                           <td class="line" data-tooltip>619</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1940</td>
-                          <td class="source">          delete data[field]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          }</td>
                           
                         </tr>            <tr id="cosmos-store.js__620" class="hit">
                           <td class="line" data-tooltip>620</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source">        })</td>
                           
                         </tr>            <tr id="cosmos-store.js__621" class="hit">
                           <td class="line" data-tooltip>621</td>
@@ -4799,104 +4908,194 @@
                           <td class="hits" data-tooltip></td>
                           <td class="source">      }</td>
                           
-                        </tr>            <tr id="cosmos-store.js__622" class="hit">
+                        </tr>            <tr id="cosmos-store.js__622" class="miss">
                           <td class="line" data-tooltip>622</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source" data-tooltip>      return data</td>
                           
                         </tr>            <tr id="cosmos-store.js__623" class="hit">
                           <td class="line" data-tooltip>623</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>412</td>
-                          <td class="source">      if (entity_options) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    },</td>
                           
-                        </tr>            <tr id="cosmos-store.js__624" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__624" class="hit">
                           <td class="line" data-tooltip>624</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>        var fields &#x3D; </div><div class="miss true" data-tooltip>entity_options.fields</div><div> || </div><div class="miss never" data-tooltip>{}</div></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__625" class="hit">
                           <td class="line" data-tooltip>625</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>9</td>
-                          <td class="source">        Object.keys(fields).forEach((fn) &#x3D;&gt; {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    outbound: function (ctx, ent, data) {</td>
                           
-                        </tr>            <tr id="cosmos-store.js__626" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__626" class="miss">
                           <td class="line" data-tooltip>626</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>          var fs &#x3D; </div><div class="miss true" data-tooltip>fields[fn]</div><div> || </div><div class="miss never" data-tooltip>{}</div></td>
+                          <td class="source" data-tooltip>      if (null &#x3D;&#x3D; data) return null</td>
                           
                         </tr>            <tr id="cosmos-store.js__627" class="hit">
                           <td class="line" data-tooltip>627</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>9</td>
-                          <td class="source">          var type &#x3D; fs.type</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="cosmos-store.js__628" class="chunks">
+                        </tr>            <tr id="cosmos-store.js__628" class="hit">
                           <td class="line" data-tooltip>628</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>          if (</div><div class="miss true" data-tooltip>&#x27;date&#x27; &#x3D;&#x3D;&#x3D; type</div><div> &amp;&amp; &#x27;string&#x27; &#x3D;&#x3D;&#x3D; typeof data[fn]) {</div></td>
+                          <td class="hits" data-tooltip>868</td>
+                          <td class="source">      let entity_options &#x3D; intern.entity_options(ent, ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__629" class="hit">
                           <td class="line" data-tooltip>629</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">            data[fn] &#x3D; new Date(data[fn])</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__630" class="hit">
                           <td class="line" data-tooltip>630</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          }</td>
+                          <td class="hits" data-tooltip>868</td>
+                          <td class="source">      const defaultFields &#x3D; [&#x27;_attachments&#x27;, &#x27;_etag&#x27;, &#x27;_rid&#x27;, &#x27;_self&#x27;, &#x27;_ts&#x27;]</td>
                           
                         </tr>            <tr id="cosmos-store.js__631" class="hit">
                           <td class="line" data-tooltip>631</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        })</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__632" class="hit">
                           <td class="line" data-tooltip>632</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">      for (let field of defaultFields) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__633" class="hit">
                           <td class="line" data-tooltip>633</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>4340</td>
+                          <td class="source">        if (null !&#x3D; data[field]) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__634" class="hit">
                           <td class="line" data-tooltip>634</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>412</td>
-                          <td class="source">      return data</td>
+                          <td class="hits" data-tooltip>3750</td>
+                          <td class="source">          delete data[field]</td>
                           
                         </tr>            <tr id="cosmos-store.js__635" class="hit">
                           <td class="line" data-tooltip>635</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    },</td>
+                          <td class="source">        }</td>
                           
                         </tr>            <tr id="cosmos-store.js__636" class="hit">
                           <td class="line" data-tooltip>636</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="cosmos-store.js__637" class="hit">
                           <td class="line" data-tooltip>637</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="cosmos-store.js__638" class="hit">
                           <td class="line" data-tooltip>638</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>868</td>
+                          <td class="source">      if (entity_options) {</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__639" class="chunks">
+                          <td class="line" data-tooltip>639</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>        var fields &#x3D; </div><div class="miss true" data-tooltip>entity_options.fields</div><div> || </div><div class="miss never" data-tooltip>{}</div></td>
+                          
+                        </tr>            <tr id="cosmos-store.js__640" class="hit">
+                          <td class="line" data-tooltip>640</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">        Object.keys(fields).forEach((fn) &#x3D;&gt; {</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__641" class="chunks">
+                          <td class="line" data-tooltip>641</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>          var fs &#x3D; </div><div class="miss true" data-tooltip>fields[fn]</div><div> || </div><div class="miss never" data-tooltip>{}</div></td>
+                          
+                        </tr>            <tr id="cosmos-store.js__642" class="hit">
+                          <td class="line" data-tooltip>642</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>9</td>
+                          <td class="source">          var type &#x3D; fs.type</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__643" class="chunks">
+                          <td class="line" data-tooltip>643</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>          if (</div><div class="miss true" data-tooltip>&#x27;date&#x27; &#x3D;&#x3D;&#x3D; type</div><div> &amp;&amp; &#x27;string&#x27; &#x3D;&#x3D;&#x3D; typeof data[fn]) {</div></td>
+                          
+                        </tr>            <tr id="cosmos-store.js__644" class="hit">
+                          <td class="line" data-tooltip>644</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">            data[fn] &#x3D; new Date(data[fn])</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__645" class="hit">
+                          <td class="line" data-tooltip>645</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          }</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__646" class="hit">
+                          <td class="line" data-tooltip>646</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        })</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__647" class="hit">
+                          <td class="line" data-tooltip>647</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      }</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__648" class="hit">
+                          <td class="line" data-tooltip>648</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="cosmos-store.js__649" class="hit">
+                          <td class="line" data-tooltip>649</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>868</td>
+                          <td class="source">      return data</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__650" class="hit">
+                          <td class="line" data-tooltip>650</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    },</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__651" class="hit">
+                          <td class="line" data-tooltip>651</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__652" class="hit">
+                          <td class="line" data-tooltip>652</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">}</td>
+                          
+                        </tr>            <tr id="cosmos-store.js__653" class="hit">
+                          <td class="line" data-tooltip>653</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
