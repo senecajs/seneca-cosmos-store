@@ -325,87 +325,99 @@ lab.test('double sort', async () => {
   
 })
 
-lab.test('comparison-query', async () => {
+lab.describe('comparison-query-test', () => {
   const plugin = {}
 
   const si = make_seneca({ plugin })
 
   lab.before(() => si.ready())
-
+  
   let qop = {}
-  let list = await si.entity('query02').list$(qop)
-
-  for (let entry of list) {
-    // console.log('REMOVE', list)
-    await entry.remove$({ id: entry.id, sk1: entry.sk1 })
-  }
-
-  // generate entries for cmpops test
-  await generate_entries(si, 'query02',
-    [ 
-      { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
-      { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 0, d: 10 },
-      { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
-      { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
-      { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 2, d: 10 },
-      { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 0, d: 10 },
-      { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
-      { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
-      { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 1, d: 13 },
-    ])
-
-  // sort-key comparison
-  qop = { ip3: 'AA', is2: { lt$: 1 } }
-  list = await si.entity('query02').list$(qop) 
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.is2)).equal([0, 0, 0])
+  let list = []
   
-  qop = { d: { eq$: 10 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.length).equal(6)
-
-  qop = { d: { gt$: 10 }, ip3: 'BB', is2: { gte$: 0 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.length).equal(3)
+  lab.test('generate_entries', async () => {
   
-  // descending
-  qop = { d: { gte$: 10 }, ip3: 'BB', is2: { gte$: 0 }, sort$: { is2: -1 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.is2)).equal([3, 2, 1, 0])
+    qop = {}
+    list = await si.entity('query02').list$(qop)
 
-  // ascending
-  qop = { d: { gte$: 10 }, ip3: 'BB', is2: { lte$: 3 }, sort$: { is2: 1 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.is2)).equal([0, 1, 2, 3])
+    for (let entry of list) {
+      // console.log('REMOVE', list)
+      await entry.remove$({ id: entry.id, sk1: entry.sk1 })
+    }
 
-  qop = { d: { eq$: 10 }, sk1: { eq$: 'c' }, ip3: 'AA', is2: { lt$: 3 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log("LIST: ", list)
-  expect(list.length).equal(2)
+    // generate entries for cmpops test
+    await generate_entries(si, 'query02',
+      [ 
+        { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
+        { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 0, d: 10 },
+        { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
+        { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
+        { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 2, d: 10 },
+        { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 0, d: 10 },
+        { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
+        { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
+        { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 1, d: 13 },
+      ])
+    
+  })
   
-  qop = { d: { gt$: 10, lt$: 13, }, ip3: 'BB', is2: { lte$: 3}, sort$: { d: 1 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log("LIST: ", list)
-  expect(list.map((ent) => ent.d)).equal([11, 12])
-
-  qop = { sk1: { gt$: 'a', lt$: 'c' } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.sk1)).equal(['b'])
+  lab.test('lt$', async () => {
+    qop = { ip3: 'AA', is2: { lt$: 1 } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.map((ent) => ent.is2)).equal([0, 0, 0])
+  })
   
-  list = await si.entity('query02')
-    .list$({ d: [ { lt$: 11, gt$: 9 }, { eq$: 11 } ], sort$: { id: 1 } } )
-  // console.log("LIST: ", list)
-  expect(list.length).equal(7)
+  lab.test('eq$', async () => {
+    qop = { d: { eq$: 10 } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.length).equal(6)
+  })
   
-  list = await si.entity('query02')
-    .list$({ d: { ne$: 10 }, sort$: { d: 1 } })
-  expect(list.map((ent) => ent.d)).equal([11, 12, 13])
+  lab.test('combine gt$, eq$, gte$', async () => {
+    qop = { d: { gt$: 10 }, ip3: 'BB', is2: { gte$: 0 } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.length).equal(3)
+  })
+  
+  lab.test('DESC combine with sort$: -1', async () => {
+    qop = { d: { gte$: 10 }, ip3: 'BB', is2: { gte$: 0 }, sort$: { is2: -1 } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.map((ent) => ent.is2)).equal([3, 2, 1, 0])
+  })
+  
+  lab.test('ASC combine with sort$: 1', async () => {
+    qop = { d: { gte$: 10 }, ip3: 'BB', is2: { lte$: 3 }, sort$: { is2: 1 } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.map((ent) => ent.is2)).equal([0, 1, 2, 3])
+  })
+  
+  lab.test('more complicated tests', async () => {
+    qop = { d: { eq$: 10 }, sk1: { eq$: 'c' }, ip3: 'AA', is2: { lt$: 3 } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.length).equal(2)
+  
+    qop = { d: { gt$: 10, lt$: 13, }, ip3: 'BB', is2: { lte$: 3}, sort$: { d: 1 } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.map((ent) => ent.d)).equal([11, 12])
 
+    qop = { sk1: { gt$: 'a', lt$: 'c' } }
+    list = await si.entity('query02').list$(qop)
+    expect(list.map((ent) => ent.sk1)).equal(['b'])
+  
+    list = await si.entity('query02')
+      .list$({ d: [ { lt$: 11, gt$: 9 }, { eq$: 11 } ], sort$: { id: 1 } } )
+    expect(list.length).equal(7)
+  
+    list = await si.entity('query02')
+      .list$({ d: { ne$: 10 }, sort$: { d: 1 } })
+    expect(list.map((ent) => ent.d)).equal([11, 12, 13])
+  
+  })
+  
+  lab.test('clear', async () => {
+    await si.entity('query02').remove$({ all$: true })
+  })
+  
 })
 
 lab.test('invalid-operators', async () => {
