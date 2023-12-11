@@ -120,7 +120,6 @@ lab.test('no-dups', async () => {
   expect(list.length).equal(1)
 })
 
-// See support/db/create-database-tables for table def
 lab.test('special-query', async () => {
   var si = make_seneca({})
   await si.ready()
@@ -135,13 +134,7 @@ lab.test('special-query', async () => {
     // console.log('REMOVE', list)
     await entry.remove$({ id: entry.id, sk0: entry.sk0 })
   }
-
-  // id: PartionKey
-  // sk: SortKey
-  // ip0: Index0 PartionKey
-  // ip1: Index1 PartionKey
-  // is1: Index1 SortKey
-  // d: plain data
+  
   await si
     .entity('query01')
     .save$({ id$: 'q0', sk0: 'a', ip0: 'A', ip1: 'AA', is1: 0, d: 10 })
@@ -226,282 +219,231 @@ lab.test('special-query', async () => {
   // console.log('END')
 })
 
-lab.test('simple sort', async () => {
+lab.describe('simple-sort-query-test', () => {
   const plugin = {}
 
   const si = make_seneca({ plugin })
 
   lab.before(() => si.ready())
-
-  await generate_entries(si, 'query02', [
-    { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
-    { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10 },
-    { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10 },
-    { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 8, d: 10 },
-    { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 7, d: 10 },
-    { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 6, d: 10 },
-    { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
-    { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
-    { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13 },
-  ])
-
-  let list = await si.entity('query02').list$({ sort$: { is2: 1 } })
-
-  expect(list.map((e) => e.is2)).equal(
-    Array(9)
-      .fill()
-      .map((v, i) => i + 1)
-  )
-
-  list = await si.entity('query02').list$({ sort$: { is2: -1 } })
-
-  expect(list.map((e) => e.is2)).equal(
-    Array(9)
-      .fill()
-      .map((v, i) => Math.abs(i - 9))
-  )
-
-  // combine
-  list = await si
-    .entity('query02')
-    .list$({ sort$: { is2: 1 }, limit$: 2, ip3: 'AA' })
-  expect(list.map((e) => e.is2)).equal([1, 4])
-
-  // clear
-  si.entity('query02').remove$({ all$: true })
-})
-
-/*
-lab.test('comparison-query', async () => {
-  var si = make_seneca({
-    plugin: {
-      entity: {
-        query02: {
-          table: {
-            name: 'query02',
-            key: {
-              partition: 'id',
-              sort: 'sk1',
-            },
-            index: [
-              {
-                name: 'gsi_2',
-                key: {
-                  partition: 'ip2',
-                },
-              },
-              {
-                name: 'gsi_3',
-                key: {
-                  partition: 'ip3',
-                  sort: 'is2',
-                },
-              },
-            ],
-          },
-        },
-      },
-    },
-  })
-
-  await si.ready()
-  si.quiet()
-
-  let qop = {}
-  let list = await si.entity('query02').list$(qop)
-
-  for (let entry of list) {
-    // console.log('REMOVE', list)
-    await entry.remove$({ id: entry.id, sk1: entry.sk1 })
-  }
-
-  // generate entries for cmpops test
-  await generate_entries(si, 'query02',
-    [ 
+  
+  let q = {}
+  let list = []
+  
+  lab.test('generate_entries', async () => {
+    await generate_entries(si, 'query02', [
       { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
-      { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 0, d: 10 },
-      { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
-      { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
-      { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 2, d: 10 },
-      { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 0, d: 10 },
+      { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10 },
+      { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10 },
+      { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 8, d: 10 },
+      { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 7, d: 10 },
+      { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 6, d: 10 },
       { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
       { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
-      { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 1, d: 13 },
+      { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13 },
     ])
-
-  // sort-key comparison
-  qop = { ip3: 'AA', is2: { $lt: 1 } }
-  list = await si.entity('query02').list$(qop) 
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.is2)).equal([0, 0, 0, 1])
+  })
   
-  qop = { d: { $ne: 10 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.length).equal(6)
+  lab.test('ASC sort$: 1', async () => {
+    q = { sort$: { is2: 1 } }
+    list = await si.entity('query02').list$(q)
 
-  qop = { d: { $gt: 10 }, ip3: 'BB', is2: { $gte: 0 } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.length).equal(3)
+    expect(list.map((e) => e.is2)).equal(
+      Array(9)
+        .fill()
+        .map((v, i) => i + 1)
+    )
+  })
   
-  // descending
-  qop = { d: { $gt: 10 }, ip3: 'BB', is2: { $gt: 0 }, $sort: -1 }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.is2)).equal([3, 2, 1, 0])
+  lab.test('DESC sort$: -1', async () => {
+    q = { sort$: { is2: -1 } }
+    list = await si.entity('query02').list$(q)
 
-  // ascending
-  qop = { d: { $gt: 10 }, ip3: 'BB', is2: { $lt: 3 }, $sort: 1 }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.is2)).equal([0, 1, 2, 3])
-
-  // table key.sort
-  qop = { d: { $ne: 10 }, sk1: { $ne: 'c' }, ip3: 'AA', is2: { $lt: 3 }, $sort: 1 }
-  list = await si.entity('query02').list$(qop)
-  // console.log("LIST: ", list)
-  expect(list.length).equal(2)
-
-
-  qop = { ip3: 'AA', is2: { $lt: 1, $gte: 2 } } // KeyCondition error
-  qop = { ip3: 'AA', is2: { $lt: 1 } }
-  qop = { d: { $gte: 10, $lte: 13, }, ip3: 'BB', is2: { $lt: 3}, $sort: 1 }
-  list = await si.entity('query02').list$(qop)
-  // console.log("LIST: ", list)
-  expect(list.map((ent) => ent.d)).equal([11, 12])
-
-  qop = { sk1: { $gte: 'a', $lte: 'c' } }
-  list = await si.entity('query02').list$(qop)
-  // console.log('LIST: ', list)
-  expect(list.map((ent) => ent.sk1)).equal(['b'])
+    expect(list.map((e) => e.is2)).equal(
+      Array(9)
+        .fill()
+        .map((v, i) => 9 - i )
+    )
+    
+  })
   
-  list = await si.entity('query02').list$({ d: [ { $lte: 11, $gte: 9 }, { $ne: 11 } ] } )
-  // console.log("LIST: ", list)
-  expect(list.length).equal(7)
-
+  lab.test('combine sort$, limit$', async () => {
+    list = await si
+      .entity('query02')
+      .list$({ sort$: { is2: 1 }, limit$: 2, ip3: 'AA' })
+    expect(list.map((e) => e.is2)).equal([1, 4])
+  })
+  
+  lab.test('clear', async () => {
+    await si.entity('query02').remove$({ all$: true })
+  })
+  
 })
 
-lab.test('store-with-sortkey', async () => {
-  var si = make_seneca({
-    plugin: {
-      entity: {
-        query02: {
-          table: {
-            name: 'query02',
-            key: {
-              partition: 'id',
-              sort: 'sk1',
-            },
-            index: [
-              {
-                name: 'gsi_2',
-                key: {
-                  partition: 'ip2',
-                },
-              },
-              {
-                name: 'gsi_3',
-                key: {
-                  partition: 'ip3',
-                  sort: 'is2',
-                },
-              },
-            ],
-          },
-        },
+lab.test('double sort', async () => {
+  const plugin = {}
+
+  const si = make_seneca({ plugin })
+
+  lab.before(() => si.ready())
+  
+  await generate_entries(si, 'query03',
+    [
+      { id$: 'q0', firstName: 'John', lastName: 'Doe', age: 30 },
+      { id$: 'q1', firstName: 'Alice', lastName: 'Smith', age: 25 },
+      { id$: 'q2', firstName: 'Bob', lastName: 'Johnson', age: 35 },
+      { id$: 'q3', firstName: 'John', lastName: 'Smith', age: 28 },
+      { id$: 'q4', firstName: 'Alice', lastName: 'Doe', age: 32 },
+      { id$: 'q5', firstName: 'Bob', lastName: 'Doe', age: 22 },
+    ])
+  
+  let list = await si.entity('query03')
+    .list$({ sort$: { firstName: 1, lastName: -1 } })
+  
+  expect(list.map((e) => ({ firstName: e.firstName, lastName: e.lastName })))
+    .equal([
+      {
+        firstName: 'Alice',
+        lastName: 'Smith'
       },
-    },
-  })
-
-  await si.ready()
-  si.quiet()
-
-
-  // should put entry with sortkey
-  await si
-    .entity('query02')
-    .save$({ id$: 'q80', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 1, d: 13 })
+      {
+        firstName: 'Alice',
+        lastName: 'Doe'
+      },
+      {
+        firstName: 'Bob',
+        lastName: 'Johnson'
+      },
+      {
+        firstName: 'Bob',
+        lastName: 'Doe'
+      },
+      {
+        firstName: 'John',
+        lastName: 'Smith'
+      },
+      {
+        firstName: 'John',
+        lastName: 'Doe'
+      },
+    ])
     
+  // clear
+  await si.entity('query03').remove$({ all$: true })
   
-  // should update entry with sortkey
-  // overwrite ip2, ip3, is2, d
-  await si
-    .entity('query02')
-    .save$({ id: 'q80', sk1: 'c', ip2: 'CC', ip3: 'BBB', is2: 2, d: 14 })
+})
+
+lab.describe('comparison-query-test', () => {
+  const plugin = {}
+
+  const si = make_seneca({ plugin })
+
+  lab.before(() => si.ready())
   
-  // should load entry with sortkey
-  let q80 = await si
-    .entity('query02')
-    .load$({id: 'q80', sk1: 'c'})
-  expect(q80.data$(false)).equal({
-    sk1: 'c',
-    is2: 2,
-    ip2: 'CC',
-    id: 'q80',
-    d: 14,
-    ip3: 'BBB'
+  let q = {}
+  let list = []
+  
+  lab.test('generate_entries', async () => {
+  
+    q = {}
+    list = await si.entity('query02').list$(q)
+
+    for (let entry of list) {
+      // console.log('REMOVE', list)
+      await entry.remove$({ id: entry.id, sk1: entry.sk1 })
+    }
+
+    // generate entries for cmpops test
+    await generate_entries(si, 'query02',
+      [ 
+        { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
+        { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 0, d: 10 },
+        { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
+        { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
+        { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 2, d: 10 },
+        { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 0, d: 10 },
+        { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
+        { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
+        { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 1, d: 13 },
+      ])
+    
   })
   
-  // should delete entry with sortkey
-  q80 = await si.entity('query02').remove$({id: 'q80', sk1: 'c'})
+  lab.test('lt$', async () => {
+    q = { ip3: 'AA', is2: { lt$: 1 } }
+    list = await si.entity('query02').list$(q)
+    expect(list.map((ent) => ent.is2)).equal([0, 0, 0])
+  })
   
-  expect(q80).equal(null)
+  lab.test('eq$', async () => {
+    q = { d: { eq$: 10 } }
+    list = await si.entity('query02').list$(q)
+    expect(list.length).equal(6)
+  })
+  
+  lab.test('combine gt$, eq$, gte$', async () => {
+    q = { d: { gt$: 10 }, ip3: 'BB', is2: { gte$: 0 } }
+    list = await si.entity('query02').list$(q)
+    expect(list.length).equal(3)
+  })
+  
+  lab.test('DESC combine with sort$: -1', async () => {
+    q = { d: { gte$: 10 }, ip3: 'BB', is2: { gte$: 0 }, sort$: { is2: -1 } }
+    list = await si.entity('query02').list$(q)
+    expect(list.map((ent) => ent.is2)).equal([3, 2, 1, 0])
+  })
+  
+  lab.test('ASC combine with sort$: 1', async () => {
+    q = { d: { gte$: 10 }, ip3: 'BB', is2: { lte$: 3 }, sort$: { is2: 1 } }
+    list = await si.entity('query02').list$(q)
+    expect(list.map((ent) => ent.is2)).equal([0, 1, 2, 3])
+  })
+  
+  lab.test('more complicated tests', async () => {
+    q = { d: { eq$: 10 }, sk1: { eq$: 'c' }, ip3: 'AA', is2: { lt$: 3 } }
+    list = await si.entity('query02').list$(q)
+    expect(list.length).equal(2)
+  
+    q = { d: { gt$: 10, lt$: 13, }, ip3: 'BB', is2: { lte$: 3}, sort$: { d: 1 } }
+    list = await si.entity('query02').list$(q)
+    expect(list.map((ent) => ent.d)).equal([11, 12])
 
-  // can't update the sortkey but
-  // you can remove that entry
-  // and save the new sortkey with new content
-  // delete-put
-  q80 = await si
-    .entity('query02')
-    .save$({id$: 'q80', sk1: 'cc', d: 15})
-  expect(q80.data$(false)).equal({ sk1: 'cc', d: 15, id: 'q80' })
+    q = { sk1: { gt$: 'a', lt$: 'c' } }
+    list = await si.entity('query02').list$(q)
+    expect(list.map((ent) => ent.sk1)).equal(['b'])
+  
+    q = { d: [ { lt$: 11, gt$: 9 }, { eq$: 11 } ], sort$: { id: 1 } }
+    list = await si.entity('query02')
+      .list$(q)
+    expect(list.length).equal(7)
+  
+    q = { d: { ne$: 10 }, sort$: { d: 1 } }
+    list = await si.entity('query02')
+      .list$(q)
+    expect(list.map((ent) => ent.d)).equal([11, 12, 13])
+  
+  })
+  
+  lab.test('clear', async () => {
+    await si.entity('query02').remove$({ all$: true })
+  })
   
 })
 
 lab.test('invalid-operators', async () => {
-  var si = make_seneca({
-    plugin: {
-      entity: {
-        query01: {
-          table: {
-            name: 'query01',
-            key: {
-              partition: 'id',
-              sort: 'sk0',
-            },
-            index: [
-              {
-                name: 'gsi_0',
-                key: {
-                  partition: 'ip0',
-                },
-              },
-              {
-                name: 'gsi_1',
-                key: {
-                  partition: 'ip1',
-                  sort: 'is1',
-                },
-              },
-            ],
-          },
-        },
-      },
-    },
-  })
+  const plugin = {}
 
-  await si.ready()
-  si.quiet()
+  const si = make_seneca({ plugin })
+
+  lab.before(() => si.ready(), si.quiet())
 
   let list = []
-  let qop = {}
+  let q = {}
   let err
 
   err = null
-  qop = { d: { $notAValidOp: 123 } }
+  q = { d: { notAValidOp$: 123 } }
   try {
-    list = await si.entity('query01').list$(qop)
+    list = await si.entity('query01').list$(q)
   }catch(e) {
     err = e
   }
@@ -509,68 +451,44 @@ lab.test('invalid-operators', async () => {
 
 })
 
+
 lab.test('injection-fails', async () => {
+  const plugin = {}
 
-  var si = make_seneca({
-    plugin: {
-      entity: {
-        query01: {
-          table: {
-            name: 'query01',
-            key: {
-              partition: 'id',
-              sort: 'sk0',
-            },
-            index: [
-              {
-                name: 'gsi_0',
-                key: {
-                  partition: 'ip0',
-                },
-              },
-              {
-                name: 'gsi_1',
-                key: {
-                  partition: 'ip1',
-                  sort: 'is1',
-                },
-              },
-            ],
-          },
-        },
-      },
-    },
-  })
+  const si = make_seneca({ plugin })
 
-  await si.ready()
-  si.quiet()
+  lab.before(() => si.ready(), si.quiet())
 
-
-  /*
-  let qop = {}
+  let q = {}
   let list = []
 
   let q_no_results = [
-    { d: { $ne: '10 or 1 = 1' } },
     { ip1: '*', is1: 1 }
+    // '*' is actually a String
   ]
 
   let q_validation_error = [
-    { 'd or 1': { $ne: 10 } }, // inject into FilterExpression
-    { ip1: 'BB', 'is1 or 1': 1 }, // ExpressionAttributeValues/Names
-    { ip1: 'BB', is1: ' and 1 = 1' }, // ExpressionAttributeValues/Names
+    { 'd or 1': { $ne: 10 } }, // inject into Params
+    { ip1: 'BB', 'is1 or 1': 1 }, // Syntax error
+    { d: { $ne: '10 or 1 = 1' } },
+    // { is1: '1 = 1' }, // will treat it as an actual String
   ]
+  // await si.entity('query01').data$({id$: '_my', is1: '1 = 1'}).save$()
 
-
+  // Try: string injection via container
+  // Treated as query01 due to seneca-entity
+  list = await si.entity("query01 query01.sk0 == 'a'").list$()
+  expect(list.length).equal(6)
+  
   for(let q of q_validation_error) {
     let err = null
     try {
       list = await si.entity('query01').list$(q)
     }catch(e) {
       err = e
-      // console.error('e: ', e)
-      // expect(e).exist()
+      list = null
     }
+    
     expect(err).not.equal(null)
   }
 
@@ -578,10 +496,8 @@ lab.test('injection-fails', async () => {
     list = await si.entity('query01').list$(q)
     expect(list.length).equal(0)
   }
-
-
+  
 })
-*/
 
 lab.test('export', async () => {
   var si = make_seneca()

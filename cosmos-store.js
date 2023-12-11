@@ -455,41 +455,34 @@ function make_intern() {
       }
     },
 
-    build_ops(qv, kname, type) {
-      // TODO: enable these for cosmosDB
-
+    build_cmps(qv, kname) {
+      // console.log('QV: ', typeof qv, qv)
+      
       if ('object' != typeof qv) {
         //  && !Array.isArray(qv)) {
-        return { cmps: [{ c: '$ne', cmpop: '=', k: kname, v: qv }] }
+        return { cmps: [{ c: 'eq$', cmpop: '=', k: kname, v: qv }] }
       }
 
-      let ops = {
-        $gte: { cmpop: '>' },
-        $gt: { cmpop: '>=' },
-        $lt: { cmpop: '<=' },
-        $lte: { cmpop: '<' },
-        $ne: { cmpop: '=' },
-      }
-
-      // console.log('QV: ', typeof qv, qv)
-
-      let cmps = []
+      let cmpops = {
+        gt$: { cmpop: '>' },
+        gte$: { cmpop: '>=' },
+        lt$: { cmpop: '<' },
+        lte$: { cmpop: '<=' },
+        ne$: { cmpop: '!=' },
+        eq$: { cmpop: '=' }
+      }, cmps = []
+      
       for (let k in qv) {
-        let op = ops[k]
-        if (op) {
-          op.k = kname
-          op.v = qv[k]
-          op.c = k
-          cmps.push(op)
-        } else if (k.startsWith('$')) {
-          throw new Error('Invalid Comparison Operator: ' + k)
+        let cmp = cmpops[k]
+        if (cmp) {
+          cmp = { ...cmpops[k] }
+          cmp.k = kname
+          cmp.v = qv[k]
+          cmp.c = k
+          cmps.push(cmp)
+        } else if(k.endsWith('$')) {
+          throw new Error('Invalid Comparison ' + k)
         }
-      }
-      // special case
-      if ('sort' == type && 1 < cmps.length) {
-        throw new Error(
-          'Only one condition per sortkey: ' + cmps.length + ' is given.'
-        )
       }
 
       return { cmps }
@@ -534,18 +527,24 @@ function make_intern() {
         listquery += ' WHERE '
 
         listquery += Object.keys(cq)
-          .map((k, i) => {
-            let cq_k = isarr(cq[k]) ? cq[k] : [cq[k]]
+          .map((k) => {
+            let cq_k = isarr(cq[k]) ? cq[k] : [ cq[k] ]
 
             return (
               '(' +
               cq_k
-                .map((v, j) => {
-                  params.push({
-                    name: '@i' + i + j,
-                    value: v,
-                  })
-                  return co.name + '.' + k + ' = ' + '@' + ('i' + i + j)
+                .map((v, i) => {
+                  let cq_cmp = intern.build_cmps(v, k)
+                  return cq_cmp
+                    .cmps
+                    .map((c, j) => {
+                      params.push({
+                        name: '@' + k + i + j,
+                        value: c.v,
+                      })
+                      return co.name + '.' + k + ` ${c.cmpop} ` + '@' + (k + i + j)
+                    })
+                    .join(' AND ')
                 })
                 .join(' OR ') +
               ')'
@@ -559,15 +558,24 @@ function make_intern() {
           1: 'ASC',
           '-1': 'DESC',
         }
-
-        if (typeof q.sort$ == 'object') {
-          for (let k in q.sort$) {
+        
+        if ('object' !== typeof q.sort$) {
+          throw new Error("Invalid sort$")
+        }
+        
+        listquery += ' ORDER BY '
+        listquery +=
+          Object.keys(q.sort$).map(k => {
             let order = sort_order[q.sort$[k]]
             if (null != order) {
-              listquery += ' ORDER BY ' + co.name + '.' + k + ' ' + order
+              return co.name + '.' + k + ' ' + order
             }
-          }
-        }
+            else {
+              throw new Error("Invalid sort$ order")
+            }
+        
+          }).join(', ')
+          
       }
 
       listreq.query = listquery
@@ -578,15 +586,23 @@ function make_intern() {
 
       async function do_list(args) {
         const container = await intern.load_container(co.name, ctx, reply)
-        let out_list = []
-        const { resources } = await container.items.query(listreq).fetchAll()
+        if (1 < Object.keys(q.sort$ || {}).length) {
+          // TODO: update compositeIndexes
+        }
+        
+        try {
+          const { resources } = await container.items.query(listreq).fetchAll()
 
-        out_list = resources.map((resource) =>
-          qent.make$(intern.outbound(ctx, qent, resource))
-        )
+          let out_list = resources.map((resource) =>
+            qent.make$(intern.outbound(ctx, qent, resource))
+          )
 
-        reply(null, out_list)
+          reply(null, out_list)
+        } catch(err) {
+          reply(err, null)
+        }
       }
+      
     },
 
     inbound: function (ctx, ent, data) {
