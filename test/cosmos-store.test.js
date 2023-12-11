@@ -258,7 +258,7 @@ lab.test('simple sort', async () => {
   expect(list.map((e) => e.is2)).equal(
     Array(9)
       .fill()
-      .map((v, i) => Math.abs(i - 9))
+      .map((v, i) => 9 - i )
   )
 
   // combine
@@ -268,7 +268,61 @@ lab.test('simple sort', async () => {
   expect(list.map((e) => e.is2)).equal([1, 4])
 
   // clear
-  si.entity('query02').remove$({ all$: true })
+  await si.entity('query02').remove$({ all$: true })
+})
+
+lab.test('double sort', async () => {
+  const plugin = {}
+
+  const si = make_seneca({ plugin })
+
+  lab.before(() => si.ready())
+  
+  await generate_entries(si, 'query03',
+    [
+      { id$: 'q0', firstName: 'John', lastName: 'Doe', age: 30 },
+      { id$: 'q1', firstName: 'Alice', lastName: 'Smith', age: 25 },
+      { id$: 'q2', firstName: 'Bob', lastName: 'Johnson', age: 35 },
+      { id$: 'q3', firstName: 'John', lastName: 'Smith', age: 28 },
+      { id$: 'q4', firstName: 'Alice', lastName: 'Doe', age: 32 },
+      { id$: 'q5', firstName: 'Bob', lastName: 'Doe', age: 22 },
+    ])
+  
+  let list = await si.entity('query03')
+    .list$({ sort$: { firstName: 1, lastName: -1 } })
+  
+  // console.log("LIST: ", list)
+  expect(list.map((e) => ({ firstName: e.firstName, lastName: e.lastName })))
+    .equal([
+      {
+        firstName: 'Alice',
+        lastName: 'Smith'
+      },
+      {
+        firstName: 'Alice',
+        lastName: 'Doe'
+      },
+      {
+        firstName: 'Bob',
+        lastName: 'Johnson'
+      },
+      {
+        firstName: 'Bob',
+        lastName: 'Doe'
+      },
+      {
+        firstName: 'John',
+        lastName: 'Smith'
+      },
+      {
+        firstName: 'John',
+        lastName: 'Doe'
+      },
+    ])
+    
+  // clear
+  await si.entity('query03').remove$({ all$: true })
+  
 })
 
 lab.test('comparison-query', async () => {

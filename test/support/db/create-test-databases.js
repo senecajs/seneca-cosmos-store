@@ -93,6 +93,21 @@ const dbs = [
 
       {
         id: 'query03',
+        indexingPolicy: {
+          includedPaths: [ { "path": "/*" } ],
+          compositeIndexes: [
+            [
+              {
+                "path": "/firstName",
+                "order": "ascending"
+              },
+              {
+                "path": "/lastName",
+                "order": "descending",
+              }
+            ]
+          ]
+        },
         partitionKey,
       },
 
@@ -116,9 +131,27 @@ async function create_db(db, codb, opts = {}) {
     const { database } = await codb.databases.createIfNotExists(db)
     for(let conConfig of co) {
       try {
+        let indexingPolicy = null
+        if (conConfig.indexingPolicy) {
+          indexingPolicy = conConfig.indexingPolicy
+          delete conConfig.indexingPolicy
+        }
+
         const {
           container
         } = await database.containers.createIfNotExists(conConfig)
+
+        // TODO: do this within the plugin itself
+        // Right now - getting:
+        // This query requires a composite index on ORDER BY attributes. The composite index is currently being built.
+        if (indexingPolicy) {
+          await container.replace({
+            id: container.id,
+            ...conConfig,
+            indexingPolicy,
+          })
+        }
+
         if (opts.verbose) {
           console.log(`Database "${db.id}" with container "${container.id}" has been created successfully.`)
         }

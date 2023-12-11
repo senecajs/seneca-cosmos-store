@@ -586,6 +586,10 @@ function make_intern() {
 
       async function do_list(args) {
         const container = await intern.load_container(co.name, ctx, reply)
+        if (1 < Object.keys(q.sort$ || {}).length) {
+          // TODO: update compositeIndexes
+        }
+        
         try {
           const { resources } = await container.items.query(listreq).fetchAll()
 
