@@ -543,7 +543,12 @@ function make_intern() {
                         value: c.v,
                       })
                       return (
-                        co.name + '["' + k + `"] ${c.cmpop} ` + '@' + (k + i + j)
+                        co.name +
+                        '["' +
+                        k +
+                        `"] ${c.cmpop} ` +
+                        '@' +
+                        (k + i + j)
                       )
                     })
                     .join(' AND ')
@@ -579,7 +584,7 @@ function make_intern() {
       }
 
       listreq.query = listquery
-      
+
       // console.log('list_req: ', listreq ) // , q, co)
 
       do_list()

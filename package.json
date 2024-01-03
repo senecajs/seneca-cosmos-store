@@ -1,7 +1,7 @@
 {
   "name": "@seneca/cosmos-store",
   "description": "CosmosDB store for Seneca",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [
     "seneca",
     "cosmos",
