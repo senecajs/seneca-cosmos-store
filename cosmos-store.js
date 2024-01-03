@@ -543,7 +543,7 @@ function make_intern() {
                         value: c.v,
                       })
                       return (
-                        co.name + '.' + k + ` ${c.cmpop} ` + '@' + (k + i + j)
+                        co.name + '["' + k + `"] ${c.cmpop} ` + '@' + (k + i + j)
                       )
                     })
                     .join(' AND ')
@@ -570,7 +570,7 @@ function make_intern() {
           .map((k) => {
             let order = sort_order[q.sort$[k]]
             if (null != order) {
-              return co.name + '.' + k + ' ' + order
+              return co.name + '["' + k + '"] ' + order
             } else {
               throw new Error('Invalid sort$ order')
             }
@@ -579,7 +579,7 @@ function make_intern() {
       }
 
       listreq.query = listquery
-
+      
       // console.log('list_req: ', listreq ) // , q, co)
 
       do_list()

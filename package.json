@@ -43,7 +43,7 @@
   "contributors": [
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "devDependencies": {
     "@azure/cosmos": "^4.0.0",

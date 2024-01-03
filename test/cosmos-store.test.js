@@ -231,15 +231,15 @@ lab.describe('simple-sort-query-test', () => {
 
   lab.test('generate_entries', async () => {
     await generate_entries(si, 'query02', [
-      { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
-      { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10 },
-      { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10 },
-      { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 8, d: 10 },
-      { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 7, d: 10 },
-      { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 6, d: 10 },
-      { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
-      { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
-      { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13 },
+      { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10, when: 0 },
+      { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10 , when: 1},
+      { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10, when: 2 },
+      { id$: 'q2', sk1: 'b', ip2: 'B', ip3: 'AA', is2: 8, d: 10, when: 3 },
+      { id$: 'q4', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 7, d: 10, when: 4 },
+      { id$: 'q5', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 6, d: 10, when: 5 },
+      { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12, when: 6 },
+      { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11, when: 7 },
+      { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13, when: 8 },
     ])
   })
 
@@ -252,6 +252,18 @@ lab.describe('simple-sort-query-test', () => {
         .fill()
         .map((v, i) => i + 1)
     )
+  })
+  
+  lab.test('reserved keyword as field name', async () => {
+    q = { sort$: { when: 1 } }
+    list = await si.entity('query02').list$({sort$: { when : 1 }})
+    
+    expect(list.map((e) => e.when)).equal(
+      Array(9)
+        .fill()
+        .map((v, i) => i)
+    )
+    
   })
 
   lab.test('DESC sort$: -1', async () => {
