@@ -217,18 +217,18 @@ function make_intern() {
         },
 
         save: function (msg, reply) {
-          var seneca = this
-          var ent = msg.ent
+          let seneca = this
+          let ent = msg.ent
 
-          var update = null != ent.id
-          var co = intern.get_container(ent, ctx)
-          var data = ent.data$(false)
+          let update = null != ent.id
+          let co = intern.get_container(ent, ctx)
+          let data = ent.data$(false)
 
-          var item = data
+          let item = data
 
           // console.log('save ent: ', ent, co)
           // console.log('data: ', data)
-          var q = msg.q || {}
+          let q = msg.q || {}
 
           // console.log(ent.id, opts.generate_id(ent))
           if (!update) {
@@ -238,7 +238,7 @@ function make_intern() {
               new_id = opts.generate_id(ent)
             }
 
-            data.id = new_id
+            ent.id = data.id = new_id
           }
 
           do_upsert(ctx)
