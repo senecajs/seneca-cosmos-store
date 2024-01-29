@@ -277,15 +277,15 @@ function make_intern() {
         },
 
         load: function (msg, reply) {
-          var seneca = this
-          var qent = msg.qent
-          var q = msg.q
+          let seneca = this
+          let qent = msg.qent
+          let q = msg.q
           // const ti = intern.get_table(qent, ctx)
           // console.log('TI', ti)
 
-          var qid = q.id
+          let qid = q.id
 
-          var co = intern.get_container(qent, ctx)
+          let co = intern.get_container(qent, ctx)
           // console.log(q)
 
           if (null == qid) {
@@ -314,26 +314,26 @@ function make_intern() {
         },
 
         list: function (msg, reply) {
-          var seneca = this
-          var qent = msg.qent
-          var q = msg.q
+          let seneca = this
+          let qent = msg.qent
+          let q = msg.q
 
-          var co = intern.get_container(qent, ctx)
+          let co = intern.get_container(qent, ctx)
 
           intern.listent(ctx, seneca, qent, co, q, reply)
         },
 
         remove: function (msg, reply) {
-          var seneca = this
+          let seneca = this
           // console.log('REMOVE MSG', msg)
 
-          var qent = msg.qent
-          var q = msg.q
+          let qent = msg.qent
+          let q = msg.q
 
           let co = intern.get_container(qent, ctx)
 
-          var all = true === q.all$
-          var load = true === q.load$
+          let all = true === q.all$
+          let load = true === q.load$
 
           let qid = q.id
 
@@ -494,7 +494,7 @@ function make_intern() {
       let listquery = 'SELECT'
       // let queryspec = {}
 
-      var isarr = Array.isArray
+      let isarr = Array.isArray
 
       if (isarr(q) || 'object' != typeof q) {
         q = { id: q }
@@ -615,10 +615,10 @@ function make_intern() {
       let entity_options = intern.entity_options(ent, ctx)
 
       if (entity_options) {
-        var fields = entity_options.fields || {}
+        let fields = entity_options.fields || {}
         Object.keys(fields).forEach((fn) => {
-          var fs = fields[fn] || {}
-          var type = fs.type
+          let fs = fields[fn] || {}
+          let type = fs.type
           if ('date' === type && data[fn] instanceof Date) {
             data[fn] = data[fn].toISOString()
           }
@@ -641,10 +641,10 @@ function make_intern() {
       }
 
       if (entity_options) {
-        var fields = entity_options.fields || {}
+        let fields = entity_options.fields || {}
         Object.keys(fields).forEach((fn) => {
-          var fs = fields[fn] || {}
-          var type = fs.type
+          let fs = fields[fn] || {}
+          let type = fs.type
           if ('date' === type && 'string' === typeof data[fn]) {
             data[fn] = new Date(data[fn])
           }
