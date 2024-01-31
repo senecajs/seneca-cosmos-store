@@ -215,6 +215,11 @@ lab.test('special-query', async () => {
   list = await si.entity('query01').list$(q)
   // console.log('Q', q, list)
   expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2'])
+  
+  let foo0 = await si.entity('foo')
+  await foo0.save$({ d:12 })
+  expect(foo0.id, 'entity id exists').exists()
+  
 
   // console.log('END')
 })
