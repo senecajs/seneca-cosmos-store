@@ -52,12 +52,6 @@ function make_seneca(config) {
     )
 }
 
-async function generate_entries(si, q_name, entries) {
-  for (let entry of entries) {
-    await si.entity(q_name).save$(entry)
-  }
-}
-
 /*
 let containerConfig = {
 
@@ -100,8 +94,8 @@ lab.test('no-dups', async () => {
   si.quiet()
 
   let list = await si.entity('uniq01').list$()
-  for (let entry of list) {
-    await entry.remove$()
+  for (let item of list) {
+    await item.remove$()
   }
 
   let a0 = await si.entity('uniq01').save$({ id$: 'a0', x: 1, d: Date.now() })
@@ -127,12 +121,12 @@ lab.test('special-query', async () => {
 
   // console.log('FIRST',await si.entity('query01').load$({id:'q0',sk0:'a'}))
 
-  let list = await si.entity('query01').list$({})
+  let list = await si.entity('query01').list$()
   // console.log('EXISTING', list)
 
-  for (let entry of list) {
+  for (let item of list) {
     // console.log('REMOVE', list)
-    await entry.remove$({ id: entry.id, sk0: entry.sk0 })
+    await item.remove$({ id: item.id, sk0: item.sk0 })
   }
 
   await si
@@ -233,8 +227,8 @@ lab.describe('simple-sort-query-test', () => {
   let q = {}
   let list = []
 
-  lab.test('generate_entries', async () => {
-    await generate_entries(si, 'query02', [
+  lab.test('generate items', async () => {
+   [
       { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10, when: 0 },
       { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10, when: 1 },
       { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10, when: 2 },
@@ -244,7 +238,8 @@ lab.describe('simple-sort-query-test', () => {
       { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12, when: 6 },
       { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11, when: 7 },
       { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13, when: 8 },
-    ])
+    ].forEach( async (item) => await si.entity('query02').save$(item) )
+    
   })
 
   lab.test('ASC sort$: 1', async () => {
@@ -299,16 +294,18 @@ lab.test('double sort', async () => {
 
   lab.before(() => si.ready())
 
-  await generate_entries(si, 'query03', [
+  let list = [
     { id$: 'q0', firstName: 'John', lastName: 'Doe', age: 30 },
     { id$: 'q1', firstName: 'Alice', lastName: 'Smith', age: 25 },
     { id$: 'q2', firstName: 'Bob', lastName: 'Johnson', age: 35 },
     { id$: 'q3', firstName: 'John', lastName: 'Smith', age: 28 },
     { id$: 'q4', firstName: 'Alice', lastName: 'Doe', age: 32 },
     { id$: 'q5', firstName: 'Bob', lastName: 'Doe', age: 22 },
-  ])
+  ]
+  
+  list.forEach( async (item) => await si.entity('query03').save$(item) )
 
-  let list = await si
+  list = await si
     .entity('query03')
     .list$({ sort$: { firstName: 1, lastName: -1 } })
 
@@ -355,17 +352,17 @@ lab.describe('comparison-query-test', () => {
   let q = {}
   let list = []
 
-  lab.test('generate_entries', async () => {
+  lab.test('generate items', async () => {
     q = {}
     list = await si.entity('query02').list$(q)
 
-    for (let entry of list) {
+    for (let item of list) {
       // console.log('REMOVE', list)
-      await entry.remove$({ id: entry.id, sk1: entry.sk1 })
+      await item.remove$({ id: item.id, sk1: item.sk1 })
     }
 
-    // generate entries for cmpops test
-    await generate_entries(si, 'query02', [
+    // generate items for cmpops test
+    [
       { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
       { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 0, d: 10 },
       { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
@@ -375,7 +372,8 @@ lab.describe('comparison-query-test', () => {
       { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
       { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
       { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 1, d: 13 },
-    ])
+    ].forEach( async (item) => await si.entity('query02').save$(item) )
+    
   })
 
   lab.test('lt$', async () => {
