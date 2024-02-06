@@ -228,7 +228,7 @@ lab.describe('simple-sort-query-test', () => {
   let list = []
 
   lab.test('generate items', async () => {
-   [
+   list = [
       { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10, when: 0 },
       { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 4, d: 10, when: 1 },
       { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 9, d: 10, when: 2 },
@@ -238,7 +238,11 @@ lab.describe('simple-sort-query-test', () => {
       { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12, when: 6 },
       { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11, when: 7 },
       { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 5, d: 13, when: 8 },
-    ].forEach( async (item) => await si.entity('query02').save$(item) )
+    ]
+    
+    for(let item of list) {
+      await si.entity('query02').save$(item)
+    }
     
   })
 
@@ -303,7 +307,9 @@ lab.test('double sort', async () => {
     { id$: 'q5', firstName: 'Bob', lastName: 'Doe', age: 22 },
   ]
   
-  list.forEach( async (item) => await si.entity('query03').save$(item) )
+  for(let item of list) {
+    await si.entity('query03').save$(item)
+  }
 
   list = await si
     .entity('query03')
@@ -362,7 +368,7 @@ lab.describe('comparison-query-test', () => {
     }
 
     // generate items for cmpops test
-    [
+    list = [
       { id$: 'q3', sk1: 'c', ip2: 'C', ip3: 'AA', is2: 1, d: 10 },
       { id$: 'q0', sk1: 'a', ip2: 'A', ip3: 'AA', is2: 0, d: 10 },
       { id$: 'q1', sk1: 'a', ip2: 'B', ip3: 'AA', is2: 0, d: 10 },
@@ -372,7 +378,11 @@ lab.describe('comparison-query-test', () => {
       { id$: 'q7', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 3, d: 12 },
       { id$: 'q6', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 2, d: 11 },
       { id$: 'q8', sk1: 'c', ip2: 'C', ip3: 'BB', is2: 1, d: 13 },
-    ].forEach( async (item) => await si.entity('query02').save$(item) )
+    ]
+    
+    for(let item of list) {
+      await si.entity('query02').save$(item)
+    }
     
   })
 
