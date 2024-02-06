@@ -128,26 +128,22 @@ lab.test('special-query', async () => {
     // console.log('REMOVE', list)
     await item.remove$({ id: item.id, sk0: item.sk0 })
   }
-
-  await si
-    .entity('query01')
-    .save$({ id$: 'q0', sk0: 'a', ip0: 'A', ip1: 'AA', is1: 0, d: 10 })
-
-  await si
-    .entity('query01')
-    .save$({ id$: 'q1', sk0: 'a', ip0: 'B', ip1: 'AA', is1: 0, d: 10 })
-  await si
-    .entity('query01')
-    .save$({ id$: 'q2', sk0: 'b', ip0: 'B', ip1: 'AA', is1: 0, d: 10 })
-  await si
-    .entity('query01')
-    .save$({ id$: 'q3', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 1, d: 10 })
-  await si
-    .entity('query01')
-    .save$({ id$: 'q4', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 2, d: 10 })
-  await si
-    .entity('query01')
-    .save$({ id$: 'q5', sk0: 'c', ip0: 'C', ip1: 'BB', is1: 0, d: 10 })
+  
+  list = [
+    { id$: 'q0', sk0: 'a', ip0: 'A', ip1: 'AA', is1: 0, d: 10 },
+    { id$: 'q1', sk0: 'a', ip0: 'B', ip1: 'AA', is1: 0, d: 10 },
+    { id$: 'q2', sk0: 'b', ip0: 'B', ip1: 'AA', is1: 0, d: 10 },
+    { id$: 'q3', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 1, d: 10 },
+    { id$: 'q4', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 2, d: 10 },
+    { id$: 'q5', sk0: 'c', ip0: 'C', ip1: 'BB', is1: 0, d: 10 }
+  ]
+  
+  for(let item of list) {
+    await si
+      .entity('query01')
+      .data$(item)
+      .save$()
+  }
 
   list = await si.entity('query01').list$()
   // console.log('ALL', list)
