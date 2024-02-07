@@ -550,8 +550,8 @@
       <div class="stats high">
           <div class="failures">0</div>
           <div class="skipped">0</div>
-          <div class="test-count">73</div>
-          <div class="duration">20137</div>
+          <div class="test-count">76</div>
+          <div class="duration">18183</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -559,6 +559,8 @@
           <input type="checkbox" checked="" onchange="filter(this)" value="failure" id="show-failure">
           <label for="show-failure">Show Failure</label>
           <br>
+          <input type="checkbox" checked="" onchange="filter(this)" value="special-query" id="show-special-query">
+          <label for="show-special-query">special-query</label>
           <input type="checkbox" checked="" onchange="filter(this)" value="simple-sort-query-test" id="show-simple-sort-query-test">
           <label for="show-simple-sort-query-test">simple-sort-query-test</label>
           <input type="checkbox" checked="" onchange="filter(this)" value="comparison-query-test" id="show-comparison-query-test">
@@ -609,500 +611,521 @@
               <td class="test-title">happy
                   
               </td>
-              <td class="test-duration">302</td>
+              <td class="test-duration">316</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">3</td>
               <td class="test-title">no-dups
                   
               </td>
-              <td class="test-duration">431</td>
+              <td class="test-duration">376</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">4</td>
-              <td class="test-title">special-query
-                  
-              </td>
-              <td class="test-duration">864</td>
-          </tr>
-          <tr class="show  success">
-              <td class="test-id">5</td>
               <td class="test-title">double sort
                   
               </td>
-              <td class="test-duration">604</td>
+              <td class="test-duration">527</td>
+          </tr>
+          <tr class="show  success">
+              <td class="test-id">5</td>
+              <td class="test-title">invalid-operators
+                  
+              </td>
+              <td class="test-duration">81</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">6</td>
-              <td class="test-title">invalid-operators
+              <td class="test-title">injection-fails
+                  
+              </td>
+              <td class="test-duration">347</td>
+          </tr>
+          <tr class="show  success">
+              <td class="test-id">7</td>
+              <td class="test-title">export
+                  
+              </td>
+              <td class="test-duration">158</td>
+          </tr>
+          <tr class="show  success">
+              <td class="test-id">8</td>
+              <td class="test-title">store-core
+                  
+              </td>
+              <td class="test-duration">375</td>
+          </tr>
+          <tr class="show  success">
+              <td class="test-id">9</td>
+              <td class="test-title">store-load
                   
               </td>
               <td class="test-duration">112</td>
           </tr>
           <tr class="show  success">
-              <td class="test-id">7</td>
-              <td class="test-title">injection-fails
+              <td class="test-id">10</td>
+              <td class="test-title">store-save
                   
               </td>
-              <td class="test-duration">418</td>
+              <td class="test-duration">180</td>
           </tr>
           <tr class="show  success">
-              <td class="test-id">8</td>
-              <td class="test-title">export
+              <td class="test-id">11</td>
+              <td class="test-title">custom-table
                   
               </td>
               <td class="test-duration">156</td>
           </tr>
-          <tr class="show  success">
-              <td class="test-id">9</td>
-              <td class="test-title">store-core
-                  
-              </td>
-              <td class="test-duration">258</td>
-          </tr>
-          <tr class="show  success">
-              <td class="test-id">10</td>
-              <td class="test-title">store-load
-                  
-              </td>
-              <td class="test-duration">117</td>
-          </tr>
-          <tr class="show  success">
-              <td class="test-id">11</td>
-              <td class="test-title">store-save
-                  
-              </td>
-              <td class="test-duration">246</td>
-          </tr>
-          <tr class="show  success">
+          <tr class="show special-query success">
               <td class="test-id">12</td>
-              <td class="test-title">custom-table
+              <td class="test-title">special-query clear
                   
               </td>
-              <td class="test-duration">146</td>
+              <td class="test-duration">322</td>
           </tr>
-          <tr class="show simple-sort-query-test success">
+          <tr class="show special-query success">
               <td class="test-id">13</td>
-              <td class="test-title">simple-sort-query-test generate_entries
+              <td class="test-title">special-query generate items
                   
               </td>
-              <td class="test-duration">325</td>
+              <td class="test-duration">143</td>
           </tr>
-          <tr class="show simple-sort-query-test success">
+          <tr class="show special-query success">
               <td class="test-id">14</td>
-              <td class="test-title">simple-sort-query-test ASC sort$: 1
+              <td class="test-title">special-query query
                   
               </td>
-              <td class="test-duration">163</td>
+              <td class="test-duration">96</td>
           </tr>
-          <tr class="show simple-sort-query-test success">
+          <tr class="show special-query success">
               <td class="test-id">15</td>
-              <td class="test-title">simple-sort-query-test reserved keyword as field name
+              <td class="test-title">special-query entity id exists
                   
               </td>
-              <td class="test-duration">123</td>
+              <td class="test-duration">20</td>
           </tr>
           <tr class="show simple-sort-query-test success">
               <td class="test-id">16</td>
-              <td class="test-title">simple-sort-query-test DESC sort$: -1
+              <td class="test-title">simple-sort-query-test generate items
                   
               </td>
-              <td class="test-duration">148</td>
+              <td class="test-duration">431</td>
           </tr>
           <tr class="show simple-sort-query-test success">
               <td class="test-id">17</td>
-              <td class="test-title">simple-sort-query-test combine sort$, limit$
+              <td class="test-title">simple-sort-query-test ASC sort$: 1
                   
               </td>
-              <td class="test-duration">134</td>
+              <td class="test-duration">156</td>
           </tr>
           <tr class="show simple-sort-query-test success">
               <td class="test-id">18</td>
+              <td class="test-title">simple-sort-query-test reserved keyword as field name
+                  
+              </td>
+              <td class="test-duration">159</td>
+          </tr>
+          <tr class="show simple-sort-query-test success">
+              <td class="test-id">19</td>
+              <td class="test-title">simple-sort-query-test DESC sort$: -1
+                  
+              </td>
+              <td class="test-duration">162</td>
+          </tr>
+          <tr class="show simple-sort-query-test success">
+              <td class="test-id">20</td>
+              <td class="test-title">simple-sort-query-test combine sort$, limit$
+                  
+              </td>
+              <td class="test-duration">154</td>
+          </tr>
+          <tr class="show simple-sort-query-test success">
+              <td class="test-id">21</td>
               <td class="test-title">simple-sort-query-test clear
                   
               </td>
-              <td class="test-duration">221</td>
+              <td class="test-duration">277</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">19</td>
-              <td class="test-title">comparison-query-test generate_entries
+              <td class="test-id">22</td>
+              <td class="test-title">comparison-query-test generate items
                   
               </td>
-              <td class="test-duration">395</td>
+              <td class="test-duration">376</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">20</td>
+              <td class="test-id">23</td>
               <td class="test-title">comparison-query-test lt$
                   
               </td>
-              <td class="test-duration">10</td>
+              <td class="test-duration">9</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">21</td>
+              <td class="test-id">24</td>
               <td class="test-title">comparison-query-test eq$
                   
               </td>
               <td class="test-duration">10</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">22</td>
+              <td class="test-id">25</td>
               <td class="test-title">comparison-query-test combine gt$, eq$, gte$
                   
               </td>
               <td class="test-duration">10</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">23</td>
+              <td class="test-id">26</td>
               <td class="test-title">comparison-query-test DESC combine with sort$: -1
                   
               </td>
-              <td class="test-duration">121</td>
+              <td class="test-duration">132</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">24</td>
+              <td class="test-id">27</td>
               <td class="test-title">comparison-query-test ASC combine with sort$: 1
                   
               </td>
-              <td class="test-duration">163</td>
+              <td class="test-duration">164</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">25</td>
+              <td class="test-id">28</td>
               <td class="test-title">comparison-query-test more complicated tests
                   
               </td>
-              <td class="test-duration">527</td>
+              <td class="test-duration">523</td>
           </tr>
           <tr class="show comparison-query-test success">
-              <td class="test-id">26</td>
+              <td class="test-id">29</td>
               <td class="test-title">comparison-query-test clear
                   
               </td>
-              <td class="test-duration">251</td>
+              <td class="test-duration">204</td>
           </tr>
           <tr class="show legacy-store-test store-keyvalue success">
-              <td class="test-id">27</td>
+              <td class="test-id">30</td>
               <td class="test-title">legacy-store-test store-keyvalue save-load-auto-id
                   
               </td>
-              <td class="test-duration">572</td>
+              <td class="test-duration">303</td>
           </tr>
           <tr class="show legacy-store-test store-keyvalue success">
-              <td class="test-id">28</td>
+              <td class="test-id">31</td>
               <td class="test-title">legacy-store-test store-keyvalue save-load-given-id
                   
               </td>
-              <td class="test-duration">182</td>
+              <td class="test-duration">145</td>
           </tr>
           <tr class="show legacy-store-test store-keyvalue success">
-              <td class="test-id">29</td>
+              <td class="test-id">32</td>
               <td class="test-title">legacy-store-test store-keyvalue remove
                   
               </td>
-              <td class="test-duration">84</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">30</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should load an entity qqq
-                  
-              </td>
-              <td class="test-duration">9</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">31</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should return null for non existing entity
-                  
-              </td>
-              <td class="test-duration">9</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">32</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should support filtering
-                  
-              </td>
-              <td class="test-duration">9</td>
+              <td class="test-duration">88</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
               <td class="test-id">33</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should filter with AND
+              <td class="test-title">legacy-store-test Basic Tests Load should load an entity qqq
                   
               </td>
-              <td class="test-duration">9</td>
+              <td class="test-duration">40</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
               <td class="test-id">34</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should filter with AND 2
+              <td class="test-title">legacy-store-test Basic Tests Load should return null for non existing entity
                   
               </td>
-              <td class="test-duration">9</td>
+              <td class="test-duration">41</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
               <td class="test-id">35</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should support different attribute types
+              <td class="test-title">legacy-store-test Basic Tests Load should support filtering
                   
               </td>
-              <td class="test-duration">9</td>
+              <td class="test-duration">44</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
               <td class="test-id">36</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should filter with AND
+                  
+              </td>
+              <td class="test-duration">38</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">37</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should filter with AND 2
+                  
+              </td>
+              <td class="test-duration">31</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">38</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should support different attribute types
+                  
+              </td>
+              <td class="test-duration">28</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">39</td>
               <td class="test-title">legacy-store-test Basic Tests Load should not mix attributes from entity to query for filtering
+                  
+              </td>
+              <td class="test-duration">11</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Load success">
+              <td class="test-id">40</td>
+              <td class="test-title">legacy-store-test Basic Tests Load should reload current entity if no query provided and id present
                   
               </td>
               <td class="test-duration">8</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">37</td>
-              <td class="test-title">legacy-store-test Basic Tests Load should reload current entity if no query provided and id present
-                  
-              </td>
-              <td class="test-duration">10</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Load success">
-              <td class="test-id">38</td>
+              <td class="test-id">41</td>
               <td class="test-title">legacy-store-test Basic Tests Load should do nothing if no query provided and id not present
                   
               </td>
-              <td class="test-duration">1</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">39</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should save an entity to store (and generate an id)
-                  
-              </td>
-              <td class="test-duration">60</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">40</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should save an entity to store (with provided id)
-                  
-              </td>
-              <td class="test-duration">59</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">41</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
-                  
-              </td>
-              <td class="test-duration">28</td>
+              <td class="test-duration">0</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Save success">
               <td class="test-id">42</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
-                  
-              </td>
-              <td class="test-duration">119</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">43</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should save an entity if id provided but original doesn&#x27;t exist
-                  
-              </td>
-              <td class="test-duration">102</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">44</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should support different attribute types
-                  
-              </td>
-              <td class="test-duration">62</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">45</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should allow dublicate attributes
-                  
-              </td>
-              <td class="test-duration">77</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">46</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should not save modifications to entity after save completes
-                  
-              </td>
-              <td class="test-duration">52</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">47</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should not backport modification to saved entity to the original one
-                  
-              </td>
-              <td class="test-duration">12</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save success">
-              <td class="test-id">48</td>
-              <td class="test-title">legacy-store-test Basic Tests Save should clear an attribute if &#x3D; null
-                  
-              </td>
-              <td class="test-duration">139</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save when_the_id$_arg_passed_to_#save$_is_undefined success">
-              <td class="test-id">49</td>
-              <td class="test-title">legacy-store-test Basic Tests Save when the id$ arg passed to #save$ is undefined should generate a new id and save the entity
-                  
-              </td>
-              <td class="test-duration">78</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save when_the_id$_arg_passed_to_#save$_is_null success">
-              <td class="test-id">50</td>
-              <td class="test-title">legacy-store-test Basic Tests Save when the id$ arg passed to #save$ is null should generate a new id and save the entity
-                  
-              </td>
-              <td class="test-duration">24</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save when_the_provided_id_is_null success">
-              <td class="test-id">51</td>
-              <td class="test-title">legacy-store-test Basic Tests Save when the provided id is null should generate a new id and save the entity
-                  
-              </td>
-              <td class="test-duration">19</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Save when_the_provided_id_is_undefined success">
-              <td class="test-id">52</td>
-              <td class="test-title">legacy-store-test Basic Tests Save when the provided id is undefined should generate a new id and save the entity
+              <td class="test-title">legacy-store-test Basic Tests Save should save an entity to store (and generate an id)
                   
               </td>
               <td class="test-duration">87</td>
           </tr>
-          <tr class="show legacy-store-test Basic_Tests List success">
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">43</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should save an entity to store (with provided id)
+                  
+              </td>
+              <td class="test-duration">61</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">44</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
+                  
+              </td>
+              <td class="test-duration">116</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">45</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should update an entity if id provided
+                  
+              </td>
+              <td class="test-duration">37</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">46</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should save an entity if id provided but original doesn&#x27;t exist
+                  
+              </td>
+              <td class="test-duration">27</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">47</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should support different attribute types
+                  
+              </td>
+              <td class="test-duration">90</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">48</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should allow dublicate attributes
+                  
+              </td>
+              <td class="test-duration">87</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">49</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should not save modifications to entity after save completes
+                  
+              </td>
+              <td class="test-duration">21</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">50</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should not backport modification to saved entity to the original one
+                  
+              </td>
+              <td class="test-duration">21</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save success">
+              <td class="test-id">51</td>
+              <td class="test-title">legacy-store-test Basic Tests Save should clear an attribute if &#x3D; null
+                  
+              </td>
+              <td class="test-duration">51</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save when_the_id$_arg_passed_to_#save$_is_undefined success">
+              <td class="test-id">52</td>
+              <td class="test-title">legacy-store-test Basic Tests Save when the id$ arg passed to #save$ is undefined should generate a new id and save the entity
+                  
+              </td>
+              <td class="test-duration">30</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save when_the_id$_arg_passed_to_#save$_is_null success">
               <td class="test-id">53</td>
+              <td class="test-title">legacy-store-test Basic Tests Save when the id$ arg passed to #save$ is null should generate a new id and save the entity
+                  
+              </td>
+              <td class="test-duration">20</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save when_the_provided_id_is_null success">
+              <td class="test-id">54</td>
+              <td class="test-title">legacy-store-test Basic Tests Save when the provided id is null should generate a new id and save the entity
+                  
+              </td>
+              <td class="test-duration">20</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Save when_the_provided_id_is_undefined success">
+              <td class="test-id">55</td>
+              <td class="test-title">legacy-store-test Basic Tests Save when the provided id is undefined should generate a new id and save the entity
+                  
+              </td>
+              <td class="test-duration">86</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests List success">
+              <td class="test-id">56</td>
               <td class="test-title">legacy-store-test Basic Tests List should load all elements if no params
                   
               </td>
               <td class="test-duration">10</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">54</td>
+              <td class="test-id">57</td>
               <td class="test-title">legacy-store-test Basic Tests List should load all elements if no params 2
                   
               </td>
               <td class="test-duration">8</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">55</td>
+              <td class="test-id">58</td>
               <td class="test-title">legacy-store-test Basic Tests List should load all elements if no query provided
                   
               </td>
-              <td class="test-duration">8</td>
+              <td class="test-duration">10</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">56</td>
+              <td class="test-id">59</td>
               <td class="test-title">legacy-store-test Basic Tests List should list entities by id
                   
               </td>
               <td class="test-duration">8</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">57</td>
+              <td class="test-id">60</td>
               <td class="test-title">legacy-store-test Basic Tests List should list entities by integer property
+                  
+              </td>
+              <td class="test-duration">10</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests List success">
+              <td class="test-id">61</td>
+              <td class="test-title">legacy-store-test Basic Tests List should list entities by string property
                   
               </td>
               <td class="test-duration">9</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">58</td>
-              <td class="test-title">legacy-store-test Basic Tests List should list entities by string property
-                  
-              </td>
-              <td class="test-duration">12</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">59</td>
+              <td class="test-id">62</td>
               <td class="test-title">legacy-store-test Basic Tests List should list entities by two properties
                   
               </td>
               <td class="test-duration">8</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">60</td>
+              <td class="test-id">63</td>
               <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (array)
                   
               </td>
               <td class="test-duration">8</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">61</td>
+              <td class="test-id">64</td>
               <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (single id)
+                  
+              </td>
+              <td class="test-duration">10</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests List success">
+              <td class="test-id">65</td>
+              <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (string)
                   
               </td>
               <td class="test-duration">8</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">62</td>
-              <td class="test-title">legacy-store-test Basic Tests List should support opaque ids (string)
-                  
-              </td>
-              <td class="test-duration">9</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">63</td>
+              <td class="test-id">66</td>
               <td class="test-title">legacy-store-test Basic Tests List should filter with AND
                   
               </td>
               <td class="test-duration">9</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests List success">
-              <td class="test-id">64</td>
+              <td class="test-id">67</td>
               <td class="test-title">legacy-store-test Basic Tests List should not mix attributes from entity to query for filtering
                   
               </td>
-              <td class="test-duration">9</td>
+              <td class="test-duration">10</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">65</td>
+              <td class="test-id">68</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete only an entity
                   
               </td>
-              <td class="test-duration">25</td>
+              <td class="test-duration">63</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">66</td>
+              <td class="test-id">69</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete all entities if all$ &#x3D; true
                   
               </td>
-              <td class="test-duration">45</td>
+              <td class="test-duration">37</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">67</td>
+              <td class="test-id">70</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete an entity by property
+                  
+              </td>
+              <td class="test-duration">123</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">71</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should delete entities filtered by AND
+                  
+              </td>
+              <td class="test-duration">20</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">72</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should return deleted entity if load$: true
+                  
+              </td>
+              <td class="test-duration">28</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">73</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should never return deleted entities if all$: true
+                  
+              </td>
+              <td class="test-duration">28</td>
+          </tr>
+          <tr class="show legacy-store-test Basic_Tests Remove success">
+              <td class="test-id">74</td>
+              <td class="test-title">legacy-store-test Basic Tests Remove should not delete current ent (only uses query)
                   
               </td>
               <td class="test-duration">27</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">68</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should delete entities filtered by AND
-                  
-              </td>
-              <td class="test-duration">60</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">69</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should return deleted entity if load$: true
-                  
-              </td>
-              <td class="test-duration">32</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">70</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should never return deleted entities if all$: true
-                  
-              </td>
-              <td class="test-duration">111</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">71</td>
-              <td class="test-title">legacy-store-test Basic Tests Remove should not delete current ent (only uses query)
-                  
-              </td>
-              <td class="test-duration">115</td>
-          </tr>
-          <tr class="show legacy-store-test Basic_Tests Remove success">
-              <td class="test-id">72</td>
+              <td class="test-id">75</td>
               <td class="test-title">legacy-store-test Basic Tests Remove should delete current entity if no query present
                   
               </td>
-              <td class="test-duration">28</td>
+              <td class="test-duration">29</td>
           </tr>
           <tr class="show legacy-store-test Basic_Tests Native success">
-              <td class="test-id">73</td>
+              <td class="test-id">76</td>
               <td class="test-title">legacy-store-test Basic Tests Native should prived direct access to the driver
                   
               </td>
@@ -2116,7 +2139,7 @@
                         </tr>            <tr id="cosmos-store.js__155" class="hit">
                           <td class="line" data-tooltip>155</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>423</td>
+                          <td class="hits" data-tooltip>439</td>
                           <td class="source">      let entopts &#x3D;</td>
                           
                         </tr>            <tr id="cosmos-store.js__156" class="hit">
@@ -2158,7 +2181,7 @@
                         </tr>            <tr id="cosmos-store.js__162" class="hit">
                           <td class="line" data-tooltip>162</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>423</td>
+                          <td class="hits" data-tooltip>439</td>
                           <td class="source">      intern.canon_ref[canonkey] &#x3D; entopts</td>
                           
                         </tr>            <tr id="cosmos-store.js__163" class="hit">
@@ -2170,7 +2193,7 @@
                         </tr>            <tr id="cosmos-store.js__164" class="hit">
                           <td class="line" data-tooltip>164</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>423</td>
+                          <td class="hits" data-tooltip>439</td>
                           <td class="source">      return entopts</td>
                           
                         </tr>            <tr id="cosmos-store.js__165" class="hit">
@@ -2224,7 +2247,7 @@
                         </tr>            <tr id="cosmos-store.js__173" class="hit">
                           <td class="line" data-tooltip>173</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>425</td>
+                          <td class="hits" data-tooltip>426</td>
                           <td class="source">      let canon &#x3D; ent.canon$({ object: true })</td>
                           
                         </tr>            <tr id="cosmos-store.js__174" class="hit">
@@ -2236,7 +2259,7 @@
                         </tr>            <tr id="cosmos-store.js__175" class="hit">
                           <td class="line" data-tooltip>175</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>425</td>
+                          <td class="hits" data-tooltip>426</td>
                           <td class="source">      container.name &#x3D; (null !&#x3D; canon.base ? canon.base + &#x27;_&#x27; : &#x27;&#x27;) + canon.name</td>
                           
                         </tr>            <tr id="cosmos-store.js__176" class="hit">
@@ -2248,7 +2271,7 @@
                         </tr>            <tr id="cosmos-store.js__177" class="hit">
                           <td class="line" data-tooltip>177</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>425</td>
+                          <td class="hits" data-tooltip>426</td>
                           <td class="source">      return container</td>
                           
                         </tr>            <tr id="cosmos-store.js__178" class="hit">
@@ -2284,7 +2307,7 @@
                         </tr>            <tr id="cosmos-store.js__183" class="hit">
                           <td class="line" data-tooltip>183</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>613</td>
+                          <td class="hits" data-tooltip>614</td>
                           <td class="source">      const containers &#x3D; intern.database.containers</td>
                           
                         </tr>            <tr id="cosmos-store.js__184" class="hit">
@@ -2296,7 +2319,7 @@
                         </tr>            <tr id="cosmos-store.js__185" class="hit">
                           <td class="line" data-tooltip>185</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>613</td>
+                          <td class="hits" data-tooltip>614</td>
                           <td class="source">      try {</td>
                           
                         </tr>            <tr id="cosmos-store.js__186" class="chunks">
@@ -2356,7 +2379,7 @@
                         </tr>            <tr id="cosmos-store.js__195" class="hit">
                           <td class="line" data-tooltip>195</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>613</td>
+                          <td class="hits" data-tooltip>614</td>
                           <td class="source">        return container</td>
                           
                         </tr>            <tr id="cosmos-store.js__196" class="hit">
@@ -3094,13 +3117,13 @@
                         </tr>            <tr id="cosmos-store.js__318" class="hit">
                           <td class="line" data-tooltip>318</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>61</td>
+                          <td class="hits" data-tooltip>62</td>
                           <td class="source">          let qent &#x3D; msg.qent</td>
                           
                         </tr>            <tr id="cosmos-store.js__319" class="hit">
                           <td class="line" data-tooltip>319</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>61</td>
+                          <td class="hits" data-tooltip>62</td>
                           <td class="source">          let q &#x3D; msg.q</td>
                           
                         </tr>            <tr id="cosmos-store.js__320" class="hit">
@@ -3112,7 +3135,7 @@
                         </tr>            <tr id="cosmos-store.js__321" class="hit">
                           <td class="line" data-tooltip>321</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>61</td>
+                          <td class="hits" data-tooltip>62</td>
                           <td class="source">          let co &#x3D; intern.get_container(qent, ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__322" class="hit">
@@ -3124,7 +3147,7 @@
                         </tr>            <tr id="cosmos-store.js__323" class="hit">
                           <td class="line" data-tooltip>323</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>61</td>
+                          <td class="hits" data-tooltip>62</td>
                           <td class="source">          intern.listent(ctx, seneca, qent, co, q, reply)</td>
                           
                         </tr>            <tr id="cosmos-store.js__324" class="hit">
@@ -4150,7 +4173,7 @@
                         </tr>            <tr id="cosmos-store.js__494" class="hit">
                           <td class="line" data-tooltip>494</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      let listquery &#x3D; &#x27;SELECT&#x27;</td>
                           
                         </tr>            <tr id="cosmos-store.js__495" class="hit">
@@ -4168,7 +4191,7 @@
                         </tr>            <tr id="cosmos-store.js__497" class="hit">
                           <td class="line" data-tooltip>497</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      let isarr &#x3D; Array.isArray</td>
                           
                         </tr>            <tr id="cosmos-store.js__498" class="hit">
@@ -4180,7 +4203,7 @@
                         </tr>            <tr id="cosmos-store.js__499" class="hit">
                           <td class="line" data-tooltip>499</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      if (isarr(q) || &#x27;object&#x27; !&#x3D; typeof q) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__500" class="hit">
@@ -4204,13 +4227,13 @@
                         </tr>            <tr id="cosmos-store.js__503" class="hit">
                           <td class="line" data-tooltip>503</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      let cq &#x3D; seneca.util.clean(q)</td>
                           
                         </tr>            <tr id="cosmos-store.js__504" class="hit">
                           <td class="line" data-tooltip>504</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      let fq &#x3D; cq</td>
                           
                         </tr>            <tr id="cosmos-store.js__505" class="hit">
@@ -4222,7 +4245,7 @@
                         </tr>            <tr id="cosmos-store.js__506" class="hit">
                           <td class="line" data-tooltip>506</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      let params &#x3D; (listreq.parameters &#x3D; [])</td>
                           
                         </tr>            <tr id="cosmos-store.js__507" class="hit">
@@ -4234,7 +4257,7 @@
                         </tr>            <tr id="cosmos-store.js__508" class="hit">
                           <td class="line" data-tooltip>508</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      if (null !&#x3D; q.limit$) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__509" class="hit">
@@ -4288,7 +4311,7 @@
                         </tr>            <tr id="cosmos-store.js__517" class="hit">
                           <td class="line" data-tooltip>517</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      if (q.fields$) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__518" class="hit">
@@ -4330,7 +4353,7 @@
                         </tr>            <tr id="cosmos-store.js__524" class="hit">
                           <td class="line" data-tooltip>524</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">        listquery +&#x3D; &#x27; * FROM &#x27; + co.name</td>
                           
                         </tr>            <tr id="cosmos-store.js__525" class="hit">
@@ -4348,7 +4371,7 @@
                         </tr>            <tr id="cosmos-store.js__527" class="hit">
                           <td class="line" data-tooltip>527</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>247</td>
+                          <td class="hits" data-tooltip>248</td>
                           <td class="source">      if (0 &lt; Object.keys(fq).length) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__528" class="hit">
@@ -4564,7 +4587,7 @@
                         </tr>            <tr id="cosmos-store.js__563" class="hit">
                           <td class="line" data-tooltip>563</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">      if (null !&#x3D; q.sort$) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__564" class="hit">
@@ -4702,7 +4725,7 @@
                         </tr>            <tr id="cosmos-store.js__586" class="hit">
                           <td class="line" data-tooltip>586</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">      listreq.query &#x3D; listquery</td>
                           
                         </tr>            <tr id="cosmos-store.js__587" class="hit">
@@ -4726,7 +4749,7 @@
                         </tr>            <tr id="cosmos-store.js__590" class="hit">
                           <td class="line" data-tooltip>590</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">      do_list()</td>
                           
                         </tr>            <tr id="cosmos-store.js__591" class="hit">
@@ -4744,13 +4767,13 @@
                         </tr>            <tr id="cosmos-store.js__593" class="hit">
                           <td class="line" data-tooltip>593</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">        const container &#x3D; await intern.load_container(co.name, ctx, reply)</td>
                           
                         </tr>            <tr id="cosmos-store.js__594" class="hit">
                           <td class="line" data-tooltip>594</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">        if (1 &lt; Object.keys(q.sort$ || {}).length) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__595" class="hit">
@@ -4774,13 +4797,13 @@
                         </tr>            <tr id="cosmos-store.js__598" class="hit">
                           <td class="line" data-tooltip>598</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">        try {</td>
                           
                         </tr>            <tr id="cosmos-store.js__599" class="hit">
                           <td class="line" data-tooltip>599</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>246</td>
+                          <td class="hits" data-tooltip>247</td>
                           <td class="source">          const { resources } &#x3D; await container.items.query(listreq).fetchAll()</td>
                           
                         </tr>            <tr id="cosmos-store.js__600" class="hit">
@@ -4792,7 +4815,7 @@
                         </tr>            <tr id="cosmos-store.js__601" class="hit">
                           <td class="line" data-tooltip>601</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>243</td>
+                          <td class="hits" data-tooltip>244</td>
                           <td class="source">          let out_list &#x3D; resources.map((resource) &#x3D;&gt;</td>
                           
                         </tr>            <tr id="cosmos-store.js__602" class="hit">
@@ -4816,7 +4839,7 @@
                         </tr>            <tr id="cosmos-store.js__605" class="hit">
                           <td class="line" data-tooltip>605</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>243</td>
+                          <td class="hits" data-tooltip>244</td>
                           <td class="source">          reply(null, out_list)</td>
                           
                         </tr>            <tr id="cosmos-store.js__606" class="hit">
@@ -4984,7 +5007,7 @@
                         </tr>            <tr id="cosmos-store.js__633" class="hit">
                           <td class="line" data-tooltip>633</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>423</td>
+                          <td class="hits" data-tooltip>439</td>
                           <td class="source">      let entity_options &#x3D; intern.entity_options(ent, ctx)</td>
                           
                         </tr>            <tr id="cosmos-store.js__634" class="hit">
@@ -4996,7 +5019,7 @@
                         </tr>            <tr id="cosmos-store.js__635" class="hit">
                           <td class="line" data-tooltip>635</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>423</td>
+                          <td class="hits" data-tooltip>439</td>
                           <td class="source">      const defaultFields &#x3D; [&#x27;_attachments&#x27;, &#x27;_etag&#x27;, &#x27;_rid&#x27;, &#x27;_self&#x27;, &#x27;_ts&#x27;]</td>
                           
                         </tr>            <tr id="cosmos-store.js__636" class="hit">
@@ -5014,13 +5037,13 @@
                         </tr>            <tr id="cosmos-store.js__638" class="hit">
                           <td class="line" data-tooltip>638</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2115</td>
+                          <td class="hits" data-tooltip>2195</td>
                           <td class="source">        if (null !&#x3D; data[field]) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__639" class="hit">
                           <td class="line" data-tooltip>639</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2095</td>
+                          <td class="hits" data-tooltip>2155</td>
                           <td class="source">          delete data[field]</td>
                           
                         </tr>            <tr id="cosmos-store.js__640" class="hit">
@@ -5044,7 +5067,7 @@
                         </tr>            <tr id="cosmos-store.js__643" class="hit">
                           <td class="line" data-tooltip>643</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>423</td>
+                          <td class="hits" data-tooltip>439</td>
                           <td class="source">      if (entity_options) {</td>
                           
                         </tr>            <tr id="cosmos-store.js__644" class="chunks">
@@ -5110,7 +5133,7 @@
                         </tr>            <tr id="cosmos-store.js__654" class="hit">
                           <td class="line" data-tooltip>654</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>423</td>
+                          <td class="hits" data-tooltip>439</td>
                           <td class="source">      return data</td>
                           
                         </tr>            <tr id="cosmos-store.js__655" class="hit">
