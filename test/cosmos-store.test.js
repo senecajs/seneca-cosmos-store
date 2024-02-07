@@ -114,103 +114,117 @@ lab.test('no-dups', async () => {
   expect(list.length).equal(1)
 })
 
-lab.test('special-query', async () => {
-  var si = make_seneca({})
-  await si.ready()
-  // si.quiet()
+lab.describe('special-query', () => {
+  const plugin = {}
 
-  // console.log('FIRST',await si.entity('query01').load$({id:'q0',sk0:'a'}))
+  const si = make_seneca({ plugin })
 
-  let list = await si.entity('query01').list$()
-  // console.log('EXISTING', list)
-
-  for (let item of list) {
-    // console.log('REMOVE', list)
-    await item.remove$({ id: item.id, sk0: item.sk0 })
-  }
+  lab.before(() => si.ready())
   
-  list = [
-    { id$: 'q0', sk0: 'a', ip0: 'A', ip1: 'AA', is1: 0, d: 10 },
-    { id$: 'q1', sk0: 'a', ip0: 'B', ip1: 'AA', is1: 0, d: 10 },
-    { id$: 'q2', sk0: 'b', ip0: 'B', ip1: 'AA', is1: 0, d: 10 },
-    { id$: 'q3', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 1, d: 10 },
-    { id$: 'q4', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 2, d: 10 },
-    { id$: 'q5', sk0: 'c', ip0: 'C', ip1: 'BB', is1: 0, d: 10 }
-  ]
+  let list = null
   
-  for(let item of list) {
-    await si
-      .entity('query01')
-      .data$(item)
-      .save$()
-  }
+  lab.test('clear', async () => {
+    list = await si.entity('query01').list$()
+    for (let item of list) {
+      // console.log('REMOVE', list)
+      await item.remove$({ id: item.id, sk0: item.sk0 })
+    }
+    list = await si.entity('query01').list$()
+    expect(list.length).equal(0)
+  })
+  
+  lab.test('generate items', async () => {
+    list = [
+      { id$: 'q0', sk0: 'a', ip0: 'A', ip1: 'AA', is1: 0, d: 10 },
+      { id$: 'q1', sk0: 'a', ip0: 'B', ip1: 'AA', is1: 0, d: 10 },
+      { id$: 'q2', sk0: 'b', ip0: 'B', ip1: 'AA', is1: 0, d: 10 },
+      { id$: 'q3', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 1, d: 10 },
+      { id$: 'q4', sk0: 'c', ip0: 'C', ip1: 'AA', is1: 2, d: 10 },
+      { id$: 'q5', sk0: 'c', ip0: 'C', ip1: 'BB', is1: 0, d: 10 }
+    ]
+  
+    for(let item of list) {
+      await si
+        .entity('query01')
+        .data$(item)
+        .save$()
+    }
+    
+    list = await si.entity('query01').list$()
+    // console.log('ALL', list)
+    expect(list.map((ent) => ent.id).sort()).equal([
+      'q0',
+      'q1',
+      'q2',
+      'q3',
+      'q4',
+      'q5',
+    ])
+  
+  
+  })
+  
+  lab.test('query', async () => {
+  
+    let q = { id: 'q0', sk0: 'a' }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0'])
 
-  list = await si.entity('query01').list$()
-  // console.log('ALL', list)
-  expect(list.map((ent) => ent.id).sort()).equal([
-    'q0',
-    'q1',
-    'q2',
-    'q3',
-    'q4',
-    'q5',
-  ])
+    q = { id: 'q0', sk0: 'a', d: 10 }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0'])
 
-  let q = { id: 'q0', sk0: 'a' }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0'])
+    q = { sk0: 'a' }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1'])
 
-  q = { id: 'q0', sk0: 'a', d: 10 }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0'])
+    q = { sk0: 'a', d: 10 }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1'])
 
-  q = { sk0: 'a' }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1'])
+    q = { ip0: 'A' }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0'])
 
-  q = { sk0: 'a', d: 10 }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1'])
+    q = { ip0: 'A', d: 10 }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0'])
 
-  q = { ip0: 'A' }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0'])
+    q = { ip1: 'AA' }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2', 'q3', 'q4'])
 
-  q = { ip0: 'A', d: 10 }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0'])
+    q = { ip1: 'AA', d: 10 }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2', 'q3', 'q4'])
 
-  q = { ip1: 'AA' }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2', 'q3', 'q4'])
+    q = { ip1: 'AA', is1: 0 }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2'])
 
-  q = { ip1: 'AA', d: 10 }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2', 'q3', 'q4'])
+    q = { ip1: 'AA', is1: 0, d: 10 }
+    list = await si.entity('query01').list$(q)
+    // console.log('Q', q, list)
+    expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2'])
+  
+  })
+  
+  lab.test('entity id exists', async () => {
+    let foo0 = await si.entity('foo')
+    await foo0.save$({ d: 12 })
+    expect(foo0.id, 'entity id exists').exists()
+  })
+  
 
-  q = { ip1: 'AA', is1: 0 }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2'])
-
-  q = { ip1: 'AA', is1: 0, d: 10 }
-  list = await si.entity('query01').list$(q)
-  // console.log('Q', q, list)
-  expect(list.map((ent) => ent.id).sort()).equal(['q0', 'q1', 'q2'])
-
-  let foo0 = await si.entity('foo')
-  await foo0.save$({ d: 12 })
-  expect(foo0.id, 'entity id exists').exists()
-
-  // console.log('END')
 })
 
 lab.describe('simple-sort-query-test', () => {
