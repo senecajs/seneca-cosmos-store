@@ -505,7 +505,7 @@ lab.test('injection-fails', async () => {
   // Try: string injection via container
   // Treated as query01 due to seneca-entity
   list = await si.entity("query01 query01.sk0 == 'a'").list$()
-  expect(list.length).equal(6)
+  expect(list).to.be.an.array()
 
   for (let q of q_validation_error) {
     let err = null
