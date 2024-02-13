@@ -41,6 +41,7 @@
     "lib"
   ],
   "contributors": [
+    "Aleksandar Milenkovic - https://github.com/BeAllAround"
   ],
   "engines": {
     "node": ">=14"
