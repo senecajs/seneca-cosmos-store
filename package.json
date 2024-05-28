@@ -1,7 +1,7 @@
 {
   "name": "@seneca/cosmos-store",
   "description": "CosmosDB store for Seneca",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "keywords": [
     "seneca",
     "cosmos",
@@ -41,7 +41,8 @@
     "lib"
   ],
   "contributors": [
-    "Aleksandar Milenkovic - https://github.com/BeAllAround"
+    "Aleksandar Milenkovic - https://github.com/BeAllAround",
+    "Zack Braska - https://github.com/zackbraksa"
   ],
   "engines": {
     "node": ">=14"
