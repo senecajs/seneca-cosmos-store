@@ -24,6 +24,7 @@ module.exports.defaults = {
     endpoint: Skip(String),
     key: Skip(String),
     connectionString: Skip(String),
+    connectionPolicy: Skip(Object),
 
     database: Open({
       create: Default(true, Boolean),
@@ -81,6 +82,7 @@ function cosmos_store(options) {
       ctx.client = new COSMOS_SDK.CosmosClient({
         endpoint: options.cosmos.endpoint,
         key: options.cosmos.key,
+        connectionPolicy: options.cosmos.connectionPolicy,
       })
     }
 
