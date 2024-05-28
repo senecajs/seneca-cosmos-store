@@ -30,6 +30,7 @@ module.exports.defaults = {
       create: Default(true, Boolean),
       config: Open({
         id: Required(String),
+        throughput: Skip(Number),
       }),
     }),
 
@@ -79,6 +80,7 @@ function cosmos_store(options) {
     if (options.cosmos.connectionString) {
       ctx.client = new COSMOS_SDK.CosmosClient(options.cosmos.connectionString)
     } else {
+      console.log('COSMOS', 'options', options.cosmos)
       ctx.client = new COSMOS_SDK.CosmosClient({
         endpoint: options.cosmos.endpoint,
         key: options.cosmos.key,
