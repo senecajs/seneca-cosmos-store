@@ -27,36 +27,36 @@ function make_seneca(config) {
     .use('promisify')
     .use('entity', { mem_store: false })
     .use('doc')
-    // .use('env', {
-    //   // debug: true,
-    //   file: [__dirname + '/local-env.js'],
-    //   var: {
-    //     COSMOS_CONNECTION_STRING: String,
-    //     COSMOS_ACCOUNT_ENDPOINT: String,
-    //     COSMOS_ACCOUNT_KEY: String,
-    //   }
-    // })
-    // // USE PROVIDER CONNECTION STRING
-    // .use('provider', {
-    //   provider: {
-    //     cosmos: {
-    //       keys: {
-    //         connectionstring: { value: `$COSMOS_CONNECTION_STRING` },
-    //       }
-    //     }
-    //   }
-    // })
-    // // USE PROVIDER ACCOUNT CREDENTIALS
-    // .use('provider', {
-    //   provider: {
-    //     cosmos: {
-    //       keys: {
-    //         endpoint: { value: `$COSMOS_ACCOUNT_ENDPOINT` },
-    //         key: { value: `$COSMOS_ACCOUNT_KEY` },
-    //       }
-    //     }
-    //   }
-    // })
+    .use('env', {
+      // debug: true,
+      file: [__dirname + '/local-env.js'],
+      var: {
+        COSMOS_CONNECTION_STRING: String,
+        COSMOS_ACCOUNT_ENDPOINT: String,
+        COSMOS_ACCOUNT_KEY: String,
+      }
+    })
+    // USE PROVIDER CONNECTION STRING
+    .use('provider', {
+      provider: {
+        cosmos: {
+          keys: {
+            connectionstring: { value: `$COSMOS_CONNECTION_STRING` },
+          }
+        }
+      }
+    })
+    // USE PROVIDER ACCOUNT CREDENTIALS
+    .use('provider', {
+      provider: {
+        cosmos: {
+          keys: {
+            endpoint: { value: `$COSMOS_ACCOUNT_ENDPOINT` },
+            key: { value: `$COSMOS_ACCOUNT_KEY` },
+          }
+        }
+      }
+    })
     .use(
       '..',
       Object.assign(
