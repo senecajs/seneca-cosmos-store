@@ -662,7 +662,7 @@ lab.test('custom-table', async () => {
 })
 
 const testrun = {
-  store_core: async function (opts) {
+  store_core: async function(opts) {
     const seneca = opts.seneca
     const expect = opts.expect
     const log = opts.log
@@ -776,7 +776,7 @@ const testrun = {
     expect(foolist0r.length).equals(0)
   },
 
-  store_load: async function (opts) {
+  store_load: async function(opts) {
     const seneca = opts.seneca
     const expect = opts.expect
     const log = opts.log
@@ -808,7 +808,7 @@ const testrun = {
     expect(foo1n).equal(null)
   },
 
-  store_save: async function (opts) {
+  store_save: async function(opts) {
     const seneca = opts.seneca
     const expect = opts.expect
     const log = opts.log

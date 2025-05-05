@@ -52,6 +52,15 @@ module.exports.defaults = {
   entity: {},
 }
 
+function setProviderVars(keyName, injectVars) {
+  try {
+    // InjectVars throws an error if the env var is not set
+    return injectVars(keyName)
+  } catch (e) {
+    return null
+  }
+}
+
 function cosmos_store(options) {
   const seneca = this
   const init = seneca.export('entity/init')
@@ -77,16 +86,20 @@ function cosmos_store(options) {
   seneca.init(function(reply) {
     const COSMOS_SDK = options.sdk()
 
-    if (seneca.shared.cosmos) {
-      if (seneca.shared.cosmos.connectionString) {
-        ctx.client = new COSMOS_SDK.CosmosClient(seneca.shared.cosmos.connectionString)
-      } else {
-        ctx.client = new COSMOS_SDK.CosmosClient({
-          endpoint: seneca.shared.cosmos.endpoint,
-          key: seneca.shared.cosmos.key,
-          connectionPolicy: seneca.shared.cosmos.connectionPolicy,
-        })
-      }
+    const injectVars = this.export('env/injectVars')
+
+    const connectionString = setProviderVars('$COSMOS_CONNECTION_STRING', injectVars)
+    const endpoint = setProviderVars('$COSMOS_ACCOUNT_ENDPOINT', injectVars)
+    const key = setProviderVars('$COSMOS_ACCOUNT_KEY', injectVars)
+
+    if (connectionString) {
+      ctx.client = new COSMOS_SDK.CosmosClient(connectionString)
+    } else if (endpoint && key) {
+      ctx.client = new COSMOS_SDK.CosmosClient({
+        endpoint,
+        key,
+        connectionPolicy: options.cosmos ? options.cosmos.connectionPolicy : null,
+      })
     } else if (options.cosmos.connectionString) {
       ctx.client = new COSMOS_SDK.CosmosClient(options.cosmos.connectionString)
     } else {
@@ -112,33 +125,6 @@ function cosmos_store(options) {
         : ctx.client.database(config.id)
 
       reply()
-    }
-  })
-
-
-  seneca.prepare(async function() {
-    if (seneca.has('get:keymap,sys:provider')) {
-      seneca.act('sys:provider,get:keymap,provider:cosmos', function(err, res) {
-        if (err) {
-          throw seneca.fail(err)
-        }
-
-        const keymap = res.keymap
-
-        if (keymap.connectionstring) {
-          seneca.shared.cosmos = {
-            connectionString: keymap.connectionstring.value,
-          }
-          return
-        }
-
-        seneca.shared.cosmos = {
-          endpoint: keymap.endpoint.value,
-          key: keymap.key.value,
-          connectionPolicy: keymap && keymap.connectionpolicy ?
-            keymap.connectionpolicy.value : null,
-        }
-      })
     }
   })
 
