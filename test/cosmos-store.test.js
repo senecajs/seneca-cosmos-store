@@ -22,21 +22,22 @@ if (process.env.COSMOS_LOCAL_DEV) {
 
 function make_seneca(config) {
   config = Object.assign({ seneca: {}, plugin: {} }, config)
-  return Seneca(Object.assign({ legacy: false }, config.seneca))
-    .test()
-    .use('promisify')
-    .use('entity', { mem_store: false })
-    .use('doc')
-    .use('env', {
-      // debug: true,
-      file: [__dirname + '/local-env.js'],
-      var: {
-        // 'cosmos-connection-string': String,
-        'cosmos-account-endpoint': String,
-        'cosmos-account-key': String,
-      }
-    })
-    /*
+  return (
+    Seneca(Object.assign({ legacy: false }, config.seneca))
+      .test()
+      .use('promisify')
+      .use('entity', { mem_store: false })
+      .use('doc')
+      .use('env', {
+        // debug: true,
+        file: [__dirname + '/local-env.js'],
+        var: {
+          // 'cosmos-connection-string': String,
+          'cosmos-account-endpoint': String,
+          'cosmos-account-key': String,
+        },
+      })
+      /*
     // USE PROVIDER CONNECTION STRING
     .use('provider', {
       provider: {
@@ -48,40 +49,41 @@ function make_seneca(config) {
       }
     })
     */
-    // USE PROVIDER ACCOUNT CREDENTIALS
-    .use('provider', {
-      provider: {
-        cosmos: {
-          keys: {
-            endpoint: { value: `$cosmos-account-endpoint` },
-            key: { value: `$cosmos-account-key` },
-          }
-        }
-      }
-    })
-    .use(
-      '..',
-      Object.assign(
-        {
-          sdk: () => COSMOS_SDK,
+      // USE PROVIDER ACCOUNT CREDENTIALS
+      .use('provider', {
+        provider: {
           cosmos: {
-            // endpoint:
-            //   process.env.SENECA_COSMOS_ENDPOINT || 'https://localhost:8081',
-            // // see: https://learn.microsoft.com/en-us/azure/cosmos-db/emulator#authentication
-            // // for default auth key
-            // key: process.env.SENECA_COSMOS_KEY,
-            // container: { create: false },
-            database: {
-              // create: false,
-              config: {
-                id: 'db1',
-              },
+            keys: {
+              endpoint: { value: `$cosmos-account-endpoint` },
+              key: { value: `$cosmos-account-key` },
             },
           },
         },
-        config.plugin
+      })
+      .use(
+        '..',
+        Object.assign(
+          {
+            sdk: () => COSMOS_SDK,
+            cosmos: {
+              // endpoint:
+              //   process.env.SENECA_COSMOS_ENDPOINT || 'https://localhost:8081',
+              // // see: https://learn.microsoft.com/en-us/azure/cosmos-db/emulator#authentication
+              // // for default auth key
+              // key: process.env.SENECA_COSMOS_KEY,
+              // container: { create: false },
+              database: {
+                // create: false,
+                config: {
+                  id: 'db1',
+                },
+              },
+            },
+          },
+          config.plugin
+        )
       )
-    )
+  )
 }
 
 /*
@@ -664,7 +666,7 @@ lab.test('custom-table', async () => {
 })
 
 const testrun = {
-  store_core: async function(opts) {
+  store_core: async function (opts) {
     const seneca = opts.seneca
     const expect = opts.expect
     const log = opts.log
@@ -778,7 +780,7 @@ const testrun = {
     expect(foolist0r.length).equals(0)
   },
 
-  store_load: async function(opts) {
+  store_load: async function (opts) {
     const seneca = opts.seneca
     const expect = opts.expect
     const log = opts.log
@@ -810,7 +812,7 @@ const testrun = {
     expect(foo1n).equal(null)
   },
 
-  store_save: async function(opts) {
+  store_save: async function (opts) {
     const seneca = opts.seneca
     const expect = opts.expect
     const log = opts.log

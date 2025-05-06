@@ -83,12 +83,15 @@ function cosmos_store(options) {
 
   let store = intern.make_store(ctx)
 
-  seneca.init(function(reply) {
+  seneca.init(function (reply) {
     const COSMOS_SDK = options.sdk()
 
     const injectVars = this.export('env/injectVars')
 
-    const connectionString = setProviderVars('$cosmos-connection-string', injectVars)
+    const connectionString = setProviderVars(
+      '$cosmos-connection-string',
+      injectVars
+    )
     const endpoint = setProviderVars('$cosmos-account-endpoint', injectVars)
     const key = setProviderVars('$cosmos-account-key', injectVars)
 
@@ -98,7 +101,9 @@ function cosmos_store(options) {
       ctx.client = new COSMOS_SDK.CosmosClient({
         endpoint,
         key,
-        connectionPolicy: options.cosmos ? options.cosmos.connectionPolicy : null,
+        connectionPolicy: options.cosmos
+          ? options.cosmos.connectionPolicy
+          : null,
       })
     } else if (options.cosmos.connectionString) {
       ctx.client = new COSMOS_SDK.CosmosClient(options.cosmos.connectionString)
@@ -118,10 +123,10 @@ function cosmos_store(options) {
     async function create_and_ref_database() {
       intern.database = create
         ? (
-          await ctx.client.databases.createIfNotExists({
-            ...config,
-          })
-        ).database
+            await ctx.client.databases.createIfNotExists({
+              ...config,
+            })
+          ).database
         : ctx.client.database(config.id)
 
       reply()
@@ -129,7 +134,6 @@ function cosmos_store(options) {
   })
 
   let meta = init(seneca, options, store)
-
 
   return {
     name: store.name,
@@ -149,7 +153,7 @@ function make_intern() {
     database: {},
 
     // TODO: why is this needed?
-    clean_config: function(cfgin) {
+    clean_config: function (cfgin) {
       let cfg = { ...cfgin }
       for (let prop in cfg) {
         if (null == cfg[prop]) {
@@ -160,11 +164,11 @@ function make_intern() {
       return cfg
     },
 
-    make_msg: function(msg_fn, ctx) {
+    make_msg: function (msg_fn, ctx) {
       return require('./lib/' + msg_fn)(ctx)
     },
 
-    make_ctx: function(initial_ctx, options) {
+    make_ctx: function (initial_ctx, options) {
       return Object.assign(
         {
           options,
@@ -175,7 +179,7 @@ function make_intern() {
     },
 
     // TODO: seneca-entity should provide this
-    entity_options: function(ent, ctx) {
+    entity_options: function (ent, ctx) {
       let canonkey = ent.canon$()
 
       // NOTE: canonkey in options can omit empty canon parts, and zone
@@ -192,7 +196,7 @@ function make_intern() {
       return entopts
     },
 
-    get_container: function(ent, ctx) {
+    get_container: function (ent, ctx) {
       // let entopts = intern.entity_options(ent, ctx)
       // let table = entopts && entopts.table
 
@@ -205,7 +209,7 @@ function make_intern() {
       return container
     },
 
-    load_container: async function(id, ctx, reply) {
+    load_container: async function (id, ctx, reply) {
       // console.log(ctx.options)
       const { config, create } = ctx.options.cosmos.container
       const containers = intern.database.containers
@@ -213,11 +217,11 @@ function make_intern() {
       try {
         const container = create
           ? (
-            await containers.createIfNotExists({
-              id,
-              ...config,
-            })
-          ).container
+              await containers.createIfNotExists({
+                id,
+                ...config,
+              })
+            ).container
           : intern.database.container(id)
 
         return container
@@ -226,7 +230,7 @@ function make_intern() {
       }
     },
 
-    has_error: function(seneca, err, ctx, reply) {
+    has_error: function (seneca, err, ctx, reply) {
       if (err) {
         seneca.log.error('entity', err, { store: ctx.name })
         reply(err)
@@ -234,17 +238,17 @@ function make_intern() {
       return null != err
     },
 
-    make_store: function(ctx) {
+    make_store: function (ctx) {
       const opts = ctx.options
 
       const store = {
         name: ctx.name,
 
-        close: function(msg, reply) {
+        close: function (msg, reply) {
           reply()
         },
 
-        save: function(msg, reply) {
+        save: function (msg, reply) {
           let seneca = this
           let ent = msg.ent
 
@@ -304,7 +308,7 @@ function make_intern() {
           }
         },
 
-        load: function(msg, reply) {
+        load: function (msg, reply) {
           let seneca = this
           let qent = msg.qent
           let q = msg.q
@@ -327,7 +331,7 @@ function make_intern() {
               qent,
               co,
               q,
-              function(err, reslist) {
+              function (err, reslist) {
                 if (err) return reply(err)
 
                 return reply(0 != reslist.length ? reslist[0] : null)
@@ -341,7 +345,7 @@ function make_intern() {
           }
         },
 
-        list: function(msg, reply) {
+        list: function (msg, reply) {
           let seneca = this
           let qent = msg.qent
           let q = msg.q
@@ -351,7 +355,7 @@ function make_intern() {
           intern.listent(ctx, seneca, qent, co, q, reply)
         },
 
-        remove: function(msg, reply) {
+        remove: function (msg, reply) {
           let seneca = this
           // console.log('REMOVE MSG', msg)
 
@@ -386,7 +390,7 @@ function make_intern() {
                 qent,
                 co,
                 cq,
-                async function(listerr, list) {
+                async function (listerr, list) {
                   if (intern.has_error(seneca, listerr, ctx, reply)) return
 
                   if (all) {
@@ -452,7 +456,7 @@ function make_intern() {
           }
         },
 
-        native: function(msg, reply) {
+        native: function (msg, reply) {
           reply({
             client: ctx.client,
           })
@@ -462,7 +466,7 @@ function make_intern() {
       return store
     },
 
-    id_get: function(ctx, seneca, ent, co, q, reply) {
+    id_get: function (ctx, seneca, ent, co, q, reply) {
       do_load()
 
       async function do_load(args) {
@@ -492,13 +496,13 @@ function make_intern() {
       }
 
       let cmpops = {
-        gt$: { cmpop: '>' },
-        gte$: { cmpop: '>=' },
-        lt$: { cmpop: '<' },
-        lte$: { cmpop: '<=' },
-        ne$: { cmpop: '!=' },
-        eq$: { cmpop: '=' },
-      },
+          gt$: { cmpop: '>' },
+          gte$: { cmpop: '>=' },
+          lt$: { cmpop: '<' },
+          lte$: { cmpop: '<=' },
+          ne$: { cmpop: '!=' },
+          eq$: { cmpop: '=' },
+        },
         cmps = []
 
       for (let k in qv) {
@@ -517,7 +521,7 @@ function make_intern() {
       return { cmps }
     },
 
-    listent: function(ctx, seneca, qent, co, q, reply) {
+    listent: function (ctx, seneca, qent, co, q, reply) {
       let listreq = {}
       let listquery = 'SELECT'
       // let queryspec = {}
@@ -637,7 +641,7 @@ function make_intern() {
       }
     },
 
-    inbound: function(ctx, ent, data) {
+    inbound: function (ctx, ent, data) {
       if (null == data) return null
 
       let entity_options = intern.entity_options(ent, ctx)
@@ -655,7 +659,7 @@ function make_intern() {
       return data
     },
 
-    outbound: function(ctx, ent, data) {
+    outbound: function (ctx, ent, data) {
       if (null == data) return null
 
       let entity_options = intern.entity_options(ent, ctx)
