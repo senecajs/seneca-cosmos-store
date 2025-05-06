@@ -88,9 +88,9 @@ function cosmos_store(options) {
 
     const injectVars = this.export('env/injectVars')
 
-    const connectionString = setProviderVars('$COSMOS_CONNECTION_STRING', injectVars)
-    const endpoint = setProviderVars('$COSMOS_ACCOUNT_ENDPOINT', injectVars)
-    const key = setProviderVars('$COSMOS_ACCOUNT_KEY', injectVars)
+    const connectionString = setProviderVars('$cosmos-connection-string', injectVars)
+    const endpoint = setProviderVars('$cosmos-account-endpoint', injectVars)
+    const key = setProviderVars('$cosmos-account-key', injectVars)
 
     if (connectionString) {
       ctx.client = new COSMOS_SDK.CosmosClient(connectionString)

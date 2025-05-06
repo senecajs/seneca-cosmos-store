@@ -31,28 +31,30 @@ function make_seneca(config) {
       // debug: true,
       file: [__dirname + '/local-env.js'],
       var: {
-        COSMOS_CONNECTION_STRING: String,
-        COSMOS_ACCOUNT_ENDPOINT: String,
-        COSMOS_ACCOUNT_KEY: String,
+        // 'cosmos-connection-string': String,
+        'cosmos-account-endpoint': String,
+        'cosmos-account-key': String,
       }
     })
+    /*
     // USE PROVIDER CONNECTION STRING
     .use('provider', {
       provider: {
         cosmos: {
           keys: {
-            connectionstring: { value: `$COSMOS_CONNECTION_STRING` },
+            connectionstring: { value: `$cosmos-connection-string` },
           }
         }
       }
     })
+    */
     // USE PROVIDER ACCOUNT CREDENTIALS
     .use('provider', {
       provider: {
         cosmos: {
           keys: {
-            endpoint: { value: `$COSMOS_ACCOUNT_ENDPOINT` },
-            key: { value: `$COSMOS_ACCOUNT_KEY` },
+            endpoint: { value: `$cosmos-account-endpoint` },
+            key: { value: `$cosmos-account-key` },
           }
         }
       }
