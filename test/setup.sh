@@ -1,4 +1,6 @@
 
+# 0. Switch to Node 22 due to the testing library/framework used at the moment
+# > nvm use 22
 # 1. START THE DOCKER CONTINER
 # sudo docker run     --cpuset-cpus=0-3 -p 8081:8081     -p 10250-10255:10250-10255     --interactive     --tty     mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
 
