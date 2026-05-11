@@ -1,27 +1,21 @@
 
-# Setup aws localtest profile:
-# $ aws configure --profile localtest
-# AWS Access Key ID [None]: none
-# AWS Secret Access Key [None]: none
-# Default region name [None]: region
-# Default output format [None]: 
+# 1. START THE DOCKER CONTINER
+# sudo docker run     --cpuset-cpus=0-3 -p 8081:8081     -p 10250-10255:10250-10255     --interactive     --tty     mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
 
+# 2. CREATE THE SAMPLE DB TABLES
+# npm run test-create-db
 
-# Start local dynamodb in local docker
-# docker run -d -p 18000:8000 amazon/dynamodb-local
-
-# check local dynamodb is up
-# aws dynamodb list-tables --endpoint-url http://localhost:18000 --profile localtest
-
-# open web shell (if required)
-# open http://localhost:18000/shell
-
-# create test tables
-# node create.js
-# node support/db/create-test-tables.js 
-
-# check test tables exist
-# aws dynamodb list-tables --endpoint-url http://localhost:18000 --profile localtest
+# 3. EXPORT AS ENV VAR, FROM https://learn.microsoft.com/en-us/azure/cosmos-db/emulator#authentication
+# export SENECA_COSMOS_KEY="..."
+#
+# 4. CREATE THE local-env.js file
+# module.exports = {
+#  'cosmos-account-endpoint': 'https://localhost:8081',
+  #'cosmos-account-key': '...',
+#}
+#
+# 5. > export COSMOS_LOCAL_DEV=1
+# 6. > npm run test
 
 
 # pull the latest Docker emulator to the local docker host:
@@ -38,4 +32,5 @@ docker run \
     --interactive \
     --tty \
     mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+
 
