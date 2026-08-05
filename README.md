@@ -10,6 +10,8 @@
 | ![Voxgig](https://www.voxgig.com/res/img/vgt01r.png) | This open source module is sponsored and supported by [Voxgig](https://www.voxgig.com). |
 |---|---|
 
+Seneca entity data storage plugin for CosmosDB.
+
 ## Install
 
 ```sh
