@@ -132,3 +132,5 @@ dist
 *.swp
 
 test/local-env.js
+
+package-lock.json
