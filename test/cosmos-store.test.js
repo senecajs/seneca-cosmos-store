@@ -26,8 +26,7 @@ function make_seneca(config) {
     Seneca(Object.assign({ legacy: false }, config.seneca))
       .test()
       .use('promisify')
-      .use('entity', { mem_store: false })
-      .use('doc')
+      .use('@seneca/entity', { mem_store: false })
       .use('env', {
         // debug: true,
         file: [__dirname + '/local-env.js'],

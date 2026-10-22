@@ -1,8 +1,6 @@
 /* Copyright (c) 2023 Richard Rodger and other contributors, MIT License. */
 'use strict'
 
-const { Open, Required, Default, Skip } = require('gubu')
-
 Object.defineProperty(cosmos_store, 'name', { value: 'cosmos-store' })
 
 module.exports = cosmos_store
@@ -11,46 +9,48 @@ module.exports.errors = {}
 
 const intern = (module.exports.intern = make_intern())
 
-module.exports.defaults = {
+// Built with the builders Seneca passes in: shape from Seneca 4.0.0, Gubu
+// before.
+module.exports.defaults = ({ valid }) => ({
   test: false,
 
   // Provide COSMOS SDK (via function) externally so that it is not dragged into functions.
-  sdk: Required(Function),
+  sdk: valid.Required(Function),
 
   // preserve undefined fields when saving
   merge: true,
 
-  cosmos: Open({
-    endpoint: Skip(String),
-    key: Skip(String),
-    connectionString: Skip(String),
-    connectionPolicy: Skip(Object),
+  cosmos: valid.Open({
+    endpoint: valid.Skip(String),
+    key: valid.Skip(String),
+    connectionString: valid.Skip(String),
+    connectionPolicy: valid.Skip(Object),
 
-    database: Open({
-      create: Default(true, Boolean),
-      config: Open({
-        id: Required(String),
-        throughput: Skip(Number),
+    database: valid.Open({
+      create: valid.Default(true, Boolean),
+      config: valid.Open({
+        id: valid.Required(String),
+        throughput: valid.Skip(Number),
       }),
     }),
 
-    container: Open({
-      create: Default(true, Boolean),
-      config: Open({
+    container: valid.Open({
+      create: valid.Default(true, Boolean),
+      config: valid.Open({
         partitionKey: {
-          paths: Open(Default(['/id'], Array)),
-          kind: Default('MultiHash', String),
-          version: Default(2, Number),
+          paths: valid.Open(valid.Default(['/id'], Array)),
+          kind: valid.Default('MultiHash', String),
+          version: valid.Default(2, Number),
         },
       }),
     }),
   }),
 
-  client: Open({}),
+  client: valid.Open({}),
 
   // entity meta data, by canon string
   entity: {},
-}
+})
 
 function setProviderVars(keyName, injectVars) {
   try {
