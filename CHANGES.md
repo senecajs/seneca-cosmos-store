@@ -15,6 +15,9 @@
   now `@seneca/entity >=29`.
 * Breaking: Seneca 3 support starts at 3.38. The peer range is
   `>=3.38||>=4.0.0-rc5` (was `>=3`).
+* The `cosmos` options, which hold the account key, are no longer
+  printed to the console when the client is made from `cosmos.endpoint`
+  and `cosmos.key`.
 * Tests: the entity plugin is loaded as `@seneca/entity`, and
   seneca-doc, which does not load on Seneca 4, is no longer used. The
   development dependencies are `seneca ^4.0.0-rc5`, `@seneca/entity

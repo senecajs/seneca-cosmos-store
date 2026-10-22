@@ -108,7 +108,6 @@ function cosmos_store(options) {
     } else if (options.cosmos.connectionString) {
       ctx.client = new COSMOS_SDK.CosmosClient(options.cosmos.connectionString)
     } else {
-      console.log('COSMOS', 'options', options.cosmos)
       ctx.client = new COSMOS_SDK.CosmosClient({
         endpoint: options.cosmos.endpoint,
         key: options.cosmos.key,
