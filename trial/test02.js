@@ -26,9 +26,7 @@ var conConfig = {
 var s0 = Seneca({ legacy: false })
   .test()
   .ignore_plugin('mem-store')
-  .use('promisify')
-  .use('entity')
-  .use('doc')
+  .use('@seneca/entity')
   .use('..', {
     sdk: () => AzureCosmos,
     cosmos: {
