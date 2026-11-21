@@ -9,7 +9,8 @@ if (process.env.COSMOS_LOCAL_DEV) {
 module.exports = {
   connect(opts = {}) {
     if (opts.verbose) {
-      console.log('Connecting to CosmosDb with config:\n', config)
+      // The config holds the account key, so only the endpoint is printed.
+      console.log('Connecting to CosmosDb at', config.endpoint)
       console.log()
     }
 

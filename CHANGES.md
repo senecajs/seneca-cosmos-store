@@ -33,8 +33,12 @@
   `seneca-store-test`. The account endpoint and key can come from
   `SENECA_COSMOS_ENDPOINT` and `SENECA_COSMOS_KEY` as well as from
   `test/local-env.js`, and the tests that need an account skip without
-  either. They ran against the Azure Cosmos DB Linux emulator (vNext
-  preview, HTTP), not against Azure.
+  either. With `SENECA_COSMOS_KEY` set, `npm test` first creates the
+  test database and containers (`npm run test-create-db`), which no
+  longer prints the account key. Lab's `-L` lint is dropped: lab 26
+  lints with ESLint 9, which no longer reads `.eslintrc.js` and
+  `.eslintignore`. The tests ran against the Azure Cosmos DB Linux
+  emulator (vNext preview, HTTP), not against Azure.
 
 ## Earlier versions
 

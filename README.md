@@ -23,4 +23,6 @@ export SENECA_COSMOS_KEY='<emulator key>'
 npm test
 ```
 
-Without a key or `test/local-env.js`, only the plugin validation test runs.
+With `SENECA_COSMOS_KEY` set, `npm test` first creates the test database
+and containers (`npm run test-create-db`). Without a key or
+`test/local-env.js`, only the plugin validation test runs.
