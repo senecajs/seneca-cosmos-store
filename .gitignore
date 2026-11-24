@@ -132,3 +132,7 @@ dist
 *.swp
 
 test/local-env.js
+
+# Seneca 4: no committed lockfile; test coverage report
+package-lock.json
+test/coverage.html

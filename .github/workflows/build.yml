@@ -1,51 +1,83 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# Build and test against the Azure Cosmos DB Linux emulator (vNext preview),
+# run as a service container. Based on the services variant of the senecajs
+# build template (build-services.example.yml): pinned actions, Node.js 24
+# and 26, least-privilege permissions and the standard install step.
+#
+# Linux only. GitHub runs service containers on Linux runners only, so this
+# workflow is the recorded exception to DEC-17. Its check names are
+# "node 24.x" and "node 26.x".
+#
+# The vNext emulator serves plain HTTP on 8081. SENECA_COSMOS_KEY is the
+# emulator's well-known account key, which Microsoft publishes in the
+# emulator documentation; set it as the repository variable
+# SENECA_COSMOS_EMULATOR_KEY. The job fails without it, because the tests
+# that need an account would skip.
 
 name: build
 
 on:
   push:
-    branches: [ master ]
+    branches: [main, master, develop, '*.x']
   pull_request:
-    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
-    timeout-minutes: 4
+    name: node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
-        node-version: [14.x]
+        node-version: [24.x, 26.x]
 
-    runs-on: ${{ matrix.os }} 
+    services:
+      cosmos:
+        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+        ports:
+          - 8081:8081
+
+    env:
+      SENECA_COSMOS_ENDPOINT: http://127.0.0.1:8081
+      SENECA_COSMOS_KEY: ${{ vars.SENECA_COSMOS_EMULATOR_KEY }}
 
     steps:
-    - name: Check out repository code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          package-manager-cache: false
 
-    - name: Setup CosmosDB Local
-      uses: rrainn/cosmosdb-action@v2.0.1
-      with:
-        dbPath: # undefined by default, if this is undefined inMemory will be used
-        sharedDb: # undefined by default
-        delayTransientStatuses: # undefined by default
-        optimizeDbBeforeStartup: # undefined by default
-        port: 18000
-        cors: '*'
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-package-lock --no-audit --no-fund
+          fi
 
-    - name: Install dependencies
-      run: npm install
+      - name: Wait for the Cosmos DB emulator
+        run: |
+          if [ -z "$SENECA_COSMOS_KEY" ]; then
+            echo "Set the repository variable SENECA_COSMOS_EMULATOR_KEY to the emulator key"; exit 1
+          fi
+          for i in $(seq 1 90); do
+            curl -s -o /dev/null -w '%{http_code}' "$SENECA_COSMOS_ENDPOINT/" | grep -q '^[1-4]' && exit 0
+            sleep 2
+          done
+          echo "timeout waiting for the Cosmos DB emulator"; exit 1
 
-    - name: Create CosmosDB collections for testing
-      run: npm run test-create-db
-
-    - name: Run the tests 
-      run: npm test
-
+      - run: npm run build --if-present
+      - run: npm test

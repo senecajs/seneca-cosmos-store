@@ -13,24 +13,42 @@ const Seneca = require('seneca')
 const Plugin = require('..')
 const PluginValidator = require('seneca-plugin-validator')
 
-const LegacyStoreTest = require('seneca-store-test')
+const LegacyStoreTest = require('@seneca/store-test')
 
 // for local dev
 if (process.env.COSMOS_LOCAL_DEV) {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 }
 
+// The tests run against a Cosmos DB account or emulator. The account endpoint
+// and key come from test/local-env.js (see test/setup.sh), or, when
+// SENECA_COSMOS_KEY is set, from the environment variables
+// SENECA_COSMOS_ENDPOINT (default https://localhost:8081, set by npm test)
+// and SENECA_COSMOS_KEY, which then win over the file. For the emulator, the
+// key is its well-known account key, published in the emulator documentation.
+// The vNext (Linux) emulator serves plain HTTP, for example on
+// http://127.0.0.1:8081.
+const COSMOS_ENV = {}
+if (process.env.SENECA_COSMOS_KEY) {
+  COSMOS_ENV['cosmos-account-endpoint'] =
+    process.env.SENECA_COSMOS_ENDPOINT || 'https://localhost:8081'
+  COSMOS_ENV['cosmos-account-key'] = process.env.SENECA_COSMOS_KEY
+}
+const LOCAL_ENV_FILE = __dirname + '/local-env.js'
+const HAS_ACCOUNT =
+  null != COSMOS_ENV['cosmos-account-key'] ||
+  require('node:fs').existsSync(LOCAL_ENV_FILE)
+
 function make_seneca(config) {
   config = Object.assign({ seneca: {}, plugin: {} }, config)
   return (
     Seneca(Object.assign({ legacy: false }, config.seneca))
       .test()
-      .use('promisify')
-      .use('entity', { mem_store: false })
-      .use('doc')
-      .use('env', {
+      .use('@seneca/entity', { mem_store: false })
+      .use('@seneca/env', {
         // debug: true,
-        file: [__dirname + '/local-env.js'],
+        file: [LOCAL_ENV_FILE + ';?'],
+        process: { env: COSMOS_ENV },
         var: {
           // 'cosmos-connection-string': String,
           'cosmos-account-endpoint': String,
@@ -39,7 +57,7 @@ function make_seneca(config) {
       })
       /*
     // USE PROVIDER CONNECTION STRING
-    .use('provider', {
+    .use('@seneca/provider', {
       provider: {
         cosmos: {
           keys: {
@@ -50,7 +68,7 @@ function make_seneca(config) {
     })
     */
       // USE PROVIDER ACCOUNT CREDENTIALS
-      .use('provider', {
+      .use('@seneca/provider', {
         provider: {
           cosmos: {
             keys: {
@@ -110,6 +128,17 @@ let containerConfig = {
 */
 
 lab.test('validate', PluginValidator(Plugin, module))
+
+// Without an account (no SENECA_COSMOS_KEY and no test/local-env.js), only
+// the validation above runs.
+if (!HAS_ACCOUNT) {
+  lab.test(
+    'cosmos: set SENECA_COSMOS_ENDPOINT and SENECA_COSMOS_KEY, or write test/local-env.js',
+    { skip: true },
+    () => {}
+  )
+  return
+}
 
 lab.test('happy', async () => {
   const si = make_seneca()
