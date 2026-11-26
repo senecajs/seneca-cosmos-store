@@ -12,6 +12,10 @@
 # emulator documentation; set it as the repository variable
 # SENECA_COSMOS_EMULATOR_KEY. The job fails without it, because the tests
 # that need an account would skip.
+#
+# The emulator image is pinned to the build vnext-EN20261019. The later builds
+# EN20261117pre and EN20261123 answer a sort on two fields in opposite
+# directions with an internal error, which fails the test "double sort".
 
 name: build
 
@@ -41,7 +45,7 @@ jobs:
 
     services:
       cosmos:
-        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-EN20261019
         ports:
           - 8081:8081
 
