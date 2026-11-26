@@ -14,10 +14,12 @@ The tests need a Cosmos DB account or the Cosmos DB emulator. Set
 key from the emulator documentation) and `SENECA_COSMOS_ENDPOINT` to the
 endpoint (default `https://localhost:8081`), or write `test/local-env.js`
 as `test/setup.sh` describes. The Linux emulator (vNext preview) serves
-plain HTTP:
+plain HTTP. The tests pass on its build `vnext-EN20261019`. The later builds
+EN20261117pre and EN20261123 answer a sort on two fields in opposite
+directions with an internal error, which fails the test "double sort":
 
 ```sh
-docker run -p 8081:8081 mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+docker run -p 8081:8081 mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-EN20261019
 export SENECA_COSMOS_ENDPOINT=http://127.0.0.1:8081
 export SENECA_COSMOS_KEY='<emulator key>'
 npm test
